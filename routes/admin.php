@@ -32,7 +32,7 @@ Route::group(['middleware' => ['guest:admin'], 'prefix' => 'admin', 'as' => 'adm
                 ->name('password.store');
 });
 
-Route::group(['middleware' => ['auth:admin'],'prefix'=> 'admin', 'as'=> 'admin.'],function () {
+Route::group(['middleware' => ['auth:admin'], 'prefix' => 'admin', 'as' => 'admin.'],function () {
     /**** Dashboard Route */
     Route::get('dashboard', function(){
         return view('admin.dashboard.index');
