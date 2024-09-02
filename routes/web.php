@@ -24,7 +24,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
 
 
 /***  Candidate Dashboard Routes */
@@ -32,16 +32,19 @@ Route::group(
     [
         'middleware' =>
         [
-            'auth', 'verified','user.role:candidate',
+            'auth',
+            'verified',
+            'user.role:candidate',
         ],
         'prefix' => 'candidate',
-        'as'=>'candidate.',
+        'as' => 'candidate.',
     ],
-function(){
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-});
+    function () {
+        Route::get('/dashboard', function () {
+            return view('dashboard');
+        })->name('dashboard');
+    }
+);
 
 
 /***  Company Dashboard Routes */
@@ -49,17 +52,16 @@ Route::group(
     [
         'middleware' =>
         [
-            'auth', 'verified','user.role:company',
+            'auth',
+            'verified',
+            'user.role:company',
         ],
         'prefix' => 'company',
-        'as'=>'company.',
+        'as' => 'company.',
     ],
-    function(){
+    function () {
         Route::get('/dashboard', function () {
             return view('frontend.company-dashboard.dashboard');
         })->name('dashboard');
-});
-
-
-
-
+    }
+);
