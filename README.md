@@ -26,54 +26,50 @@ MySQL or PostgreSQL
 Node.js and npm/yarn (for frontend package management)
 Git
 Installation Steps
-Clone the Repository:
-
-bash
-Copy code
-git clone https://github.com/your-username/job-portal.git
-cd job-portal
-Install Dependencies: Install the PHP dependencies using Composer:
-
-bash
-Copy code
-composer install
-Install the frontend dependencies using npm/yarn:
-
-bash
-Copy code
-npm install
-Configure Environment Variables: Create a .env file by copying from .env.example and adjust the settings according to your environment (e.g., database credentials):
-
-bash
-Copy code
-cp .env.example .env
-Generate Application Key: Generate a Laravel application key to ensure secure encryption:
-
-bash
-Copy code
-php artisan key:generate
-Database Setup: Set up your database and run the migrations to create the necessary tables:
-
-bash
-Copy code
-php artisan migrate
-Seed the Database (Optional): Seed your database with test data:
-
-bash
-Copy code
-php artisan db:seed
-Compile Frontend Assets: Compile the frontend assets using Laravel Mix:
-
-bash
-Copy code
-npm run dev
-Serve the Application: Serve your Laravel application locally:
-
-bash
-Copy code
-php artisan serve
-Your application should now be available at http://localhost:8000.
-
+1. Clone the Repository:
+    ```bash
+    git clone git@github.com:Ela-El-maker/Job-Listing-System.git
+    ```
+2. Install Dependencies: Install the PHP dependencies using Composer:
+    ```bash
+    composer install
+    ```
+3. Install the frontend dependencies using npm/yarn:
+    ```bash
+    npm install
+    ```
+4. Configure Environment Variables: Create a .env file by copying from .env.example and adjust the settings according to your environment (e.g., database credentials):
+    ```bash
+    cp .env.example .env
+    ```
+5. Generate Application Key: Generate a Laravel application key to ensure secure encryption:
+    ```bash
+    php artisan key:generate
+    ```
+6. Database Setup: Set up your database and run the migrations to create the necessary tables:
+    ```bash
+    php artisan migrate
+    ```
+7. Seed the Database (Optional): Seed your database with test data:
+   ```bash
+    php artisan db:seed
+    ```
+8. Compile Frontend Assets: Compile the frontend assets using Laravel Mix:
+   ```bash
+   npm run dev
+    ```
+9. Serve the Application: Serve your Laravel application locally:
+    ```bash
+    php artisan serve
+    ```
+10. Run automated tests using Laravel’s testing suite:
+    ```bash
+    php artisan test
+    ```
 ## Deployment
 For production deployment, make sure to configure your web server (Apache/Nginx) properly and set up an SSL certificate for secure communication.
 Use tools like Laravel Forge, Envoyer, or Docker for efficient deployment.
+
+## Database System Design
+
+![drawSQL-image-export-2024-09-07](https://github.com/user-attachments/assets/726fcfa8-7571-4811-8f17-0867ecfc411f)
