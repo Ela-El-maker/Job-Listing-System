@@ -72,4 +72,4 @@ Use tools like Laravel Forge, Envoyer, or Docker for efficient deployment.
 
 ## Database System Design
 
-![drawSQL-image-export-2024-09-07](https://github.com/user-attachments/assets/726fcfa8-7571-4811-8f17-0867ecfc411f)
+![drawSQL-image-export-2024-09-07](https://github.com/user-attachments/assets/11ce2eb1-0428-4100-a153-48b7536a89b9)
