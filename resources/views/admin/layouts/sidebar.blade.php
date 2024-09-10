@@ -65,7 +65,7 @@
          <li class="dropdown"><a href="#" data-toggle="dropdown"
                  class="nav-link dropdown-toggle nav-link-lg nav-link-user">
                  <img alt="image" src="assets/img/avatar/avatar-1.png" class="rounded-circle mr-1">
-                 <div class="d-sm-none d-lg-inline-block">Hi, Ujang Maman</div>
+                 <div class="d-sm-none d-lg-inline-block">Hi, {{ auth()->user()->name }}</div>
              </a>
              <div class="dropdown-menu dropdown-menu-right">
                  <div class="dropdown-title">Logged in 5 min ago</div>
@@ -78,8 +78,7 @@
                  </a>
                  <div class="dropdown-divider"></div>
                  <!-- Authentication -->
-                 <form method="POST"
-                     action="{{ route('admin.logout') }}">
+                 <form method="POST" action="{{ route('admin.logout') }}">
                      @csrf
 
                      <a href="{{ route('admin.logout') }}"
@@ -111,6 +110,16 @@
              <li class="menu-header">Starter</li>
              <li class="dropdown">
                  <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
+                     <span>Attributes</span></a>
+                 <ul class="dropdown-menu">
+                     <li><a class="nav-link" href="{{ route('admin.industry-types.index') }}">Industry Type</a></li>
+                     <li><a class="nav-link" href="layout-transparent.html">Transparent Sidebar</a></li>
+                     <li><a class="nav-link" href="layout-top-navigation.html">Top Navigation</a></li>
+                 </ul>
+             </li>
+
+              {{-- <li class="dropdown">
+                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
                      <span>Layout</span></a>
                  <ul class="dropdown-menu">
                      <li><a class="nav-link" href="layout-default.html">Default Layout</a></li>
@@ -118,7 +127,8 @@
                      <li><a class="nav-link" href="layout-top-navigation.html">Top Navigation</a></li>
                  </ul>
              </li>
-             <li><a class="nav-link" href="blank.html"><i class="far fa-square"></i> <span>Blank Page</span></a></li>
+             <li><a class="nav-link" href="blank.html"><i class="far fa-square"></i> <span>Blank Page</span></a></li> --}}
+
          </ul>
 
 
