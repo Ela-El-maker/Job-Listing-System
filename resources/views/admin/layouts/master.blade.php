@@ -99,7 +99,7 @@
                                 });
                             }
                         });
-                        
+
                     } else {
                         swal('Your data is safe!');
                     }
