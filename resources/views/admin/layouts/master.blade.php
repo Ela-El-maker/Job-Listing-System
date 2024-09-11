@@ -13,6 +13,7 @@
 
     <!-- CSS Libraries -->
     <link rel="stylesheet" href="{{ asset('admin/assets/modules/summernote/summernote-bs4.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin/assets/modules/select2/dist/css/select2.min.css') }}">
 
 
     <!-- Template CSS -->
@@ -53,11 +54,11 @@
     <script src="{{ asset('admin/assets/js/stisla.js') }}"></script>
 
     <!-- JS Libraies -->
+    <script src="{{ asset('admin/assets/modules/select2/dist/js/select2.full.min.js') }}"></script>
+
     <script src="{{ asset('admin/assets/modules/summernote/summernote-bs4.js') }}"></script>
     <!-- JS Libraies -->
     <script src="{{ asset('admin/assets/modules/sweetalert/sweetalert.min.js') }}"></script>
-
-
 
     <!-- Page Specific JS File -->
     <!-- Laravel Notify  Start-->
@@ -68,6 +69,7 @@
     <!-- Template JS File -->
     <script src="{{ asset('admin/assets/js/scripts.js') }}"></script>
     <script src="{{ asset('admin/assets/js/custom.js') }}"></script>
+    @stack('scripts')
     <script>
         $(".delete-item").on('click', function(e) {
             e.preventDefault();
