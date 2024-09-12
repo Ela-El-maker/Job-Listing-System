@@ -8,19 +8,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class OrganizationType extends Model
 {
-    use HasFactory,Sluggable;
-
+    use HasFactory, Sluggable;
+    protected $fillable = [
+        'name',
+    ];
     /**
-    * Return the sluggable configuration array for this model.
-    *
-    * @return array
-    */
-   public function sluggable(): array
-   {
-       return [
-           'slug' => [
-               'source' => 'name'
-           ]
-       ];
-   }
+     * Return the sluggable configuration array for this model.
+     *
+     * @return array
+     */
+    public function sluggable(): array
+    {
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
+    }
 }
