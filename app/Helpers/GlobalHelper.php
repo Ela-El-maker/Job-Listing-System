@@ -38,7 +38,20 @@ if (!function_exists('setSidebarActive')) {
 if (!function_exists('isCompanyProfileComplete')) {
     function isCompanyProfileComplete() : ?bool
     {
-        $requiredFields = ['logo','banner','vision','name','industry_type_id','organization_type_id','team_size_id','establishment_date','phone','email','country','website'];
+        $requiredFields = [
+            'logo',
+            'banner',
+            'vision',
+            'name',
+            'industry_type_id',
+            'organization_type_id',
+            'team_size_id',
+            'establishment_date',
+            'phone',
+            'email',
+            'country',
+            'website'
+        ];
         $companyProfile = Company::where('user_id',auth()->user()->id)->first();
 
         foreach ($requiredFields as $field) {
