@@ -5,7 +5,14 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\CompanyFoundingInfoUpdateRequest;
 use App\Http\Requests\Frontend\CompanyInfoUpdateRequest;
+use App\Models\City;
 use App\Models\Company;
+use App\Models\Country;
+use App\Models\IndustryType;
+use App\Models\OrganizationType;
+use App\Models\State;
+use App\Models\TeamSize;
+use App\Services\Notify;
 use App\Traits\FileUploadTrait;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -21,11 +28,30 @@ class CompanyProfileController extends Controller
     function index(): View
     {
         $companyInfo = Company::where('user_id', auth()->user()->id)->first();
-        return view('frontend.company-dashboard.profile.index', compact('companyInfo'));
+        $industryTypes = IndustryType::all();
+        $organizationTypes = OrganizationType::all();
+        $teamSizes = TeamSize::all();
+        $countries = Country::all();
+        $states = State::select(['id', 'name', 'country_id'])->where('country_id', $companyInfo->country)->get();
+        $cities = City::select(['id', 'name', 'state_id', 'country_id'])->where('state_id', $companyInfo->state)->get();
+
+        return view(
+            'frontend.company-dashboard.profile.index',
+            compact(
+                'companyInfo',
+                'industryTypes',
+                'organizationTypes',
+                'teamSizes',
+                'countries',
+                'states',
+                'cities'
+            )
+        );
     }
 
     function updateCompanyInfo(CompanyInfoUpdateRequest $request): RedirectResponse
     {
+        // dd(isCompanyProfileComplete());
         $logoPath = $this->uploadFile($request, 'logo');
         $bannerPath = $this->uploadFile($request, 'banner');
 
@@ -41,6 +67,15 @@ class CompanyProfileController extends Controller
             ['user_id' => auth()->user()->id],
             $data
         );
+
+        if (isCompanyProfileComplete()) {
+            $companyProfile = Company::where('user_id', auth()->user()->id)->first();
+            $companyProfile->profile_completion = 1;
+            $companyProfile->visibility = 1;
+            $companyProfile->save();
+        }
+
+        
         notify()->success('Company Info Updated Successfully⚡️', 'Success');
         return redirect()->back();
     }
@@ -48,6 +83,7 @@ class CompanyProfileController extends Controller
 
     function updateFoundingInfo(CompanyFoundingInfoUpdateRequest $request): RedirectResponse
     {
+        // dd(isCompanyProfileComplete());
         Company::updateOrCreate(
             ['user_id' => auth()->user()->id],
             [
@@ -65,7 +101,16 @@ class CompanyProfileController extends Controller
                 'map_link' => $request->map_link,
             ]
         );
-        notify()->success('Founding Info Updated Successfully⚡️', 'Success');
+
+        if (isCompanyProfileComplete()) {
+            $companyProfile = Company::where('user_id', auth()->user()->id)->first();
+            $companyProfile->profile_completion = 1;
+            $companyProfile->visibility = 1;
+            $companyProfile->save();
+        }
+
+
+        Notify::updatedNotification();
         return redirect()->back();
     }
 
@@ -89,7 +134,7 @@ class CompanyProfileController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
         Auth::user()->update(['password' => bcrypt($request->password)]);
-        
+
         notify()->success('Password Changed Successfully⚡️', 'Success');
 
         return redirect()->back();
