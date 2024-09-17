@@ -90,9 +90,9 @@ namespace App\Models{
  * @property string|null $vision
  * @property int $total_views
  * @property string|null $address
- * @property string|null $city
- * @property string|null $state
- * @property string|null $country
+ * @property int|null $city
+ * @property int|null $state
+ * @property int|null $country
  * @property string|null $map_link
  * @property int $is_profile_verified
  * @property string|null $document_verified_at
@@ -184,6 +184,29 @@ namespace App\Models{
  *
  * @property int $id
  * @property string $name
+ * @property string $slug
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Language findSimilarSlugs(string $attribute, array $config, string $slug)
+ * @method static \Illuminate\Database\Eloquent\Builder|Language newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Language newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Language query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Language whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Language whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Language whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Language whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Language whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Language withUniqueSlugConstraints(\Illuminate\Database\Eloquent\Model $model, string $attribute, array $config, string $slug)
+ */
+	class Language extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
+ * @property int $id
+ * @property string $name
  * @property string|null $slug
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
@@ -199,6 +222,52 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|OrganizationType withUniqueSlugConstraints(\Illuminate\Database\Eloquent\Model $model, string $attribute, array $config, string $slug)
  */
 	class OrganizationType extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
+ * @property int $id
+ * @property string $name
+ * @property string $slug
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Profession findSimilarSlugs(string $attribute, array $config, string $slug)
+ * @method static \Illuminate\Database\Eloquent\Builder|Profession newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Profession newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Profession query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Profession whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Profession whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Profession whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Profession whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Profession whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Profession withUniqueSlugConstraints(\Illuminate\Database\Eloquent\Model $model, string $attribute, array $config, string $slug)
+ */
+	class Profession extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
+ * @property int $id
+ * @property string $name
+ * @property string $slug
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Skill findSimilarSlugs(string $attribute, array $config, string $slug)
+ * @method static \Illuminate\Database\Eloquent\Builder|Skill newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Skill newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Skill query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Skill whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Skill whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Skill whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Skill whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Skill whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Skill withUniqueSlugConstraints(\Illuminate\Database\Eloquent\Model $model, string $attribute, array $config, string $slug)
+ */
+	class Skill extends \Eloquent {}
 }
 
 namespace App\Models{

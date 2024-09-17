@@ -114,7 +114,13 @@
                  <ul class="dropdown-menu">
                      <li class="{{ setSidebarActive(['admin.industry-types.*']) }}" ><a class="nav-link" href="{{ route('admin.industry-types.index') }}">Industry Type</a></li>
                      <li class="{{ setSidebarActive(['admin.organization-types.*']) }}" ><a class="nav-link" href="{{ route('admin.organization-types.index') }}">Organization Type</a></li>
-                 </ul>
+                     <li class="{{ setSidebarActive(['admin.languages.*']) }}" ><a class="nav-link" href="{{ route('admin.languages.index') }}">Languages</a></li>
+                     <li class="{{ setSidebarActive(['admin.professions.*']) }}" ><a class="nav-link" href="{{ route('admin.professions.index') }}">Professions</a></li>
+                     <li class="{{ setSidebarActive(['admin.skills.*']) }}" ><a class="nav-link" href="{{ route('admin.skills.index') }}">Skills</a></li>
+
+
+
+                    </ul>
              </li>
              <li class="dropdown {{ setSidebarActive(['admin.countries.*','admin.states.*','admin.cities.*']) }} ">
                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
@@ -126,6 +132,7 @@
 
                 </ul>
             </li>
+
 
               {{-- <li class="dropdown">
                  <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
