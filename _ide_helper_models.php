@@ -49,6 +49,67 @@ namespace App\Models{
  * 
  *
  * @property int $id
+ * @property int $user_id
+ * @property int|null $experience_id
+ * @property int|null $profession
+ * @property string|null $title
+ * @property string|null $image
+ * @property string|null $full_name
+ * @property string|null $slug
+ * @property string|null $gender
+ * @property string|null $website
+ * @property string|null $phone_one
+ * @property string|null $phone_two
+ * @property string|null $cv
+ * @property string|null $bio
+ * @property string|null $marital_status
+ * @property string|null $birth_date
+ * @property string|null $address
+ * @property int|null $city
+ * @property int|null $state
+ * @property int|null $country
+ * @property string|null $status
+ * @property int $profile_complete
+ * @property int $visibility
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Candidate newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Candidate newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Candidate query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Candidate whereAddress($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Candidate whereBio($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Candidate whereBirthDate($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Candidate whereCity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Candidate whereCountry($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Candidate whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Candidate whereCv($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Candidate whereExperienceId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Candidate whereFullName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Candidate whereGender($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Candidate whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Candidate whereImage($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Candidate whereMaritalStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Candidate wherePhoneOne($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Candidate wherePhoneTwo($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Candidate whereProfession($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Candidate whereProfileComplete($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Candidate whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Candidate whereState($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Candidate whereStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Candidate whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Candidate whereUpdatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Candidate whereUserId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Candidate whereVisibility($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Candidate whereWebsite($value)
+ */
+	class Candidate extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
+ * @property int $id
  * @property string $name
  * @property int $state_id
  * @property int $country_id
