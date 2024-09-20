@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Frontend\CandidateBasicProfileUpdateRequest;
 use App\Models\Candidate;
 use App\Models\Experience;
+use App\Models\Profession;
 use App\Services\Notify;
 use App\Traits\FileUploadTrait;
 use Illuminate\Http\RedirectResponse;
@@ -20,8 +21,9 @@ class CandidateProfileController extends Controller
     function index(): View
     {
         $experiences = Experience::all();
+        $professions = Profession::all();
         $candidate = Candidate::where('user_id',auth()->user()->id)->first();
-        return view('frontend.candidate-dashboard.profile.index', compact('candidate','experiences'));
+        return view('frontend.candidate-dashboard.profile.index', compact('candidate','experiences','professions'));
     }
 
     /***
@@ -33,7 +35,10 @@ class CandidateProfileController extends Controller
     {
 
         /***
+         *
+         *
          * Handle files
+         * 
          */
 
         $imagePath = $this->uploadFile($request, 'profile_picture');
