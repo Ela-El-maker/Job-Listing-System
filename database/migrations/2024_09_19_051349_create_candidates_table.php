@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained('users');
             $table->foreignId('experience_id')->nullable();
-            $table->foreignId('profession')->nullable();
+            $table->foreignId('profession_id')->nullable();
             $table->string('title')->nullable();
             $table->string('image')->nullable();
             $table->string('full_name')->nullable();
