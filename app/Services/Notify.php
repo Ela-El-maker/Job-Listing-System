@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Services;
 
 class Notify
@@ -7,16 +6,16 @@ class Notify
     //Created Notification
     static function createdNotification()
     {
-        return notify()->success('Created Successfully', 'Success!');
+        return notyf()->addSuccess('Created Successfully');
     }
     // Updated Notification
     static function updatedNotification()
     {
-        return notify()->success('Updated Successfully', 'Success!');
+        return notyf()->addSuccess('Updated Successfully');
     }
     // Deleted Notification
     static function deletedNotification()
     {
-        return notify()->success('Deleted Successfully', 'Success!');
+        return notyf()->addSuccess('Deleted Successfully');
     }
 }

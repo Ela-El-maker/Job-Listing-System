@@ -75,8 +75,8 @@ class CompanyProfileController extends Controller
             $companyProfile->save();
         }
 
-        
-        notify()->success('Company Info Updated Successfully⚡️', 'Success');
+
+        Notify::updatedNotification();
         return redirect()->back();
     }
 
@@ -124,7 +124,7 @@ class CompanyProfileController extends Controller
 
         Auth::user()->update($validatedData);
 
-        notify()->success('Account Info Updated Successfully⚡️', 'Success');
+        Notify::updatedNotification();
         return redirect()->back();
     }
 
@@ -135,7 +135,7 @@ class CompanyProfileController extends Controller
         ]);
         Auth::user()->update(['password' => bcrypt($request->password)]);
 
-        notify()->success('Password Changed Successfully⚡️', 'Success');
+        Notify::updatedNotification();
 
         return redirect()->back();
     }

@@ -113,6 +113,17 @@ namespace App\Models{
 /**
  * 
  *
+ * @method static \Illuminate\Database\Eloquent\Builder|CandidateExperience newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|CandidateExperience newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|CandidateExperience query()
+ */
+	class CandidateExperience extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
  * @property int $id
  * @property int $candidate_id
  * @property int $language_id
@@ -453,6 +464,7 @@ namespace App\Models{
  * @property string|null $remember_token
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Candidate|null $candidateProfile
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
  * @property-read int|null $notifications_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Sanctum\PersonalAccessToken> $tokens

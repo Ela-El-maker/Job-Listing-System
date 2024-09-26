@@ -35,9 +35,9 @@
                                 aria-selected="false">Profile</button>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill"
-                                data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact"
-                                aria-selected="false">Experience & Education</button>
+                            <button class="nav-link" id="pills-experience-tab" data-bs-toggle="pill"
+                                data-bs-target="#pills-experience" type="button" role="tab"
+                                aria-controls="pills-experience" aria-selected="false">Experience & Education</button>
                         </li>
 
                         <li class="nav-item" role="presentation">
@@ -51,9 +51,10 @@
                         @include('frontend.candidate-dashboard.profile.sections.basic-section')
 
                         @include('frontend.candidate-dashboard.profile.sections.profile-section')
-                        
-                        <div class="tab-pane fade" id="pills-contact" role="tabpanel"
-                            aria-labelledby="pills-contact-tab">
+
+                        @include('frontend.candidate-dashboard.profile.sections.experience-section')
+
+                        <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
                             <div class="row">
                                 {{-- <form action="{{ route('company.profile.account-info') }}" method="post">
                                     @csrf
@@ -127,55 +128,104 @@
             </div>
         </div>
     </section>
+
+    <!-- Modal -->
+    <div class="modal fade" id="experienceModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="POST" id = "ExperienceForm">
+                        @csrf
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="">Company *</label>
+                                    <input type="text" class="form-control" required name="company" id="">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="">Department  *</label>
+                                    <input type="text" class="form-control" required name="department" id="">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="">Designation *</label>
+                                    <input type="text" class="form-control" required name="designation" id="">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="">Start Date *</label>
+                                    <input type="text" required class="form-control datepicker" name="start" id="">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="">End Date *</label>
+                                    <input type="text" required class="form-control datepicker" name="end" id="">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" name="currently_working"
+                                        id="currently-working">
+                                    <label class="form-check-label" for="currently-working">I am Currently Working</label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="">Responsibilities</label>
+                                    <textarea maxlength="500" name="responsibilities" class="" id=""></textarea>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="text-right">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Add
+                        Experience</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @push('scripts')
     <script>
         $(document).ready(function() {
-            $('.country').on('change', function() {
-                let country_id = $(this).val();
-                // remove all previous cities
-                $('.city').html("")
+            $('#ExperienceForm').on('submit', function(event) {
+                event.preventDefault();
+                const formData = $(this).serialize();
+                console.log(formData);
                 $.ajax({
-                    method: 'GET',
-                    url: '{{ route('get-states', ':id') }}'.replace(":id", country_id),
-                    data: {},
+                    method: 'POST',
+                    url: "{{ route('candidate.experience.store') }}",
+                    data: formData,
                     success: function(response) {
-                        let html = '';
-                        $.each(response, function(index, value) {
-                            html +=
-                                `<option value = "${value.id}">${value.name}</option>`
-                        });
-                        $('.state').html(html);
+
                     },
-                    error: function(xhr, status, error) {
+                    error: function(xhr,status,error){
 
                     }
-                })
+                });
             });
-
-            // get cities
-            $('.state').on('change', function() {
-                let state_id = $(this).val();
-
-
-                $.ajax({
-                    method: 'GET',
-                    url: '{{ route('get-cities', ':id') }}'.replace(":id", state_id),
-                    data: {},
-                    success: function(response) {
-                        let html = '';
-                        $.each(response, function(index, value) {
-                            html +=
-                                `<option value = "${value.id}">${value.name}</option>`
-                        });
-                        $('.city').html(html);
-                    },
-                    error: function(xhr, status, error) {
-
-                    }
-                })
-            });
-        })
+        });
     </script>
 @endpush
