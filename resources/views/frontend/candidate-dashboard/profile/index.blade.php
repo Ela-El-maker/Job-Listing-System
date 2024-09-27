@@ -135,7 +135,7 @@
         <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                    <h5 class="modal-title" id="staticBackdropLabel">Add Experience</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -150,28 +150,31 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="">Department  *</label>
+                                    <label for="">Department *</label>
                                     <input type="text" class="form-control" required name="department" id="">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="">Designation *</label>
-                                    <input type="text" class="form-control" required name="designation" id="">
+                                    <input type="text" class="form-control" required name="designation"
+                                        id="">
                                 </div>
                             </div>
 
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="">Start Date *</label>
-                                    <input type="text" required class="form-control datepicker" name="start" id="">
+                                    <input type="text" required class="form-control datepicker" name="start"
+                                        id="">
                                 </div>
                             </div>
 
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="">End Date *</label>
-                                    <input type="text" required class="form-control datepicker" name="end" id="">
+                                    <input type="text" required class="form-control datepicker" name="end"
+                                        id="">
                                 </div>
                             </div>
 
@@ -194,8 +197,8 @@
                         </div>
                         <div class="text-right">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Add
-                        Experience</button>
+                            <button type="submit" class="btn btn-primary">Save
+                                Experience</button>
                         </div>
                     </form>
                 </div>
@@ -210,19 +213,160 @@
 @push('scripts')
     <script>
         $(document).ready(function() {
+
+            var editId = "";
+            var editMode = false;
+
+            //FETCH EXPERIENCES
+            function fetchExperience() {
+                $.ajax({
+                    method: 'GET',
+                    url: "{{ route('candidate.experience.index') }}",
+                    data: {},
+                    success: function(response) {
+                        $('.experience-tbody').html(response);
+                    },
+                    error: function(xhr, status, error) {
+
+                    }
+                });
+            }
+
+            // Save Experience data
             $('#ExperienceForm').on('submit', function(event) {
                 event.preventDefault();
+
                 const formData = $(this).serialize();
-                console.log(formData);
+
+                if (editMode) {
+                    $.ajax({
+                        method: 'PUT',
+                        url: "{{ route('candidate.experience.update', ':id') }}".replace(':id',
+                            editId),
+                        data: formData,
+                        beforeSend: function() {
+                            showLoader();
+                        },
+                        success: function(response) {
+                            fetchExperience();
+
+                            $('#ExperienceForm').trigger('reset');
+                            $('#experienceModal').modal('hide');
+                            editId = "";
+                            editMode = false;
+                            hideLoader();
+                            notyf.success(response.message);
+                        },
+                        error: function(xhr, status, error) {
+                            hideLoader();
+                            console.log(error);
+                        },
+                        // complete: function(){
+                        //     hideLoader();
+                        // }
+                    });
+
+                } else {
+
+                    $.ajax({
+                        method: 'POST',
+                        url: "{{ route('candidate.experience.store') }}",
+                        data: formData,
+                        beforeSend: function() {
+                            showLoader();
+                        },
+                        success: function(response) {
+                            fetchExperience();
+
+                            $('#ExperienceForm').trigger('reset');
+                            $('#experienceModal').modal('hide');
+                            hideLoader();
+
+                            notyf.success(response.message);
+                        },
+                        error: function(xhr, status, error) {
+                            hideLoader();
+                            console.log(error);
+                        }
+                    });
+                }
+            });
+
+            // Update Experience data
+            $('body').on('click', '.edit-experience', function() {
+                $('#ExperienceForm').trigger('reset');
+
+                let url = $(this).attr('href');
                 $.ajax({
-                    method: 'POST',
-                    url: "{{ route('candidate.experience.store') }}",
-                    data: formData,
-                    success: function(response) {
-
+                    method: 'GET',
+                    url: url,
+                    data: {},
+                    beforeSend: function() {
+                        showLoader();
                     },
-                    error: function(xhr,status,error){
+                    success: function(response) {
+                        editId = response.id
+                        editMode = true;
+                        $.each(response, function(index, value) {
+                            $(`input[name= "${index}"]:text`).val(value);
+                            if (index === 'currently_working' && value == 1) {
+                                $(`input[name= "${index}"]:checkbox`).prop('checked',
+                                    true);
+                            }
+                            if (index === 'responsibilities') {
+                                $(`textarea[name="${index}"]`).val(value);
+                            }
+                        });
+                        hideLoader();
+                    },
+                    error: function(xhr, status, error) {
 
+                        hideLoader();
+                        console.log(error);
+                    }
+                })
+            })
+
+            // Delete Item
+            $("body").on('click', '.delete-experience', function(e) {
+                e.preventDefault();
+                let url = $(this).attr('href')
+
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, delete it!"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // console.log(url);
+                        $.ajax({
+                            method: 'DELETE',
+                            url: url,
+                            data: {
+                                _token: "{{ csrf_token() }}"
+                            },
+                            beforeSend: function() {
+                                showLoader();
+                            },
+                            success: function(response) {
+                                fetchExperience();
+                                hideLoader();
+                                // window.location.reload();
+                                notyf.success(response.message);
+
+                            },
+                            error: function(xhr, status, error) {
+                                console.log(xhr);
+                                swal(xhr.responseJSON.message, {
+                                    icon: 'error',
+                                });
+                                hideLoader();
+                            }
+                        });
                     }
                 });
             });

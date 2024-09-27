@@ -18,10 +18,20 @@
     <link href="{{ asset('frontend/assets/css/style.css') }}" rel="stylesheet">
     <link rel="stylesheet"
         href="https://cdn.jsdelivr.net/npm/bootstrap-datepicker@1.10.0/dist/css/bootstrap-datepicker3.min.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+
     <title>joblist - Job Portal HTML Template </title>
 </head>
 
 <body>
+
+    <div class="preloader_demo d-none">
+        <div class="img">
+            <img src="{{ asset('frontend/assets/imgs/template/loading.gif') }}" alt="joblist">
+        </div>
+    </div>
+
 
 
     <div id="preloader-active">
@@ -83,24 +93,16 @@
     <script src="{{ asset('frontend/assets/js/plugins/counterup.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-datepicker@1.10.0/dist/js/bootstrap-datepicker.min.js"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/41.4.2/classic/ckeditor.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    
     <script src="{{ asset('frontend/assets/js/main.js?v=4.1') }}"></script>
+
+
     @stack('scripts')
-    <script>
-        $('.datepicker').datepicker({
-            format: 'yyyy-m-d',
-        });
 
+    @include('frontend.layouts.scripts')
 
-    ClassicEditor
-        .create( document.querySelector( '#editor' ) )
-        .catch( error => {
-            console.error( error );
-        } );
-
-
-    </script>
 </body>
 
 </html>
