@@ -129,7 +129,7 @@
         </div>
     </section>
 
-    <!-- Modal -->
+    <!--Experience  Modal -->
     <div class="modal fade" id="experienceModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
@@ -208,11 +208,70 @@
             </div>
         </div>
     </div>
+
+
+    <!--Education  Modal -->
+    <div class="modal fade" id="educationModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Add Education</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="" method="POST" id = "EducationForm">
+                        @csrf
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="">Level *</label>
+                                    <input type="text" class="form-control" required name="level" id="">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="">Degree *</label>
+                                    <input type="text" class="form-control" required name="degree" id="">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="">Year *</label>
+                                    <input type="text" class="form-control yearpicker" required name="year"
+                                        id="">
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label for="">Note</label>
+                                    <textarea maxlength="500" name="note" class="" id=""></textarea>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="text-right">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save
+                                Education</button>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @push('scripts')
     <script>
-        $(document).ready(function() {
+
 
             var editId = "";
             var editMode = false;
@@ -327,7 +386,7 @@
                 })
             })
 
-            // Delete Item
+            // Delete Experience data
             $("body").on('click', '.delete-experience', function(e) {
                 e.preventDefault();
                 let url = $(this).attr('href')
@@ -370,6 +429,157 @@
                     }
                 });
             });
-        });
+
+
+            //FETCH education
+            function fetchEducation() {
+                $.ajax({
+                    method: 'GET',
+                    url: "{{ route('candidate.education.index') }}",
+                    data: {},
+                    success: function(response) {
+                        $('.education-tbody').html(response);
+                    },
+                    error: function(xhr, status, error) {
+
+                    }
+                });
+            }
+
+            // Save education data
+            $('#EducationForm').on('submit', function(event) {
+                event.preventDefault();
+
+                const formData = $(this).serialize();
+
+                if (editMode) {
+                    $.ajax({
+                        method: 'PUT',
+                        url: "{{ route('candidate.education.update', ':id') }}".replace(':id',
+                            editId),
+                        data: formData,
+                        beforeSend: function() {
+                            showLoader();
+                        },
+                        success: function(response) {
+                            fetchEducation();
+
+                            $('#EducationForm').trigger('reset');
+                            $('#educationModal').modal('hide');
+                            editId = "";
+                            editMode = false;
+                            hideLoader();
+                            notyf.success(response.message);
+                        },
+                        error: function(xhr, status, error) {
+                            hideLoader();
+                            console.log(error);
+                        },
+                        // complete: function(){
+                        //     hideLoader();
+                        // }
+                    });
+
+                } else {
+
+                    $.ajax({
+                        method: 'POST',
+                        url: "{{ route('candidate.education.store') }}",
+                        data: formData,
+                        beforeSend: function() {
+                            showLoader();
+                        },
+                        success: function(response) {
+                            fetchEducation();
+                            $('#EducationForm').trigger('reset');
+                            $('#educationModal').modal('hide');
+                            hideLoader();
+
+                            notyf.success(response.message);
+                        },
+                        error: function(xhr, status, error) {
+                            hideLoader();
+                            console.log(error);
+                        }
+                    });
+                }
+            });
+
+            // Update education data
+            $('body').on('click', '.edit-education', function() {
+                $('#EducationForm').trigger('reset');
+
+                let url = $(this).attr('href');
+                $.ajax({
+                    method: 'GET',
+                    url: url,
+                    data: {},
+                    beforeSend: function() {
+                        showLoader();
+                    },
+                    success: function(response) {
+                        editId = response.id
+                        editMode = true;
+                        $.each(response, function(index, value) {
+                            $(`input[name= "${index}"]:text`).val(value);
+
+                            if (index === 'note') {
+                                $(`textarea[name="${index}"]`).val(value);
+                            }
+                        });
+                        hideLoader();
+                    },
+                    error: function(xhr, status, error) {
+
+                        hideLoader();
+                        console.log(error);
+                    }
+                })
+            })
+
+            // // Delete education data
+            $("body").on('click', '.delete-education', function(e) {
+                e.preventDefault();
+                let url = $(this).attr('href')
+
+                Swal.fire({
+                    title: "Are you sure?",
+                    text: "You won't be able to revert this!",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#3085d6",
+                    cancelButtonColor: "#d33",
+                    confirmButtonText: "Yes, delete it!"
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // console.log(url);
+                        $.ajax({
+                            method: 'DELETE',
+                            url: url,
+                            data: {
+                                _token: "{{ csrf_token() }}"
+                            },
+                            beforeSend: function() {
+                                showLoader();
+                            },
+                            success: function(response) {
+                                fetchEducation();
+                                hideLoader();
+                                // window.location.reload();
+                                notyf.success(response.message);
+
+                            },
+                            error: function(xhr, status, error) {
+                                console.log(xhr);
+                                swal(xhr.responseJSON.message, {
+                                    icon: 'error',
+                                });
+                                hideLoader();
+                            }
+                        });
+                    }
+                });
+            });
+
     </script>
 @endpush

@@ -3,15 +3,24 @@
      * --------------------------------
      * START : Third party plugin initalization
      * --------------------------------
-     * 
+     *
      */
     // Create an instance of Notyf
     var notyf = new Notyf();
 
 
+    // date picker
 
     $('.datepicker').datepicker({
         format: 'yyyy-m-d',
+    });
+
+    // year picker
+
+    $('.yearpicker').datepicker({
+        format: 'yyyy',
+        viewMode: 'years',
+        minViewMode: 'years'
     });
 
 
@@ -26,7 +35,7 @@
      * --------------------------------
      * END : Third party plugin initalization
      * --------------------------------
-     * 
+     *
      */
 
     function showLoader()
