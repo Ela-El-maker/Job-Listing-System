@@ -6,6 +6,7 @@
  *
  */
 
+use App\Models\Candidate;
 use App\Models\Company;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,12 +21,10 @@ if (!function_exists('hasError')) {
 /*** Set sidebar active */
 
 if (!function_exists('setSidebarActive')) {
-    function setSidebarActive(array $routes) : ?String
+    function setSidebarActive(array $routes): ?String
     {
-        foreach($routes as $route)
-        {
-            if(request()->routeIs($route))
-            {
+        foreach ($routes as $route) {
+            if (request()->routeIs($route)) {
                 return 'active';
             }
         }
@@ -33,10 +32,10 @@ if (!function_exists('setSidebarActive')) {
     }
 }
 
-/*** Check profile completion */
+/*** Check company profile completion */
 
 if (!function_exists('isCompanyProfileComplete')) {
-    function isCompanyProfileComplete() : ?bool
+    function isCompanyProfileComplete(): ?bool
     {
         $requiredFields = [
             'logo',
@@ -52,12 +51,50 @@ if (!function_exists('isCompanyProfileComplete')) {
             'country',
             'website'
         ];
-        $companyProfile = Company::where('user_id',auth()->user()->id)->first();
+        $companyProfile = Company::where('user_id', auth()->user()->id)->first();
 
         foreach ($requiredFields as $field) {
             # code...
-            if(empty($companyProfile->{$field}))
-            {
+            if (empty($companyProfile->{$field})) {
+                return false;
+            }
+        }
+        return true;
+    }
+}
+
+
+
+/*** Check candidate profile completion */
+
+if (!function_exists('isCandidateProfileComplete')) {
+    function isCandidateProfileComplete(): ?bool
+    {
+        $requiredFields = [
+            'experience_id',
+            'profession_id',
+            'title',
+            'image',
+            'cv',
+            'full_name',
+            'birth_date',
+            'gender',
+            'status',
+            'marital_status',
+            'bio',
+            'country',
+            'state',
+            'city',
+            'address',
+            'phone_one',
+            'phone_two',
+            'email',
+        ];
+        $candidateProfile = Candidate::where('user_id', auth()->user()->id)->first();
+
+        foreach ($requiredFields as $field) {
+            # code...
+            if (empty($candidateProfile->{$field})) {
                 return false;
             }
         }

@@ -55,7 +55,7 @@
                                         </span>
                                         <div class="text">
                                             <h4>WARNING : You have to complete you profile first!</h4>
-                                            <p>Please complete your company profile to use all the features.</p>
+                                            <p>Please complete your Company profile to use all the features.</p>
                                         </div>
                                         <a href="{{ route('company.profile') }}" class="btn btn-default rounded-1">Edit Profile</a>
                                     </div>

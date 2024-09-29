@@ -41,90 +41,22 @@
                         </li>
 
                         <li class="nav-item" role="presentation">
-                            <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill"
-                                data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact"
-                                aria-selected="false">Account Setting</button>
+                            <button class="nav-link" id="pills-account-tab" data-bs-toggle="pill"
+                                data-bs-target="#pills-account" type="button" role="tab"
+                                aria-controls="pills-account" aria-selected="false">Account Setting</button>
                         </li>
+
                     </ul>
+
                     <div class="tab-content" id="pills-tabContent">
-
                         @include('frontend.candidate-dashboard.profile.sections.basic-section')
-
                         @include('frontend.candidate-dashboard.profile.sections.profile-section')
-
                         @include('frontend.candidate-dashboard.profile.sections.experience-section')
-
-                        <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-                            <div class="row">
-                                {{-- <form action="{{ route('company.profile.account-info') }}" method="post">
-                                    @csrf
-                                    <div class="row">
-
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="font-sm color-text-mutted mb-10">Username *</label>
-                                                <input class="form-control {{ $errors->has('name') ? 'is-invalid' : '' }}"
-                                                    type="text" name="name" value="{{ auth()->user()->name }}">
-                                                <x-input-error :messages="$errors->get('name')" class="mt-2" />
-
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="font-sm color-text-mutted mb-10">Email Address *</label>
-                                                <input
-                                                    class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}"
-                                                    type="text" name="email" value="{{ auth()->user()->email }}">
-                                                <x-input-error :messages="$errors->get('email')" class="mt-2" />
-
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <button type="submit" class="btn btn-default btn-shadow">Save</button>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </form>
-                                <hr>
-                                <form action="{{ route('company.profile.password-update') }}" method="post">
-                                    @csrf
-                                    <div class="row">
-
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="font-sm color-text-mutted mb-10">Password *</label>
-                                                <input
-                                                    class="form-control {{ $errors->has('password') ? 'is-invalid' : '' }}"
-                                                    name="password" type="password" value="">
-                                                <x-input-error :messages="$errors->get('password')" class="mt-2" />
-
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="font-sm color-text-mutted mb-10">Confirm Password *</label>
-                                                <input
-                                                    class="form-control {{ $errors->has('password_confirmation') ? 'is-invalid' : '' }}"
-                                                    name="password_confirmation" type="password" value="">
-                                                <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
-
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <button type="submit" class="btn btn-default btn-shadow">Save</button>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </form> --}}
-
-                            </div>
-                        </div>
+                        <!-- New tab content for Account -->
+                        @include('frontend.candidate-dashboard.profile.sections.account-section')
                     </div>
                 </div>
+
             </div>
         </div>
     </section>
@@ -272,10 +204,8 @@
 @push('scripts')
     <script>
 
-
             var editId = "";
             var editMode = false;
-
             //FETCH EXPERIENCES
             function fetchExperience() {
                 $.ajax({
@@ -290,7 +220,6 @@
                     }
                 });
             }
-
             // Save Experience data
             $('#ExperienceForm').on('submit', function(event) {
                 event.preventDefault();
