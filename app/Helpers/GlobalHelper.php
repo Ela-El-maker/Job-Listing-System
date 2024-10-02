@@ -106,8 +106,13 @@ if (!function_exists('isCandidateProfileComplete')) {
 /*** Format date */
 
 if (!function_exists('formatDate')) {
-    function formatDate(string $date): ?String
+    function formatDate(?string $date): ?String
     {
-        return date('d M Y', strtotime($date));
+        if($date)
+        {
+            return date('d M Y', strtotime($date));
+
+        }
+        return null;
     }
 }

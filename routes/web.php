@@ -6,6 +6,7 @@ use App\Http\Controllers\Frontend\CandidateExperienceController;
 use App\Http\Controllers\Frontend\CandidateProfileController;
 use App\Http\Controllers\Frontend\CompanyDashboardController;
 use App\Http\Controllers\Frontend\CompanyProfileController;
+use App\Http\Controllers\Frontend\FrontendCandidatePageController;
 use App\Http\Controllers\Frontend\FrontendCompanyPageController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\LocationController;
@@ -35,9 +36,17 @@ require __DIR__ . '/auth.php';
 
 Route::get('get-state/{country_id}', [LocationController::class, 'getStates'])->name('get-states');
 Route::get('get-cities/{state_id}', [LocationController::class, 'getCities'])->name('get-cities');
+/**
+ * Companies frontend pages
+ */
 Route::get('companies', [FrontendCompanyPageController::class, 'index'])->name('companies.index');
 Route::get('companies/{slug}', [FrontendCompanyPageController::class, 'show'])->name('companies.show');
 
+/**
+ * Candidates Frontend Pages
+ */
+Route::get('candidates', [FrontendCandidatePageController::class, 'index'])->name('candidates.index');
+Route::get('candidates/{slug}', [FrontendCandidatePageController::class, 'show'])->name('candidates.show');
 
 /***  Candidate Dashboard Routes */
 Route::group(
