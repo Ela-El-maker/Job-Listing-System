@@ -1,13 +1,12 @@
 @extends('frontend.layouts.master')
 
 @section('contents')
-<style>
-    .card-grid-2 img {
-    max-width: 100%;
-    height: auto;
-}
-
-</style>
+    <style>
+        .card-grid-2 img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
     <section class="section-box mt-75">
         <div class="breacrumb-cover">
             <div class="container">
@@ -401,12 +400,14 @@
                                 <div class="col-lg-4 col-md-6">
                                     <div class="card-grid-2 hover-up">
                                         <div class="card-grid-2-image-left d-flex">
-                                            <div class="card-grid-2-image-rd online"><a href="{{ route('candidates.show',$candidate?->slug) }}">
+                                            <div class="card-grid-2-image-rd online"><a
+                                                    href="{{ route('candidates.show', $candidate?->slug) }}">
                                                     <figure>
                                                         <img alt="joblist" src="{{ asset($candidate?->image) }}">
                                                     </figure>
                                                 </a></div>
-                                            <div class="card-profile pt-10"><a href="{{ route('candidates.show',$candidate?->slug) }}">
+                                            <div class="card-profile pt-10"><a
+                                                    href="{{ route('candidates.show', $candidate?->slug) }}">
                                                     <h5>{{ $candidate?->full_name }}</h5>
                                                 </a><span class="font-xs color-text-mutted">{{ $candidate?->title }}</span>
                                                 <div class="rate-reviews-small pt-5">
@@ -451,10 +452,14 @@
                                                 <div class="row">
                                                     <div class="col-6"><span class="d-flex align-items-center"><i
                                                                 class="fi-rr-marker mr-5 ml-0"></i><span
-                                                                class="font-sm color-text-mutted">{{$candidate->candidateCountry?->name}}</span></span></div>
+                                                                class="font-sm color-text-mutted">{{ $candidate->candidateCountry?->name }}</span></span>
+                                                    </div>
                                                     <div class="col-6"><span
                                                             class="d-flex justify-content-end align-items-center"><span
-                                                                class="font-sm"><a href="" class="text-primary d-flex align-items-center">Resume <i style="margin-bottom: -5px" class="fi fi-rr-arrow-right"></i></a></span></span>
+                                                                class="font-sm"><a href=""
+                                                                    class="text-primary d-flex align-items-center">Resume
+                                                                    <i style="margin-bottom: -5px"
+                                                                        class="fi fi-rr-arrow-right"></i></a></span></span>
                                                     </div>
                                                 </div>
                                             </div>

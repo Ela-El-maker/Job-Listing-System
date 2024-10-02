@@ -1,15 +1,15 @@
 @extends('frontend.layouts.master')
 
 @section('contents')
-    <section class="section-box">
+    <section class="section-box mt-75">
         <div class="breacrumb-cover">
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-lg-12">
-                        <h2 class="mb-20">Blog</h2>
+                        <h2 class="mb-20">{{ $candidate?->full_name }}</h2>
                         <ul class="breadcrumbs">
-                            <li><a class="home-icon" href="index.html">Home</a></li>
-                            <li>Blog</li>
+                            <li><a class="home-icon" href="{{ url('/') }}">Home</a></li>
+                            <li>profile</li>
                         </ul>
                     </div>
                 </div>
@@ -66,13 +66,16 @@
                                     <h4>Experience</h4>
                                     <ul class="timeline">
                                         @foreach ($candidate->experiences as $experience)
-                                        <li>
-                                            <a href="#" class="float-right">{{ formatDate($experience?->start) }}  - {{ $experience?->currently_working ? 'Currently' :  formatDate($experience?->start) }}</a>
-                                            <a  href="javascript;;">{{ $experience?->designation }}</a> | <span>{{ $experience?->department }}</span>
+                                            <li>
+                                                <a href="#" class="float-right">{{ formatDate($experience?->start) }}
+                                                    -
+                                                    {{ $experience?->currently_working ? 'Currently' : formatDate($experience?->start) }}</a>
+                                                <a href="javascript;;">{{ $experience?->designation }}</a> |
+                                                <span>{{ $experience?->department }}</span>
 
-                                            <p>{{ $experience?->company }}</p>
-                                            <p>{!! $experience?->responsibilities !!}</p>
-                                        </li>
+                                                <p>{{ $experience?->company }}</p>
+                                                <p>{!! $experience?->responsibilities !!}</p>
+                                            </li>
                                         @endforeach
 
 
@@ -85,13 +88,14 @@
                                     <h4>Education</h4>
                                     <ul class="timeline">
                                         @foreach ($candidate->educations as $education)
-                                        <li>
-                                            <a href="#" class="float-right">{{ formatDate($education?->year) }}  </a>
-                                            <a  href="javascript;;">{{ $education?->level }}</a>
+                                            <li>
+                                                <a href="#" class="float-right">{{ formatDate($education?->year) }}
+                                                </a>
+                                                <a href="javascript;;">{{ $education?->level }}</a>
 
-                                            <p>{{ $education?->degree }}</p>
-                                            <p>{!! $education?->note !!}</p>
-                                        </li>
+                                                <p>{{ $education?->degree }}</p>
+                                                <p>{!! $education?->note !!}</p>
+                                            </li>
                                         @endforeach
 
 
@@ -119,7 +123,8 @@
                                     <div class="sidebar-text-info"><span class="text-description">Skills</span>
                                         <strong>
                                             @foreach ($candidate->skills as $candidateSkill)
-                                                <p class="badge bg-info text-light ">{{ $candidateSkill->skill?->name }}</p>
+                                                <p class="badge bg-info text-light ">{{ $candidateSkill->skill?->name }}
+                                                </p>
                                             @endforeach
                                         </strong>
                                     </div>
@@ -137,7 +142,9 @@
                                 </li>
                                 <li>
                                     <div class="sidebar-icon-item"><i class="fi-rr-dollar"></i></div>
-                                    <div class="sidebar-text-info"><span class="text-description">Date of Birth</span><strong class="small-heading">{{ formatDate($candidate?->birth_date) }}</strong></div>
+                                    <div class="sidebar-text-info"><span class="text-description">Date of
+                                            Birth</span><strong
+                                            class="small-heading">{{ formatDate($candidate?->birth_date) }}</strong></div>
                                 </li>
                                 <li>
                                     <div class="sidebar-icon-item"><i class="fi-rr-marker"></i></div>
@@ -146,7 +153,8 @@
                                 </li>
                                 <li>
                                     <div class="sidebar-icon-item"><i class="fi-rr-marker"></i></div>
-                                    <div class="sidebar-text-info"><span class="text-description">Marital Status</span><strong
+                                    <div class="sidebar-text-info"><span class="text-description">Marital
+                                            Status</span><strong
                                             class="small-heading">{{ $candidate?->marital_status }}</strong></div>
                                 </li>
                                 <li>
@@ -157,7 +165,9 @@
                                 <li>
                                     <div class="sidebar-icon-item"><i class="fi-rr-marker"></i></div>
                                     <div class="sidebar-text-info"><span class="text-description">Website</span><strong
-                                            class="small-heading"><a href="{{ $candidate?->website }}">{{ $candidate?->website }}</a></strong></div>
+                                            class="small-heading"><a
+                                                href="{{ $candidate?->website }}">{{ $candidate?->website }}</a></strong>
+                                    </div>
                                 </li>
                             </ul>
                         </div>
@@ -173,9 +183,9 @@
                                 <li>Office: {{ $candidate?->phone_two }}</li>
                                 <li>Email: {{ $candidate?->email }}</li>
                             </ul>
-                            <div class="mt-30"><a class="btn btn-send-message"
-                                href="mailto:{{ $candidate?->email }}">Send Message</a>
-                        </div>
+                            <div class="mt-30"><a class="btn btn-send-message" href="mailto:{{ $candidate?->email }}">Send
+                                    Message</a>
+                            </div>
                         </div>
                     </div>
                 </div>

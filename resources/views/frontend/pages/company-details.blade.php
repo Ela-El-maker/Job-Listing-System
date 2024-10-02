@@ -6,7 +6,7 @@
             <div class="container">
                 <div class="row align-items-center">
                     <div class="col-lg-12">
-                        <h2 class="mb-20">Company Profile</h2>
+                        <h2 class="mb-20">{{ $company?->name }}</h2>
                         <ul class="breadcrumbs">
                             <li><a class="home-icon" href="{{ url('/') }}">Home</a></li>
                             <li>Company</li>
