@@ -30,9 +30,6 @@ class CandidateExperienceStoreRequest extends FormRequest
             'end' => ['required','date'],
             'currently_working' => ['nullable'],
             'responsibilities' => ['nullable', 'max:500'],
-
-
-
         ];
     }
 }
