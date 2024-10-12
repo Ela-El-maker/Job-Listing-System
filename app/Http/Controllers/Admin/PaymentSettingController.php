@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\PaypalSettingUpdateRequest;
 use App\Models\PaymentSetting;
 use App\Services\Notify;
+use App\Services\PaymentGatewaySettingService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
@@ -30,6 +31,10 @@ class PaymentSettingController extends Controller
                 ['value' => $value]
             );
         }
+        
+        $settingService = app(PaymentGatewaySettingService::class);
+        $settingService ->clearCacheSettings();
+
         Notify::updatedNotification();
         return redirect()->back();
     }
