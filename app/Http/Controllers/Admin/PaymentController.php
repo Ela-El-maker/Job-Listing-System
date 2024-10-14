@@ -53,17 +53,51 @@ class PaymentController extends Controller
 
         // Calculate payable amount
         $payableAmount = round(Session::get('selected_plan')['price'] * config('gatewaySettings.paypal_currency_rate'));
-        dd($payableAmount);
+        // dd($payableAmount);
+        $response = $provider -> createOrder(
+            [
+                'intent' => 'CAPTURE',
+                'application_context' => [
+                    'return_url' => route('company.paypal.success'),
+                    'cancel_url' => route('company.paypal.cancel'),
+                ],
+                'purchase_units' =>[
+                    [
+                        'amount' => [
+                            'currency_code' => config('gatewaySettings.paypal_currency_name'),
+                            'value' => $payableAmount
+                        ]
+                    ]
+                ]
+            ],
+        );
 
+        // dd($response);
+        if(isset($response['id']) && $response['id'] !== NULL)
+        {
+            foreach ($response['links'] as $link) {
+                # code...
+                if($link['rel'] === 'approve')
+                {
+                    return redirect()->away($link['href']);
+                }
+            }
+        }
     }
 
     /**
      * Paypal Success
      *
      */
-    function paypalSuccess()
+    function paypalSuccess(Request $request)
     {
         //handle payment redirect
+        $config = $this->setPaypalConfig();
+        $provider = new PayPalClient($config);
+        $provider->getAccessToken();
+        $response = $provider ->capturePaymentOrder($request->token);
+        dd($response);
+
     }
     /**
      * Paypal Cancel
