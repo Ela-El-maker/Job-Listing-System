@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Services\OrderService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 // Import the class namespaces first, before using it directly
@@ -15,7 +16,7 @@ class PaymentController extends Controller
      * Paypal Payment
      *
      */
-    function setPaypalConfig() : array
+    function setPaypalConfig(): array
     {
 
         return  [
@@ -49,19 +50,19 @@ class PaymentController extends Controller
         // dd($this->setPaypalConfig());
         $config = $this->setPaypalConfig();
         $provider = new PayPalClient($config);
-        $provider ->getAccessToken();
+        $provider->getAccessToken();
 
         // Calculate payable amount
         $payableAmount = round(Session::get('selected_plan')['price'] * config('gatewaySettings.paypal_currency_rate'));
         // dd($payableAmount);
-        $response = $provider -> createOrder(
+        $response = $provider->createOrder(
             [
                 'intent' => 'CAPTURE',
                 'application_context' => [
                     'return_url' => route('company.paypal.success'),
                     'cancel_url' => route('company.paypal.cancel'),
                 ],
-                'purchase_units' =>[
+                'purchase_units' => [
                     [
                         'amount' => [
                             'currency_code' => config('gatewaySettings.paypal_currency_name'),
@@ -73,12 +74,10 @@ class PaymentController extends Controller
         );
 
         // dd($response);
-        if(isset($response['id']) && $response['id'] !== NULL)
-        {
+        if (isset($response['id']) && $response['id'] !== NULL) {
             foreach ($response['links'] as $link) {
                 # code...
-                if($link['rel'] === 'approve')
-                {
+                if ($link['rel'] === 'approve') {
                     return redirect()->away($link['href']);
                 }
             }
@@ -95,9 +94,21 @@ class PaymentController extends Controller
         $config = $this->setPaypalConfig();
         $provider = new PayPalClient($config);
         $provider->getAccessToken();
-        $response = $provider ->capturePaymentOrder($request->token);
-        dd($response);
+        $response = $provider->capturePaymentOrder($request->token);
+        // dd($response);
+        if (isset($response['status']) && $response['status'] === 'COMPLETED') {
+            $capture = $response['purchase_units'][0]['payments']['captures'][0];
+            try {
+                //code...
+                OrderService::storeOrder($capture['id'], 'payPal', $capture['amount']['value'], $capture['amount']['currency_code'], 'paid');
+            } catch (\Exception $th) {
+                throw $th;
+            }
 
+            Session::forget('selected_plan');
+
+            return redirect()->route('home');
+        }
     }
     /**
      * Paypal Cancel
