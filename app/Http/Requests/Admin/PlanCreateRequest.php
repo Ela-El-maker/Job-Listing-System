@@ -32,7 +32,6 @@ class PlanCreateRequest extends FormRequest
             'recommended' => ['required','boolean'],
             'frontend_show' => ['required','boolean'],
             'show_at_home' => ['required','boolean'],
-
         ];
     }
 }
