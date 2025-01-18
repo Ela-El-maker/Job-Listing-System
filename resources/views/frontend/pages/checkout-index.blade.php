@@ -28,7 +28,7 @@
                                 <div class="col-md-3">
                                     <a href=""><img class=""
                                             style="width: 200px;border-radius: 5px;border: 3px solid #1ca774; height:110px; object-fit: contain"
-                                            src="{{ asset('default-uploads/avatar/paypal1.png') }}" alt=""></a>
+                                            src="{{ asset('default-uploads/payment/paypal1.png') }}" alt=""></a>
                                 </div>
                                 <div class="col-md-3">
                                     <a href=""><img class=""
