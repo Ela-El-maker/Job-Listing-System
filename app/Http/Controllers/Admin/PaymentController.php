@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
+use Stripe\Stripe;
+use Stripe\Checkout\Session as StripeSession;
 
 
 class PaymentController extends Controller
@@ -134,5 +136,23 @@ class PaymentController extends Controller
         //handle payment redirect
         return redirect()->route('company.payment.error')->withErrors(['error'=>'Something went wrong. Please Try Again.']);
 
+    }
+
+
+    /**
+     * Stripe Payment
+     *
+     */
+
+
+    function payWithStripe()
+    {
+
+    }
+
+    function stripeSuccess()
+    {
+        // Stripe::setApiKey();
+        
     }
 }
