@@ -10,6 +10,8 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="card">
+                    <h5 class="pl-4 pt-4">Order Info</h5>
+                    <hr>
                     <div class="card-body p-0"> <!-- Removed p-0 for better spacing -->
                         <table class="table">
                             <tbody>
@@ -40,7 +42,7 @@
             <div class="col-md-4">
                 <div class="card">
                     <h5 class="pl-4 pt-4">Billing and Payment Info</h5>
-
+                    <hr>
                     <div class="card-body p-0"> <!-- Removed p-0 for better spacing -->
                         <table class="table">
                             <tbody>
@@ -66,7 +68,7 @@
             <div class="col-md-4">
                 <div class="card">
                     <h5 class="pl-4 pt-4">Plan</h5>
-
+                    <hr>
                     <div class="card-body p-0"> <!-- Removed p-0 for better spacing -->
                         <table class="table">
                             <tbody>
