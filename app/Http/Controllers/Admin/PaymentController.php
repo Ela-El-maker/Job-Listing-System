@@ -124,7 +124,9 @@ class PaymentController extends Controller
             }
         }
 
-        return redirect()->route('company.payment.error')->withErrors(['error'=>$response['error']['message']]);
+        // return redirect()->route('company.payment.error')->withErrors(['error'=>$response['error']['message']]);
+        return redirect()->route('company.payment.error')
+        ->withErrors(['error' => $response['error']['message'] ?? 'Payment failed. Please try again.']);
 
     }
     /**
@@ -153,6 +155,6 @@ class PaymentController extends Controller
     function stripeSuccess()
     {
         // Stripe::setApiKey();
-        
+
     }
 }

@@ -139,6 +139,8 @@
 
             <li class="{{ setSidebarActive(['admin.site-settings.index']) }}"><a class="nav-link" href="{{ route('admin.site-settings.index') }}"><i class="far fa-square"></i> <span>Site Settings</span></a></li>
 
+            <li class="{{ setSidebarActive(['admin.orders.*']) }}"><a class="nav-link" href="{{ route('admin.orders.index') }}"><i class="far fa-square"></i> <span>Orders</span></a></li>
+
 
             {{-- <li class="{{ setSidebarActive(['admin.site-settings.index']) }}"><a class="nav-link" href="{{ route('admin.site-settings.index') }}"><i class="far fa-square"></i> <span>Site Settings</span></a></li> --}}
 

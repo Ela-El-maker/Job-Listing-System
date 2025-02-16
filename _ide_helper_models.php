@@ -413,6 +413,45 @@ namespace App\Models{
  * 
  *
  * @property int $id
+ * @property int $company_id
+ * @property int $plan_id
+ * @property string $package_name
+ * @property string $transaction_id
+ * @property string $order_id
+ * @property string $payment_provider
+ * @property float $amount
+ * @property string $paid_in_currency
+ * @property string $default_amount
+ * @property string $payment_status
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\Company $company
+ * @property-read \App\Models\Plan|null $plan
+ * @method static \Illuminate\Database\Eloquent\Builder|Order newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Order newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Order query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereAmount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereDefaultAmount($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereOrderId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order wherePackageName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order wherePaidInCurrency($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order wherePaymentProvider($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order wherePaymentStatus($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order wherePlanId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereTransactionId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Order whereUpdatedAt($value)
+ */
+	class Order extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
+ * @property int $id
  * @property string $name
  * @property string|null $slug
  * @property \Illuminate\Support\Carbon|null $created_at
@@ -612,6 +651,7 @@ namespace App\Models{
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Candidate|null $candidateProfile
+ * @property-read \App\Models\Company|null $company
  * @property-read \Illuminate\Notifications\DatabaseNotificationCollection<int, \Illuminate\Notifications\DatabaseNotification> $notifications
  * @property-read int|null $notifications_count
  * @property-read \Illuminate\Database\Eloquent\Collection<int, \Laravel\Sanctum\PersonalAccessToken> $tokens
@@ -632,5 +672,34 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|User whereUpdatedAt($value)
  */
 	class User extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
+ * @property int $id
+ * @property int $company_id
+ * @property int $plan_id
+ * @property int $job_limit
+ * @property int $featured_job_limit
+ * @property int $highlight_job_limit
+ * @property int $profile_verified
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|UserPlan newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|UserPlan newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|UserPlan query()
+ * @method static \Illuminate\Database\Eloquent\Builder|UserPlan whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserPlan whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserPlan whereFeaturedJobLimit($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserPlan whereHighlightJobLimit($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserPlan whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserPlan whereJobLimit($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserPlan wherePlanId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserPlan whereProfileVerified($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|UserPlan whereUpdatedAt($value)
+ */
+	class UserPlan extends \Eloquent {}
 }
 

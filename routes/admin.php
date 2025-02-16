@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\IndustryTypeController;
 use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\LocationController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\OrganizationTypeController;
 use App\Http\Controllers\Admin\PaymentSettingController;
 use App\Http\Controllers\Admin\PlanController;
@@ -67,7 +68,7 @@ Route::group(['middleware' => ['auth:admin'], 'prefix' => 'admin', 'as' => 'admi
 
     Route::get('get-states/{country_id}', [LocationController::class, 'getStatesOfCountry'])->name('get-states');
 
-    /**** Langauage Route */
+    /**** Language Route */
     Route::resource('languages', LanguageController::class);
 
     /**** Profession Route */
@@ -80,6 +81,10 @@ Route::group(['middleware' => ['auth:admin'], 'prefix' => 'admin', 'as' => 'admi
     /**** Plan Route */
     Route::resource('plans', PlanController::class);
 
+    /**** Order Route */
+    Route::get('orders', [OrderController::class, 'index'])->name('orders.index');
+    Route::get('order/{order}', [OrderController::class,'show'])->name('orders.show');
+    Route::get('order/invoice/{id}', [OrderController::class,'invoice'])->name('orders.invoice');
 
     /**Payment Setting Route Section */
     Route::get('payment-settings', [PaymentSettingController::class, 'index'])->name('payment-settings.index');
