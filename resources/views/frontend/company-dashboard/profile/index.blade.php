@@ -163,7 +163,7 @@
                                             <input type="text" name="establishment_date"
                                                 value="{{ $companyInfo?->establishment_date }}"
                                                 class="form-control datepicker {{ $errors->has('establishment_date') ? 'is-invalid' : '' }}
- ">
+                        ">
                                             <x-input-error :messages="$errors->get('establishment_date')" class="mt-2" />
                                         </div>
                                     </div>
@@ -172,7 +172,7 @@
                                             <label class="font-sm color-text-mutted mb-10">Website </label>
                                             <input type="text" name="website" value="{{ $companyInfo?->website }}"
                                                 class="form-control {{ $errors->has('website') ? 'is-invalid' : '' }}
-">
+            ">
                                             <x-input-error :messages="$errors->get('website')" class="mt-2" />
 
                                         </div>

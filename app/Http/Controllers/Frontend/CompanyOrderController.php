@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use Illuminate\Http\Request;
 use App\Traits\Searchable;
 use Illuminate\View\View;
 use LaravelDaily\Invoices\Classes\Buyer;
@@ -11,27 +12,37 @@ use LaravelDaily\Invoices\Classes\InvoiceItem;
 use LaravelDaily\Invoices\Classes\Party;
 use LaravelDaily\Invoices\Invoice;
 
-class OrderController extends Controller
+class CompanyOrderController extends Controller
 {
     //
     use Searchable;
 
-    public function index(): View
+    function index(): View
     {
-        $query = Order::query();
-        $query->with(['company', 'plan']);
-        $this->search($query, ['package_name', 'transaction_id', 'order_id', 'payment_provider', 'amount', 'paid_in_currency', 'payment_status', 'created_at']);
+        $query = Order::query()
+            ->with(['company', 'plan'])
+            ->where('company_id', auth()->user()->company?->id); // Ensures orders are filtered by company
 
-        $orders = $query->orderBy('id', 'DESC')->paginate(20);
+        $this->search($query, [
+            'package_name',
+            'order_id',
+            'payment_provider',
+            'amount',
+            'paid_in_currency',
+            'payment_status',
+            'created_at'
+        ]);
 
-        return view('admin.order.index', compact('orders'));
+        $orders = $query->orderBy('id', 'DESC')->paginate(20); // Apply sorting & pagination once
+
+        return view("frontend.company-dashboard.order.index", compact("orders"));
     }
 
-    public function show(string $id): View
+
+    function show(string $id): View
     {
         $order = Order::findOrFail($id);
-
-        return view('admin.order.show', compact('order'));
+        return view("frontend.company-dashboard.order.show", compact("order"));
     }
 
     public function invoice(string $id)

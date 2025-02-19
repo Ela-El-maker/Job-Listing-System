@@ -70,7 +70,7 @@
                                     </td>
                                     <td>
                                         <div>
-                                            {{ $order?->amount }}{{ $order?->paid_in_currency }}
+                                            {{ $order?->amount }} {{ $order?->paid_in_currency }}
                                         </div>
                                     </td>
                                     <td>
@@ -86,7 +86,8 @@
                                     </td>
 
                                     <td>
-                                        <a href="{{ route('admin.orders.show', $order?->id) }}" class="btn-sm btn btn-primary"><i class="fas fa-eye"></i> View Info </a>
+                                        <a href="{{ route('admin.orders.show', $order?->id) }}"
+                                            class="btn-sm btn btn-primary"><i class="fas fa-eye"></i> View Info </a>
                                     </td>
                                 </tr>
                             @empty
