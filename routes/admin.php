@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\Admin\CountryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\IndustryTypeController;
+use App\Http\Controllers\Admin\JobCategoryController;
 use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\LocationController;
 use App\Http\Controllers\Admin\OrderController;
@@ -83,23 +84,26 @@ Route::group(['middleware' => ['auth:admin'], 'prefix' => 'admin', 'as' => 'admi
 
     /**** Order Route */
     Route::get('orders', [OrderController::class, 'index'])->name('orders.index');
-    Route::get('order/{order}', [OrderController::class,'show'])->name('orders.show');
-    Route::get('order/invoice/{id}', [OrderController::class,'invoice'])->name('orders.invoice');
+    Route::get('order/{order}', [OrderController::class, 'show'])->name('orders.show');
+    Route::get('order/invoice/{id}', [OrderController::class, 'invoice'])->name('orders.invoice');
+
+    /**
+     * Job Category Route
+     */
+    Route::resource('job-categories', JobCategoryController::class);
+
+
+
+
+
 
     /**Payment Setting Route Section */
     Route::get('payment-settings', [PaymentSettingController::class, 'index'])->name('payment-settings.index');
 
     Route::post('paypal-settings', [PaymentSettingController::class, 'updatePaypalSetting'])->name('paypal-settings.update');
 
-     /**Site Setting Route Section */
-     Route::get('site-settings', [SiteSettingController::class, 'index'])->name('site-settings.index');
+    /**Site Setting Route Section */
+    Route::get('site-settings', [SiteSettingController::class, 'index'])->name('site-settings.index');
 
-     Route::post('general-settings', [SiteSettingController::class, 'updateGeneralSetting'])->name('general-settings.update');
-
-
-     /**Site Setting Route Section */
-    //  Route::get('site-settings', [SiteSettingController::class, 'index'])->name('site-settings.index');
-
-    //  Route::post('general-site-settings', [SiteSettingController::class, 'updateGeneralSetting'])->name('general-settings.update');
-
+    Route::post('general-settings', [SiteSettingController::class, 'updateGeneralSetting'])->name('general-settings.update');
 });
