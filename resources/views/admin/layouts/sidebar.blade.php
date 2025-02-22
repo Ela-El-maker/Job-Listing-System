@@ -123,6 +123,10 @@
                      href="{{ route('admin.job-role.index') }}"><i class="far fa-square"></i> <span>Job
                          Roles</span></a></li>
 
+             <li class="{{ setSidebarActive(['admin.job-experience.*']) }}"><a class="nav-link"
+                     href="{{ route('admin.job-experience.index') }}"><i class="far fa-square"></i> <span>Job
+                         Experiences</span></a></li>
+
              <li class="{{ setSidebarActive(['admin.salary-type.*']) }}"><a class="nav-link"
                      href="{{ route('admin.salary-type.index') }}"><i class="far fa-square"></i> <span>Salary
                          Type</span></a></li>
