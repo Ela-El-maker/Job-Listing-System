@@ -3,24 +3,48 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Company;
+use App\Models\Country;
+use App\Models\Education;
+use App\Models\Experience;
+use App\Models\JobCategory;
+use App\Models\JobExperience;
+use App\Models\JobRole;
+use App\Models\JobType;
+use App\Models\SalaryType;
+use App\Models\Skill;
+use App\Models\Tag;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class JobController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(): View
     {
         //
+        return view('admin.job.index');
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
         //
+        $companies = Company::where(['profile_completion' => 1, 'visibility' => 1])->get();
+        $categories = JobCategory::all();
+        $countries = Country::all();
+        $salaryTypes  = SalaryType::all();
+        $experiences = JobExperience::all();
+        $jobRoles = JobRole::all();
+        $educations = Education::all();
+        $jobTypes = JobType::all();
+        $tags = Tag::all();
+        $skills = Skill::all();
+        return view('admin.job.create', compact('companies', 'categories', 'countries', 'salaryTypes', 'experiences', 'jobRoles', 'educations', 'jobTypes', 'tags', 'skills'));
     }
 
     /**
