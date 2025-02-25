@@ -12,6 +12,7 @@ use App\Models\Job;
 use App\Models\JobCategory;
 use App\Models\JobExperience;
 use App\Models\JobRole;
+use App\Models\JobTag;
 use App\Models\JobType;
 use App\Models\SalaryType;
 use App\Models\Skill;
@@ -89,6 +90,16 @@ class JobController extends Controller
         $job->is_highlighted = $request->highlight;
         $job->description = $request->description;
         $job->save();
+
+
+        // Insert Tags
+        foreach ($request->tags as $tag) {
+            $createTag = new JobTag();
+            $createTag->job_id = $job->id;
+            $createTag->tag_id = $tag;
+            $createTag->save();
+        }
+
 
         Notify::createdNotification();
         return to_route('admin.jobs.index');
