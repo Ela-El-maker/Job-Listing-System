@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('jobs', function (Blueprint $table) {
             $table->id();
             $table->foreignId('company_id')->constrained('companies');
-            $table->foreignId('job_category_id')->constrained('job_experiences')->onDelete('cascade');
+            $table->foreignId('job_category_id')->constrained('job_categories')->onDelete('cascade');
             $table->foreignId('job_role_id');
             $table->foreignId('job_experience_id');
             $table->foreignId('education_id');
@@ -22,17 +22,18 @@ return new class extends Migration
             $table->foreignId('salary_type_id');
             $table->string('title');
             $table->string('slug');
-            $table->string('vacancies');
-            $table->double('min_salary');
-            $table->double('max_salary');
+            $table->integer('vacancies');
+            $table->double('min_salary')->nullable();
+            $table->double('max_salary')->nullable();
+            $table->double('custom_salary')->nullable();
             $table->date('deadline');
             $table->text('description');
             $table->enum('status', ['pending', 'active', 'inactive', 'expired'])->default('pending');
             $table->enum('apply_on', ['app', 'email', 'custom_url']);
             $table->string('apply_email')->nullable();
             $table->text('apply_url')->nullable();
-            $table->boolean('is_featured')->default(0);
-            $table->boolean('is_highlighted')->default(0);
+            $table->boolean('is_featured')->nullable();
+            $table->boolean('is_highlighted')->nullable();
             $table->date('featured_until')->nullable();
             $table->date('highlighted_until')->nullable();
             $table->integer('total_views')->default(0);
