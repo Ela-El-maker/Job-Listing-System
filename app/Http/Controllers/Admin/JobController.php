@@ -4,11 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\JobCreateRequest;
+use App\Models\Benefits;
 use App\Models\Company;
 use App\Models\Country;
 use App\Models\Education;
 use App\Models\Experience;
 use App\Models\Job;
+use App\Models\JobBenefits;
 use App\Models\JobCategory;
 use App\Models\JobExperience;
 use App\Models\JobRole;
@@ -98,6 +100,22 @@ class JobController extends Controller
             $createTag->job_id = $job->id;
             $createTag->tag_id = $tag;
             $createTag->save();
+        }
+
+        // Insert Benefits
+
+        $benefits = explode(',', $request->benefits);
+        foreach ($benefits as $benefit) {
+            $createBenefit = new Benefits();
+            $createBenefit->company_id = $job->company_id;
+            $createBenefit->name = $benefit;
+            $createBenefit->save();
+
+            //store job benfit
+            $jobBenefit = new JobBenefits();
+            $jobBenefit->job_id = $job->id;
+            $jobBenefit->benefit_id = $createBenefit->id;
+            $jobBenefit->save();
         }
 
 
