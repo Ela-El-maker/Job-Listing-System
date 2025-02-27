@@ -49,6 +49,27 @@ namespace App\Models{
  * 
  *
  * @property int $id
+ * @property int $company_id
+ * @property string $name
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|Benefits newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Benefits newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Benefits query()
+ * @method static \Illuminate\Database\Eloquent\Builder|Benefits whereCompanyId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Benefits whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Benefits whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Benefits whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|Benefits whereUpdatedAt($value)
+ */
+	class Benefits extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
+ * @property int $id
  * @property int $user_id
  * @property int|null $experience_id
  * @property int|null $profession_id
@@ -445,6 +466,11 @@ namespace App\Models{
  * @property string|null $company_name
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
+ * @property-read \App\Models\JobCategory $category
+ * @property-read \App\Models\Company $company
+ * @property-read \App\Models\JobRole|null $jobRole
+ * @property-read \App\Models\JobType|null $jobType
+ * @property-read \App\Models\SalaryType|null $salaryType
  * @method static \Illuminate\Database\Eloquent\Builder|Job findSimilarSlugs(string $attribute, array $config, string $slug)
  * @method static \Illuminate\Database\Eloquent\Builder|Job newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Job newQuery()
@@ -485,6 +511,27 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|Job withUniqueSlugConstraints(\Illuminate\Database\Eloquent\Model $model, string $attribute, array $config, string $slug)
  */
 	class Job extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
+ * @property int $id
+ * @property int $job_id
+ * @property int $benefit_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|JobBenefits newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|JobBenefits newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|JobBenefits query()
+ * @method static \Illuminate\Database\Eloquent\Builder|JobBenefits whereBenefitId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|JobBenefits whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|JobBenefits whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|JobBenefits whereJobId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|JobBenefits whereUpdatedAt($value)
+ */
+	class JobBenefits extends \Eloquent {}
 }
 
 namespace App\Models{
@@ -556,6 +603,48 @@ namespace App\Models{
  * @method static \Illuminate\Database\Eloquent\Builder|JobRole withUniqueSlugConstraints(\Illuminate\Database\Eloquent\Model $model, string $attribute, array $config, string $slug)
  */
 	class JobRole extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
+ * @property int $id
+ * @property int $job_id
+ * @property int $skill_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|JobSkills newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|JobSkills newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|JobSkills query()
+ * @method static \Illuminate\Database\Eloquent\Builder|JobSkills whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|JobSkills whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|JobSkills whereJobId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|JobSkills whereSkillId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|JobSkills whereUpdatedAt($value)
+ */
+	class JobSkills extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * 
+ *
+ * @property int $id
+ * @property int $job_id
+ * @property int $tag_id
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|JobTag newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|JobTag newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|JobTag query()
+ * @method static \Illuminate\Database\Eloquent\Builder|JobTag whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|JobTag whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|JobTag whereJobId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|JobTag whereTagId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|JobTag whereUpdatedAt($value)
+ */
+	class JobTag extends \Eloquent {}
 }
 
 namespace App\Models{

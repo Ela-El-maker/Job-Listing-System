@@ -22,10 +22,10 @@ return new class extends Migration
             $table->foreignId('salary_type_id');
             $table->string('title');
             $table->string('slug');
-            $table->integer('vacancies');
-            $table->double('min_salary')->nullable();
-            $table->double('max_salary')->nullable();
-            $table->double('custom_salary')->nullable();
+            $table->integer('vacancies'); // Use integer for number-based fields
+            $table->double('min_salary')->default(0)->nullable(false);
+            $table->double('max_salary')->default(0)->nullable(false);
+            $table->string('custom_salary', 255)->default('commutative'); // Fixed spelling
             $table->date('deadline');
             $table->text('description');
             $table->enum('status', ['pending', 'active', 'inactive', 'expired'])->default('pending');

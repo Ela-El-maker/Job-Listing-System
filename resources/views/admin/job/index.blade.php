@@ -31,21 +31,64 @@
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <tr>
-                            <th>Name</th>
-                            <th>Slug</th>
+                            <th>Job</th>
+                            <th>Category/Role</th>
+                            <th>Salary</th>
+                            <th>Deadline</th>
+                            <th>Status</th>
+
                             <th style="width: 20%">Action</th>
                         </tr>
                         <tbody>
-                            {{-- @forelse ($tagTypes as $tagType)
+                            @forelse ($jobs as $job)
                                 <tr>
-                                    <td>{{ $tagType->name }}</td>
-                                    <td>{{ $tagType->slug }}</td>
                                     <td>
-                                        <a href="{{ route('admin.tag.edit', $tagType->id) }}"
+                                        <div class="d-flex">
+                                            <div class="mr-2">
+                                                <img style="width: 50px;height:50px;object-fit:cover;"
+                                                    src="{{ asset($job?->company?->logo) }}" alt="">
+                                            </div>
+                                            <div>
+                                                <b>{{ $job?->title }}</b>
+                                                <br>
+                                                <span>{{ $job?->company?->name }} - {{ $job?->jobType?->name }}</span>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <b>{{ $job?->category?->name }}</b>
+                                            <br>
+                                            <span>{{ $job?->jobRole?->name }}</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        @if ($job?->salary_mode === 'range')
+                                            {{ $job?->min_salary }} - {{ $job?->max_salary }}
+                                            {{ config('settings.site_default_currency') }}
+                                            <br>
+                                            <span>{{ $job?->salaryType?->name }}</span>
+                                        @else
+                                            {{ $job?->custom_salary }}
+                                            <br>
+                                            <span>{{ $job?->salaryType?->name }}</span>
+                                        @endif
+                                    </td>
+                                    <td>{{ formatDate($job?->deadline) }}</td>
+                                    <td>
+                                        @if ($job?->deadline > date('Y-m-d'))
+                                            <span class="badge badge-success">Active</span>
+                                        @else
+                                            <span class="badge badge-danger">Expired</span>
+                                        @endif
+                                    </td>
+
+                                    <td>
+                                        <a href="{{ route('admin.tag.edit', $job?->id) }}"
                                             class="btn-small btn btn-primary">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <a href="{{ route('admin.tag.destroy', $tagType->id) }}"
+                                        <a href="{{ route('admin.tag.destroy', $job?->id) }}"
                                             class="btn-small btn btn-danger delete-item">
                                             <i class="fas fa-trash-alt"></i>
                                         </a>
@@ -56,7 +99,7 @@
                                 <tr>
                                     <td colspan="3" class="text-center"> No Results Found! </td>
                                 </tr>
-                            @endforelse --}}
+                            @endforelse
                         </tbody>
 
                     </table>
