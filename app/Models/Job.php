@@ -6,6 +6,7 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Job extends Model
 {
@@ -43,5 +44,11 @@ class Job extends Model
     function salaryType(): BelongsTo
     {
         return $this->belongsTo(SalaryType::class, 'salary_type_id', 'id');
+    }
+
+
+    function tags(): HasMany
+    {
+        return $this->hasMany(JobTag::class,  'job_id', 'id');
     }
 }

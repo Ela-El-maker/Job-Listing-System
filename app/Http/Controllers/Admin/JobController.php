@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\JobCreateRequest;
 use App\Models\Benefits;
+use App\Models\City;
 use App\Models\Company;
 use App\Models\Country;
 use App\Models\Education;
@@ -19,6 +20,7 @@ use App\Models\JobTag;
 use App\Models\JobType;
 use App\Models\SalaryType;
 use App\Models\Skill;
+use App\Models\State;
 use App\Models\Tag;
 use App\Services\Notify;
 use App\Traits\Searchable;
@@ -152,9 +154,23 @@ class JobController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $id): View
     {
         //
+        $job = Job::findOrFail($id);
+        $companies = Company::where(['profile_completion' => 1, 'visibility' => 1])->get();
+        $categories = JobCategory::all();
+        $countries = Country::all();
+        $states = State::where('country_id', $job?->country_id)->get();
+        $cities = City::where('state_id', $job?->state_id)->get();
+        $salaryTypes  = SalaryType::all();
+        $experiences = JobExperience::all();
+        $jobRoles = JobRole::all();
+        $educations = Education::all();
+        $jobTypes = JobType::all();
+        $tags = Tag::all();
+        $skills = Skill::all();
+        return view('admin.job.edit', compact('companies', 'categories', 'countries', 'states', 'cities', 'salaryTypes', 'experiences', 'jobRoles', 'educations', 'jobTypes', 'tags', 'skills', 'job'));
     }
 
     /**
