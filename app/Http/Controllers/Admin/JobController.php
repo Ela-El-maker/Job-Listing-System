@@ -267,5 +267,14 @@ class JobController extends Controller
     public function destroy(string $id)
     {
         //
+        try {
+            Job::findorfail($id)->delete();
+            Notify::deletedNotification();
+            return response(['message' => 'success'], 200);
+        } catch (\Exception $e) {
+            logger($e);
+
+            return response(['message' => 'Something Went Wrong! Please Try Again'], 500);
+        }
     }
 }
