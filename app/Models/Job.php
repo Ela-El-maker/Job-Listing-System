@@ -51,4 +51,14 @@ class Job extends Model
     {
         return $this->hasMany(JobTag::class,  'job_id', 'id');
     }
+
+    function benefits(): HasMany
+    {
+        return $this->hasMany(JobBenefits::class,  'job_id', 'id');
+    }
+
+    function skills(): HasMany
+    {
+        return $this->hasMany(JobSkills::class,  'job_id', 'id');
+    }
 }

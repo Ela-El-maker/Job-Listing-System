@@ -357,19 +357,32 @@
                                             </div>
                                         </div>
 
+                                        @php
+                                            $benefits = $job?->benefits()->with('benefit')->get();
+                                            $benefitNames = [];
 
+                                            foreach ($benefits as $benefit) {
+                                                # code...
+                                                $benefitNames[] = $benefit->benefit->name;
+                                            }
+                                            $benefitNameString = implode(', ', $benefitNames);
+
+                                        @endphp
 
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label for="">Benefits </label>
                                                 <input type="text" name="benefits"
                                                     class="form-control  inputtags {{ hasError($errors, 'benefits') }}"
-                                                    value="{{ old('benefits') }}">
+                                                    value="{{ old('benefits', $benefitNameString) }}">
 
                                                 <x-input-error :messages="$errors->get('benefits')" class="mt-2" />
                                             </div>
                                         </div>
 
+                                        @php
+                                            $selectedSkills = $job?->skills()->pluck('skill_id')->toArray();
+                                        @endphp
 
                                         <div class="col-md-12">
                                             <div class="form-group">
@@ -379,7 +392,8 @@
                                                     name="skills[]">
                                                     <option value="">Choose</option>
                                                     @foreach ($skills as $skill)
-                                                        <option value="{{ $skill?->id }}">{{ $skill?->name }}</option>
+                                                        <option @selected(in_array($skill?->id, $selectedSkills)) value="{{ $skill?->id }}">
+                                                            {{ $skill?->name }}</option>
                                                     @endforeach
                                                 </select>
                                                 <x-input-error :messages="$errors->get('skills')" class="mt-2" />
@@ -403,9 +417,12 @@
                                                 <select
                                                     class="form-control {{ hasError($errors, 'receive_applications') }} select2"
                                                     name="receive_applications">
-                                                    <option value="app">On Our Platform</option>
-                                                    <option value="email">On your Email Address</option>
-                                                    <option value="custom_url">On a custom link/URL</option>
+                                                    <option @selected($job?->apply_on == 'app') value="app">On Our Platform
+                                                    </option>
+                                                    <option @selected($job?->apply_on == 'email') value="email">On your Email
+                                                        Address</option>
+                                                    <option @selected($job?->apply_on == 'custom_url') value="custom_url">On a custom
+                                                        link/URL</option>
 
                                                 </select>
                                                 <x-input-error :messages="$errors->get('receive_applications')" class="mt-2" />
@@ -424,8 +441,8 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <input type="checkbox" id="featured"
-                                                    class="{{ hasError($errors, 'featured') }}" name="featured" checked
+                                                <input @checked($job?->is_featured) type="checkbox" id="featured"
+                                                    class="{{ hasError($errors, 'featured') }}" name="featured"
                                                     value="1">
                                                 <label for="featured">Featured</label>
                                                 <x-input-error :messages="$errors->get('featured')" class="mt-2" />
@@ -434,7 +451,7 @@
 
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <input type="checkbox" id="highlight"
+                                                <input @checked($job?->is_highlighted) type="checkbox" id="highlight"
                                                     class="{{ hasError($errors, 'highlight') }}" name="highlight"
                                                     value="1">
                                                 <label for="highlight">Highlight</label>
@@ -457,7 +474,7 @@
                                             <div class="form-group">
                                                 <label for="">Description <span
                                                         class="text-danger">*</span></label>
-                                                <textarea id="editor" name="description" class="form-control">{{ old('description', $job?->description) }}</textarea>
+                                                <textarea id="editor" name="description" class="form-control">{!! $job?->description !!}</textarea>
                                                 <x-input-error :messages="$errors->get('description')" class="mt-2" />
                                             </div>
                                         </div>
@@ -468,7 +485,7 @@
                             </div>
 
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary">Create</button>
+                                <button type="submit" class="btn btn-primary">Update</button>
                             </div>
 
 

@@ -176,9 +176,89 @@ class JobController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(JobCreateRequest $request, string $id)
     {
         //
+        // dd($request->all());
+        $job = Job::findOrFail($id);
+        $job->title = $request->title;
+        $job->company_id = $request->company;
+        $job->job_category_id = $request->category;
+        $job->vacancies = $request->vacancies;
+        $job->deadline = $request->deadline;
+
+        $job->country_id = $request->country;
+        $job->state_id = $request->state;
+        $job->city_id = $request->city;
+        $job->address = $request->address;
+
+
+        $job->salary_mode = $request->salary_mode;
+        $job->min_salary = $request->min_salary;
+        $job->max_salary = $request->max_salary;
+        $job->custom_salary = $request->custom_salary;
+        $job->salary_type_id = $request->salary_type;
+
+        $job->job_experience_id = $request->experience;
+        $job->job_role_id = $request->job_role;
+        $job->education_id = $request->education;
+        $job->job_type_id = $request->job_type;
+
+        //Tags, Benefits,Skills will be handled separately
+
+        // $job->apply_on = $request->receive_applications;
+        $job->is_featured = $request->featured;
+        $job->is_highlighted = $request->highlight;
+        $job->description = $request->description;
+        $job->save();
+
+
+        // Insert Tags
+        JobTag::where('job_id', $id)->delete();
+        foreach ($request->tags as $tag) {
+            $createTag = new JobTag();
+            $createTag->job_id = $job->id;
+            $createTag->tag_id = $tag;
+            $createTag->save();
+        }
+
+        // Insert Benefits
+        $selectedBenefits = JobBenefits::where('job_id', $id);
+        foreach ($selectedBenefits->get() as $selectedBenefit) {
+            Benefits::find($selectedBenefit?->benefit_id)->delete();
+        }
+
+        $selectedBenefits->delete();
+
+        $benefits = explode(',', $request->benefits);
+
+        foreach ($benefits as $benefit) {
+            $createBenefit = new Benefits();
+            $createBenefit->company_id = $job->company_id;
+            $createBenefit->name = $benefit;
+            $createBenefit->save();
+
+            //store job benfit
+            $jobBenefit = new JobBenefits();
+            $jobBenefit->job_id = $job->id;
+            $jobBenefit->benefit_id = $createBenefit->id;
+            $jobBenefit->save();
+        }
+
+
+
+        // Insert Skills
+        JobSkills::where('job_id', $id)->delete();
+        foreach ($request->skills as $skill) {
+            $createSkill = new JobSkills();
+            $createSkill->job_id = $job->id;
+            $createSkill->skill_id = $skill;
+            $createSkill->save();
+        }
+
+
+        Notify::updatedNotification();
+        return to_route('admin.jobs.index');
     }
 
     /**
