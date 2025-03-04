@@ -237,7 +237,8 @@
                                                 <select name="salary_type" id=""
                                                     class="form-control form-icons select-active {{ hasError($errors, 'salary_type') }}">
                                                     @foreach ($salaryTypes as $salaryType)
-                                                        <option value="{{ $salaryType?->id }}">{{ $salaryType?->name }}
+                                                        <option value="{{ $salaryType?->id }}">
+                                                            {{ $salaryType?->name }}
                                                         </option>
                                                     @endforeach
 
