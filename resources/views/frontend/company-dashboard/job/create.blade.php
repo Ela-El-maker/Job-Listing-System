@@ -380,11 +380,11 @@
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            <div class="form-group">
+                                            <div class="form-group select-style">
                                                 <label for="">Recieve Applications <span
                                                         class="text-danger">*</span></label>
                                                 <select
-                                                    class="form-control {{ hasError($errors, 'receive_applications') }} select2"
+                                                    class="form-control form-icons select-active {{ hasError($errors, 'receive_applications') }} select2"
                                                     name="receive_applications">
                                                     <option value="app">On Our Platform</option>
                                                     <option value="email">On your Email Address</option>
