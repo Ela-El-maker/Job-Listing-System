@@ -12,6 +12,7 @@ use App\Http\Controllers\Frontend\CompanyProfileController;
 use App\Http\Controllers\Frontend\FrontendCandidatePageController;
 use App\Http\Controllers\Frontend\FrontendCompanyPageController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\JobController;
 use App\Http\Controllers\Frontend\LocationController;
 use App\Http\Controllers\Frontend\PricingPageController;
 use App\Http\Controllers\ProfileController;
@@ -109,13 +110,19 @@ Route::group(
         /***
          * Payment Routes
          */
+
+        /**
+         * PayPal Payment
+         */
         Route::get('payment/success', [PaymentController::class, 'paymentSuccess'])->name('payment.success');
         Route::get('payment/error', [PaymentController::class, 'paymentError'])->name('payment.error');
         Route::get('paypal/payment', [PaymentController::class, 'payWithPaypal'])->name('paypal.payment');
         Route::get('paypal/success', [PaymentController::class, 'paypalSuccess'])->name('paypal.success');
         Route::get('paypal/cancel', [PaymentController::class, 'paypalCancel'])->name('paypal.cancel');
 
-
+        /**
+         * Stripe payment
+         */
         Route::get('stripe/payment', [PaymentController::class, 'payWithStripe'])->name('stripe.payment');
         Route::get('stripe/success', [PaymentController::class, 'stripeSuccess'])->name('stripe.success');
 
@@ -125,5 +132,11 @@ Route::group(
         Route::get('orders', [CompanyOrderController::class, 'index'])->name('orders.index');
         Route::get('order/{order}', [CompanyOrderController::class, 'show'])->name('orders.show');
         Route::get('order/invoice/{id}', [CompanyOrderController::class, 'invoice'])->name('orders.invoice');
+
+        /***
+         * Job Routes
+         *
+         */
+        Route::resource('jobs', JobController::class);
     }
 );
