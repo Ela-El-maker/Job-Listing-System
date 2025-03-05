@@ -23,10 +23,10 @@
 
                 <div class="col-lg-9 col-md-8 col-sm-12 col-12 mb-50">
                     <div class="card-body ">
-                        <form action="{{ route('admin.jobs.store') }}" method="post">
+                        <form action="{{ route('company.jobs.store') }}" method="post">
                             @csrf
 
-                            <div class="card">
+                            <div class="card mb-3">
                                 <div class="card-header">
                                     <h4>Job Details</h4>
                                 </div>
@@ -85,7 +85,7 @@
                                 </div>
                             </div>
 
-                            <div class="card">
+                            <div class="card mb-3">
                                 <div class="card-header">
                                     <h4>Locations</h4>
                                 </div>
@@ -97,7 +97,7 @@
                                             <div class="form-group select-style">
                                                 <label for="">Country </label>
                                                 <select
-                                                    class="form-control select-active country {{ hasError($errors, 'country') }} select2"
+                                                    class="form-control form-icons select-active country {{ hasError($errors, 'country') }} select2"
                                                     name="country">
                                                     <option value="">Choose</option>
                                                     @foreach ($countries as $country)
@@ -112,7 +112,7 @@
                                             <div class="form-group select-style">
                                                 <label for="">State </label>
                                                 <select
-                                                    class="form-control select-active state {{ hasError($errors, 'state') }} select2"
+                                                    class="form-control form-icons select-active state {{ hasError($errors, 'state') }} select2"
                                                     name="state">
                                                     <option value="">Choose</option>
                                                 </select>
@@ -124,7 +124,7 @@
                                             <div class="form-group select-style">
                                                 <label for="">City </label>
                                                 <select
-                                                    class="form-control select-active city {{ hasError($errors, 'city') }} select2"
+                                                    class="form-control form-icons select-active city {{ hasError($errors, 'city') }} select2"
                                                     name="city">
                                                     <option value="">Choose</option>
                                                 </select>
@@ -144,7 +144,7 @@
                                 </div>
                             </div>
 
-                            <div class="card">
+                            <div class="card mb-3">
                                 <div class="card-header">
                                     <h4>Salary Details</h4>
                                 </div>
@@ -254,7 +254,7 @@
                                 </div>
                             </div>
 
-                            <div class="card">
+                            <div class="card mb-3">
                                 <div class="card-header">
                                     <h4>Attributes</h4>
                                 </div>
@@ -326,10 +326,10 @@
                                         </div>
 
                                         <div class="col-md-12">
-                                            <div class="form-group">
+                                            <div class="form-group select-style">
                                                 <label for="">Tags <span class="text-danger">*</span></label>
                                                 <select multiple
-                                                    class="form-control {{ hasError($errors, 'tags') }} select2"
+                                                    class="form-control form-icons select-active {{ hasError($errors, 'tags') }} select2"
                                                     name="tags[]">
                                                     <option value="">Choose</option>
                                                     @foreach ($tags as $tag)
@@ -355,10 +355,10 @@
 
 
                                         <div class="col-md-12">
-                                            <div class="form-group">
+                                            <div class="form-group select-style">
                                                 <label for="">Skills <span class="text-danger">*</span></label>
                                                 <select multiple
-                                                    class="form-control {{ hasError($errors, 'skills') }} select2"
+                                                    class="form-control form-icons select-active {{ hasError($errors, 'skills') }} select2"
                                                     name="skills[]">
                                                     <option value="">Choose</option>
                                                     @foreach ($skills as $skill)
@@ -372,7 +372,7 @@
                                 </div>
                             </div>
 
-                            <div class="card">
+                            <div class="card mb-3">
                                 <div class="card-header">
                                     <h4>Application Options</h4>
                                 </div>
@@ -398,7 +398,7 @@
                                 </div>
                             </div>
 
-                            <div class="card">
+                            <div class="card mb-3">
                                 <div class="card-header">
                                     <h4>Promote</h4>
                                 </div>
@@ -407,20 +407,22 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <input type="checkbox" id="featured"
+                                                <input style="height:18px; width:18px;" type="checkbox" id="featured"
                                                     class="{{ hasError($errors, 'featured') }}" name="featured" checked
                                                     value="1">
-                                                <label for="featured">Featured</label>
+                                                <label style="margin-left: 5px; margin-top: -4px"
+                                                    for="featured">Featured</label>
                                                 <x-input-error :messages="$errors->get('featured')" class="mt-2" />
                                             </div>
                                         </div>
 
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <input type="checkbox" id="highlight"
+                                                <input style="height:18px; width:18px;" type="checkbox" id="highlight"
                                                     class="{{ hasError($errors, 'highlight') }}" name="highlight"
                                                     value="1">
-                                                <label for="highlight">Highlight</label>
+                                                <label style="margin-left: 5px; margin-top: -4px"
+                                                    for="highlight">Highlight</label>
                                                 <x-input-error :messages="$errors->get('highlight')" class="mt-2" />
                                             </div>
                                         </div>
@@ -428,7 +430,7 @@
                                 </div>
                             </div>
 
-                            <div class="card">
+                            <div class="card mb-3">
                                 <div class="card-header">
                                     <h4>Description</h4>
                                 </div>

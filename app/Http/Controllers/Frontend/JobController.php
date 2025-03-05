@@ -3,17 +3,23 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Frontend\JobCreateRequest;
+use App\Models\Benefits;
 use App\Models\Company;
 use App\Models\Country;
 use App\Models\Education;
 use App\Models\Job;
+use App\Models\JobBenefits;
 use App\Models\JobCategory;
 use App\Models\JobExperience;
 use App\Models\JobRole;
+use App\Models\JobSkills;
+use App\Models\JobTag;
 use App\Models\JobType;
 use App\Models\SalaryType;
 use App\Models\Skill;
 use App\Models\Tag;
+use App\Services\Notify;
 use App\Traits\Searchable;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -31,7 +37,7 @@ class JobController extends Controller
 
         $this->search($query, ['name', 'slug']);
 
-        $jobs = $query->paginate(10);
+        $jobs = $query->orderBy('id', 'DESC')->paginate(10);
 
         return view('frontend.company-dashboard.job.index', compact('jobs'));
     }
@@ -58,9 +64,80 @@ class JobController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(JobCreateRequest $request)
     {
         //
+        // dd($request->all());
+        $job = new Job();
+        $job->title = $request->title;
+        $job->company_id = auth()->user()->company->id;
+        $job->job_category_id = $request->category;
+        $job->vacancies = $request->vacancies;
+        $job->deadline = $request->deadline;
+
+        $job->country_id = $request->country;
+        $job->state_id = $request->state;
+        $job->city_id = $request->city;
+        $job->address = $request->address;
+
+
+        $job->salary_mode = $request->salary_mode;
+        $job->min_salary = $request->min_salary;
+        $job->max_salary = $request->max_salary;
+        $job->custom_salary = $request->custom_salary;
+        $job->salary_type_id = $request->salary_type;
+
+        $job->job_experience_id = $request->experience;
+        $job->job_role_id = $request->job_role;
+        $job->education_id = $request->education;
+        $job->job_type_id = $request->job_type;
+
+        //Tags, Benefits,Skills will be handled separately
+
+        // $job->apply_on = $request->receive_applications;
+        $job->is_featured = $request->featured;
+        $job->is_highlighted = $request->highlight;
+        $job->description = $request->description;
+        $job->save();
+
+
+        // Insert Tags
+        foreach ($request->tags as $tag) {
+            $createTag = new JobTag();
+            $createTag->job_id = $job->id;
+            $createTag->tag_id = $tag;
+            $createTag->save();
+        }
+
+        // Insert Benefits
+
+        $benefits = explode(',', $request->benefits);
+        foreach ($benefits as $benefit) {
+            $createBenefit = new Benefits();
+            $createBenefit->company_id = $job->company_id;
+            $createBenefit->name = $benefit;
+            $createBenefit->save();
+
+            //store job benfit
+            $jobBenefit = new JobBenefits();
+            $jobBenefit->job_id = $job->id;
+            $jobBenefit->benefit_id = $createBenefit->id;
+            $jobBenefit->save();
+        }
+
+
+
+        // Insert Skills
+        foreach ($request->skills as $skill) {
+            $createSkill = new JobSkills();
+            $createSkill->job_id = $job->id;
+            $createSkill->skill_id = $skill;
+            $createSkill->save();
+        }
+
+
+        Notify::createdNotification();
+        return to_route('company.jobs.index');
     }
 
     /**
