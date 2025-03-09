@@ -31,17 +31,19 @@
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <tr>
+                            <th>#</th> <!-- Add this column for numbering -->
                             <th>Job</th>
                             <th>Category/Role</th>
                             <th>Salary</th>
                             <th>Deadline</th>
                             <th>Status</th>
-
+                            <th>Approve</th>
                             <th style="width: 20%">Action</th>
                         </tr>
                         <tbody>
                             @forelse ($jobs as $job)
                                 <tr>
+                                    <td>{{ $loop->iteration }}</td> <!-- Add numbering here -->
                                     <td>
                                         <div class="d-flex">
                                             <div class="mr-2">
@@ -76,13 +78,44 @@
                                     </td>
                                     <td>{{ formatDate($job?->deadline) }}</td>
                                     <td>
-                                        @if ($job?->deadline > date('Y-m-d'))
+                                        @if ($job?->status === 'pending')
+                                            <span class="badge badge-warning">Pending</span>
+                                        @elseif ($job?->deadline > date('Y-m-d'))
                                             <span class="badge badge-success">Active</span>
                                         @else
                                             <span class="badge badge-danger">Expired</span>
                                         @endif
                                     </td>
+                                    {{-- <td>
+                                        <div class="form-group">
+                                            <label class="custom-switch mt-2">
+                                                <input type="checkbox" data-id="{{ $job?->id }}"
+                                                    name="custom-switch-checkbox" class="custom-switch-input post_status">
+                                                <span class="custom-switch-indicator"></span>
+                                            </label>
 
+                                        </div>
+                                    </td> --}}
+                                    {{-- <td>
+                                        <div class="form-group">
+                                            <label class="custom-switch mt-2">
+                                                <input type="checkbox" data-id="{{ $job->id }}"
+                                                    name="custom-switch-checkbox" class="custom-switch-input post_status"
+                                                    {{ $job->status === 'active' ? 'checked' : '' }}>
+                                                <span class="custom-switch-indicator"></span>
+                                            </label>
+                                        </div>
+                                    </td> --}}
+                                    <td>
+                                        <div class="form-group">
+                                            <label class="custom-switch mt-2">
+                                                <input @checked($job->status === 'active') type="checkbox"
+                                                    data-id="{{ $job->id }}" name="custom-switch-checkbox"
+                                                    class="custom-switch-input post_status">
+                                                <span class="custom-switch-indicator"></span>
+                                            </label>
+                                        </div>
+                                    </td>
                                     <td>
                                         <a href="{{ route('admin.jobs.edit', $job?->id) }}"
                                             class="btn-small btn btn-primary">
@@ -117,3 +150,60 @@
         </div>
     </div>
 @endsection
+
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            $('.post_status').on('change', function() {
+                let id = $(this).data('id');
+                let isChecked = $(this).is(':checked'); // Get the current state of the toggle
+                let newStatus = isChecked ? 'active' : 'inactive'; // Determine the new status
+
+                $.ajax({
+                    method: 'POST',
+                    url: '{{ route('admin.job-status.update', ':id') }}'.replace(":id", id),
+                    data: {
+                        _token: "{{ csrf_token() }}",
+                        status: newStatus // Send the new status to the backend
+                    },
+                    success: function(response) {
+                        if (response.message == 'success') {
+                            window.location
+                                .reload(); // Reload the page to reflect the updated status
+                        }
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('An error occurred while updating the status:', error);
+                        // Optionally, show a user-friendly error message (e.g., using toastr)
+                        // toastr.error('An error occurred while updating the status.');
+                    }
+                });
+            });
+        });
+    </script>
+
+    {{-- <script>
+        $(document).ready(function() {
+            $('.post_status').on('change', function() {
+                let id = $(this).data('id');
+
+                $.ajax({
+                    method: 'POST',
+                    url: '{{ route('admin.job-status.update', ':id') }}'.replace(":id", id),
+                    data: {
+                        _token: "{{ csrf_token() }}"
+                    },
+                    success: function(response) {
+                        if (response.message == 'success') {
+                            window.location.reload();
+                        }
+                    },
+                    error: function(xhr, status, error) {
+
+                    }
+                });
+            })
+        })
+    </script> --}}
+@endpush

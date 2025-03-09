@@ -108,11 +108,25 @@ if (!function_exists('isCandidateProfileComplete')) {
 if (!function_exists('formatDate')) {
     function formatDate(?string $date): ?String
     {
-        if($date)
-        {
+        if ($date) {
             return date('d M Y', strtotime($date));
-
         }
         return null;
+    }
+}
+
+
+//
+/**
+ * Store plan info in session
+ */
+
+if (!function_exists('storePlanInformation')) {
+    function storePlanInformation()
+    {
+        session()->forget('user_plan');
+        session([
+            'user_plan' => isset(auth()->user()->company?->userPlan) ? auth()->user()->company?->userPlan : []
+        ]);
     }
 }

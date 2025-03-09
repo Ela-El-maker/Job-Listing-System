@@ -26,6 +26,7 @@ use App\Services\Notify;
 use App\Traits\Searchable;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\View\View;
 
 class JobController extends Controller
@@ -39,9 +40,9 @@ class JobController extends Controller
         //
         $query = Job::query();
 
-        $this->search($query, ['title', 'slug', '']);
+        $this->search($query, ['title', 'slug', 'status']);
 
-        $jobs = $query->paginate(10);
+        $jobs = $query->orderBy('created_at', 'DESC')->paginate(10);
         return view('admin.job.index', compact('jobs'));
     }
 
@@ -101,6 +102,7 @@ class JobController extends Controller
         $job->is_featured = $request->featured;
         $job->is_highlighted = $request->highlight;
         $job->description = $request->description;
+        $job->status = 'active';
         $job->save();
 
 
@@ -277,4 +279,41 @@ class JobController extends Controller
             return response(['message' => 'Something Went Wrong! Please Try Again'], 500);
         }
     }
+
+    function changeStatus(string $id): Response
+    {
+        $job = Job::findOrFail($id);
+        $job->status = $job->status == 'active' ? 'pending' : 'active';
+        $job->save();
+        Notify::updatedNotification();
+        return response(['message' => 'success'], 200);
+    }
+    // public function changeStatus(string $id): Response
+    // {
+    //     // Find the job or fail
+    //     $job = Job::findOrFail($id);
+
+    //     // Check if the job is expired
+    //     if ($job->deadline < now()->format('Y-m-d')) {
+    //         return response(['message' => 'Cannot update status of an expired job'], 400);
+    //     }
+
+    //     // Get the new status from the request
+    //     $newStatus = request('status');
+
+    //     // Validate the new status
+    //     if (!in_array($newStatus, ['active', 'inactive'])) {
+    //         return response(['message' => 'Invalid status'], 400);
+    //     }
+
+    //     // Update the job status
+    //     $job->status = $newStatus;
+    //     $job->save();
+
+    //     // Notify the user
+    //     Notify::updatedNotification();
+
+    //     // Return a success response
+    //     return response(['message' => 'success'], 200);
+    // }
 }

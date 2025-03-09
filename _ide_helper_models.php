@@ -309,6 +309,7 @@ namespace App\Models{
  * @property-read \App\Models\IndustryType|null $industryType
  * @property-read \App\Models\OrganizationType|null $organizationType
  * @property-read \App\Models\TeamSize|null $teamSize
+ * @property-read \App\Models\UserPlan|null $userPlan
  * @method static \Illuminate\Database\Eloquent\Builder|Company findSimilarSlugs(string $attribute, array $config, string $slug)
  * @method static \Illuminate\Database\Eloquent\Builder|Company newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|Company newQuery()

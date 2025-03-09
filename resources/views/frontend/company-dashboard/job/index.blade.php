@@ -26,10 +26,12 @@
                     <div class="card">
                         <div class="card-header">
                             <h4>All Posted Jobs </h4>
+                            <hr>
                             <div class="row">
                                 <div class="col-md-9">
                                     <div class="card-header-form">
-                                        <form action="" method="GET" class="d-flex justify-content-center">
+                                        <form action="{{ route('company.jobs.index') }}" method="GET"
+                                            class="d-flex justify-content-center">
                                             <div class="input-group" style="max-width: 300px;">
                                                 <input type="text" name="search" class="form-control"
                                                     placeholder="Search" value="{{ request('search') }}">
@@ -52,6 +54,7 @@
                             <div class="table-responsive">
                                 <table class="table table-striped">
                                     <tr>
+                                        <th style="width: 5%">#</th>
                                         <th style="width: 270px;">Job</th>
                                         <th>Category/Role</th>
                                         <th>Salary</th>
@@ -62,6 +65,7 @@
                                     <tbody>
                                         @forelse ($jobs as $job)
                                             <tr>
+                                                <td>{{ $loop->iteration }}</td> <!-- Add numbering here -->
                                                 <td>
                                                     <div class="d-flex">
 
@@ -94,19 +98,22 @@
                                                 </td>
                                                 <td>{{ formatDate($job?->deadline) }}</td>
                                                 <td>
-                                                    @if ($job?->deadline > date('Y-m-d'))
+                                                    @if ($job?->status === 'pending')
+                                                        <span class="badge bg-warning">Pending</span>
+                                                    @elseif ($job?->deadline > date('Y-m-d'))
                                                         <span class="badge bg-success">Active</span>
                                                     @else
                                                         <span class="badge bg-danger">Expired</span>
                                                     @endif
                                                 </td>
 
+
                                                 <td>
-                                                    <a href="{{ route('admin.jobs.edit', $job?->id) }}"
+                                                    <a href="{{ route('company.jobs.edit', $job?->id) }}"
                                                         class="mb-2 btn-small btn btn-primary">
                                                         <i class="fas fa-edit"></i>
                                                     </a>
-                                                    <a href="{{ route('admin.jobs.destroy', $job?->id) }}"
+                                                    <a href="{{ route('company.jobs.destroy', $job?->id) }}"
                                                         class="mb-2 btn-small btn btn-danger delete-item">
                                                         <i class="fas fa-trash-alt"></i>
                                                     </a>
@@ -115,7 +122,7 @@
                                             </tr>
                                         @empty
                                             <tr>
-                                                <td colspan="3" class="text-center"> No Results Found! </td>
+                                                <td colspan="6" class="text-center"> No Results Found! </td>
                                             </tr>
                                         @endforelse
                                     </tbody>
