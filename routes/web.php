@@ -10,6 +10,7 @@ use App\Http\Controllers\Frontend\CompanyDashboardController;
 use App\Http\Controllers\Frontend\CompanyOrderController;
 use App\Http\Controllers\Frontend\CompanyProfileController;
 use App\Http\Controllers\Frontend\FrontendCandidatePageController;
+use App\Http\Controllers\Frontend\FrontendJobPageController;
 use App\Http\Controllers\Frontend\FrontendCompanyPageController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\JobController;
@@ -57,6 +58,11 @@ Route::get('candidates/{slug}', [FrontendCandidatePageController::class, 'show']
 Route::get('pricing', PricingPageController::class)->name('pricing.index');
 Route::get('checkout/{plan_id}', CheckoutPageController::class)->name('checkout.index');
 
+
+/**
+ * Find a Job Route
+ */
+Route::get('jobs', [FrontendJobPageController::class, 'index'])->name('jobs.index');
 
 /***  Candidate Dashboard Routes */
 Route::group(

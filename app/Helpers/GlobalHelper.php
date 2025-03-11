@@ -130,3 +130,57 @@ if (!function_exists('storePlanInformation')) {
         ]);
     }
 }
+
+
+
+/**
+ * Format Location
+ */
+
+if (!function_exists('formatLocation')) {
+    function formatLocation($country = null, $state = null, $city = null, $address = null): ?String
+    {
+        $location = '';
+        if ($address) {
+            $location .= $address;
+        }
+        if ($city) {
+            $location .= $address ?  ', ' . $city : $city;
+        }
+        if ($state) {
+            $location .= $city ?  ', ' . $state : $state;
+        }
+        if ($country) {
+            $location .= $state ? ', ' . $country : $country;
+        }
+        return $location;
+    }
+}
+if (!function_exists('relativeTime')) {
+    /**
+     * Format a timestamp as a relative time string (e.g., "4 mins ago").
+     *
+     * @param string $timestamp The timestamp to format.
+     * @return string
+     */
+    function relativeTime($timestamp)
+    {
+        $now = new DateTime();
+        $then = new DateTime($timestamp);
+        $diff = $now->diff($then);
+
+        if ($diff->y > 0) {
+            return $diff->y . ' year' . ($diff->y > 1 ? 's' : '') . ' ago';
+        } elseif ($diff->m > 0) {
+            return $diff->m . ' month' . ($diff->m > 1 ? 's' : '') . ' ago';
+        } elseif ($diff->d > 0) {
+            return $diff->d . ' day' . ($diff->d > 1 ? 's' : '') . ' ago';
+        } elseif ($diff->h > 0) {
+            return $diff->h . ' hour' . ($diff->h > 1 ? 's' : '') . ' ago';
+        } elseif ($diff->i > 0) {
+            return $diff->i . ' min' . ($diff->i > 1 ? 's' : '') . ' ago';
+        } else {
+            return 'Just now';
+        }
+    }
+}

@@ -9994,9 +9994,9 @@ Custom Css
     display: flex;
     justify-content: center;
     align-items: center;
-  }
+}
 
-  .preloader_demo .img {
+.preloader_demo .img {
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -10004,23 +10004,22 @@ Custom Css
     -moz-border-radius: 50%;
     -ms-border-radius: 50%;
     -o-border-radius: 50%;
-  }
+}
 
-  .preloader_demo .img img {
+.preloader_demo .img img {
     border-radius: 50%;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     -ms-border-radius: 50%;
     -o-border-radius: 50%;
-  }
-
+}
 
 ul.timeline {
     list-style-type: none;
     position: relative;
 }
 ul.timeline:before {
-    content: ' ';
+    content: " ";
     background: var(--colorPrimary);
     display: inline-block;
     position: absolute;
@@ -10034,7 +10033,7 @@ ul.timeline > li {
     padding-left: 70px;
 }
 ul.timeline > li:before {
-    content: ' ';
+    content: " ";
     background: white;
     display: inline-block;
     position: absolute;
@@ -10046,15 +10045,61 @@ ul.timeline > li:before {
     z-index: 400;
 }
 
-
 .tag.label.label-info {
     background: var(--colorPrimary);
-  padding: 5px;
+    padding: 5px;
 }
 .bootstrap-tagsinput input {
     height: 40px;
-  }
+}
 .bootstrap-tagsinput {
     width: 100%;
     box-shadow: none;
+}
+
+.job-skill {
+    background: var(--colorPrimary) !important;
+    color: #fff !important;
+    padding: 7px 10px !important;
+    font-size: 14px !important;
+    font-weight: 500 !important;
+    text-transform: capitalize !important; /* Capitalize skill names */
+    transition: all 0.3s ease !important; /* Smooth transition */
+    text-decoration: none !important; /* Remove underline */
+    display: inline-block !important; /* Ensure proper spacing */
+    margin-right: 8px !important; /* Space between skills */
+    margin-bottom: 8px !important; /* Space between rows */
+}
+
+.job-skill:hover {
+    background: #fff !important; /* Darker shade on hover */
+    transform: translateY(-2px) !important; /* Slight lift on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important; /* Shadow on hover */
+}
+
+/*
+Additional CSS for responsive design
+*/
+.featured {
+    background: #ae00ae !important;
+    color: white !important;
+}
+
+.featured:hover {
+    background: #fff !important; /* Darker shade on hover */
+    color: #ae00ae !important;
+    transform: translateY(-2px) !important; /* Slight lift on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important; /* Shadow on hover */
+}
+
+.highlight {
+    background: #f05d04 !important;
+    color: white !important;
+}
+
+.highlight:hover {
+    background: #fff !important; /* Darker shade on hover */
+    color: #f05d04 !important;
+    transform: translateY(-2px) !important; /* Slight lift on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important; /* Shadow on hover */
 }

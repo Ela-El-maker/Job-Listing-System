@@ -43,7 +43,9 @@
                         <tbody>
                             @forelse ($jobs as $job)
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td> <!-- Add numbering here -->
+
+                                    <td>{{ ($jobs->currentPage() - 1) * $jobs->perPage() + $loop->iteration }}</td>
+
                                     <td>
                                         <div class="d-flex">
                                             <div class="mr-2">

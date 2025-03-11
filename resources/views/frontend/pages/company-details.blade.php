@@ -28,11 +28,28 @@
                             <img style="height: 100px; width: 100px; object-fit:cover;" src="{{ asset($company?->logo) }}"
                                 alt="" srcset="">
                         </div>
-                        <h5 class="f-18">{{ $company?->name }}<span
-                                class="card-location font-regular ml-20">{{ $company?->companyCountry->name }}</span></h5>
+                        <h5 class="f-18">
+                            {{ $company?->name }}
+                            <span class="card-location font-regular ml-20">
+                                {{-- {{ $company?->companyCountry->name }} --}}
+                                @if ($company?->companyCountry)
+                                    {{ $company?->companyCountry?->name }}
+
+                                    @if ($company?->companyState)
+                                        , {{ $company?->companyState?->name }}
+
+                                        @if ($company?->companyCity)
+                                            , {{ $company?->companyCity?->name }}
+                                        @endif
+                                    @endif
+                                @else
+                                    Location not available
+                                @endif
+                            </span>
+                        </h5>
                     </div>
-                    <div class="col-lg-4 col-md-12 text-lg-end"><a class="btn  btn-apply btn-apply-big"
-                            href="javascript:;" onclick="document.getElementById('open-positions').scrollIntoView()">Open Position</a></div>
+                    <div class="col-lg-4 col-md-12 text-lg-end"><a class="btn  btn-apply btn-apply-big" href="javascript:;"
+                            onclick="document.getElementById('open-positions').scrollIntoView()">Open Position</a></div>
                 </div>
             </div>
 
@@ -192,8 +209,21 @@
                         <div class="sidebar-heading">
                             <div class="avatar-sidebar">
                                 <div class="sidebar-info pl-0"><span
-                                        class="sidebar-company">{{ $company?->name }}</span><span
-                                        class="card-location">{{ $company?->companyCountry->name }}</span></div>
+                                        class="sidebar-company">{{ $company?->name }}</span><span class="card-location">
+                                        @if ($company?->companyCountry)
+                                            {{ $company?->companyCountry?->name }}
+
+                                            @if ($company?->companyState)
+                                                , {{ $company?->companyState?->name }}
+
+                                                @if ($company?->companyCity)
+                                                    , {{ $company?->companyCity?->name }}
+                                                @endif
+                                            @endif
+                                        @else
+                                            Location not available
+                                        @endif
+                                    </span></div>
                             </div>
                         </div>
                         <div class="sidebar-list-job">

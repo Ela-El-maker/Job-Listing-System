@@ -47,6 +47,11 @@ class Job extends Model
         return $this->belongsTo(SalaryType::class, 'salary_type_id', 'id');
     }
 
+    function jobExperience(): BelongsTo
+    {
+        return $this->belongsTo(JobExperience::class, 'job_experience_id', 'id');
+    }
+
 
     function tags(): HasMany
     {

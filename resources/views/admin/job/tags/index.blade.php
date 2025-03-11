@@ -31,6 +31,7 @@
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <tr>
+                            <th>#</th> <!-- Add the correct numbering -->
                             <th>Name</th>
                             <th>Slug</th>
                             <th style="width: 20%">Action</th>
@@ -38,6 +39,8 @@
                         <tbody>
                             @forelse ($tagTypes as $tagType)
                                 <tr>
+                                    <!-- Calculate the correct numbering -->
+                                    <td>{{ ($tagTypes->currentPage() - 1) * $tagTypes->perPage() + $loop->iteration }}</td>
                                     <td>{{ $tagType->name }}</td>
                                     <td>{{ $tagType->slug }}</td>
                                     <td>
