@@ -63,6 +63,7 @@ Route::get('checkout/{plan_id}', CheckoutPageController::class)->name('checkout.
  * Find a Job Route
  */
 Route::get('jobs', [FrontendJobPageController::class, 'index'])->name('jobs.index');
+Route::get('job/{slug}', [FrontendJobPageController::class, 'show'])->name('jobs.show');
 
 /***  Candidate Dashboard Routes */
 Route::group(

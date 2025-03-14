@@ -1,7 +1,7 @@
 @extends('frontend.layouts.master')
 
 @section('contents')
-    <section class="section-box">
+    <section class="section-box mt-75">
         <div class="breacrumb-cover">
             <div class="container">
                 <div class="row align-items-center">
@@ -9,7 +9,7 @@
                         <h2 class="mb-20">{{ $company?->name }}</h2>
                         <ul class="breadcrumbs">
                             <li><a class="home-icon" href="{{ url('/') }}">Home</a></li>
-                            <li>Company</li>
+                            <li>Jobs</li>
                         </ul>
                     </div>
                 </div>

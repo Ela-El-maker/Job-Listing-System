@@ -10103,3 +10103,6 @@ Additional CSS for responsive design
     transform: translateY(-2px) !important; /* Slight lift on hover */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important; /* Shadow on hover */
 }
+.box-map iframe {
+    height: 35vh;
+}
