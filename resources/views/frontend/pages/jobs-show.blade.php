@@ -189,15 +189,22 @@
                             <div class="col-md-5"><a class="btn btn-default mr-15" href="#">Apply now</a><a
                                     class="btn btn-border" href="#">Save job</a></div>
                             <div class="col-md-7 text-lg-end social-share">
-                                <h6 class="color-text-paragraph-2 d-inline-block d-baseline mr-10">Share this</h6><a
-                                    class="mr-5 d-inline-block d-middle" href="#"><img alt="joblist"
-                                        src="assets/imgs/template/icons/share-fb.svg"></a><a
-                                    class="mr-5 d-inline-block d-middle" href="#"><img alt="joblist"
-                                        src="assets/imgs/template/icons/share-tw.svg"></a><a
-                                    class="mr-5 d-inline-block d-middle" href="#"><img alt="joblist"
-                                        src="assets/imgs/template/icons/share-red.svg"></a><a
-                                    class="d-inline-block d-middle" href="#"><img alt="joblist"
-                                        src="assets/imgs/template/icons/share-whatsapp.svg"></a>
+                                <h6 class="color-text-paragraph-2 d-inline-block d-baseline mr-10">Share this</h6>
+                                <a data-social="facebook" class="mr-5 d-inline-block d-middle" href="#"><img
+                                        alt="joblist"
+                                        src="{{ asset('frontend/assets/imgs/template/icons/share-fb.svg') }}"></a>
+                                <a data-social="twitter" class="mr-5 d-inline-block d-middle" href="#"><img
+                                        alt="joblist"
+                                        src="{{ asset('frontend/assets/imgs/template/icons/share-tw.svg') }}"></a>
+                                <a data-social="reddit" class="mr-5 d-inline-block d-middle" href="#"><img
+                                        alt="joblist"
+                                        src="{{ asset('frontend/assets/imgs/template/icons/share-red.svg') }}"></a>
+                                <a data-social="whatsapp" class="d-inline-block d-middle" href="#"><img
+                                        alt="joblist"
+                                        src="{{ asset('frontend/assets/imgs/template/icons/share-whatsapp.svg') }}"></a>
+                                <a data-social="linkedin" class="d-inline-block d-middle" href="#"><img
+                                        alt="joblist" style="height: 45px;width:45px;"
+                                        src="{{ asset('frontend/assets/imgs/template/icons/linkedin1.svg') }}"></a>
                             </div>
                         </div>
                     </div>
@@ -233,182 +240,107 @@
                             </ul>
                         </div>
                     </div>
+
+                    <div class="sidebar-border">
+                        <div class="sidebar-heading">
+                            <h6 class="f-18">Skills</h6>
+
+                        </div>
+                        <div class="sidebar-list-job">
+                            @foreach ($job?->skills->shuffle() as $jobSkill)
+                                <a class="btn btn-grey-small mr-5 job-skill mt-2" href="javascript:void(0)">
+                                    {{ $jobSkill?->skill?->name }}
+                                </a>
+                            @endforeach
+                        </div>
+                    </div>
+
+                    <div class="sidebar-border">
+                        <div class="sidebar-heading">
+                            <h6 class="f-18">Benefits</h6>
+
+                        </div>
+                        <div class="sidebar-list-job">
+                            @foreach ($job?->benefits->shuffle() as $jobBenefit)
+                                <a class="btn btn-grey-small mr-5 job-skill mt-2" href="javascript:void(0)">
+                                    {{ $jobBenefit?->benefit?->name }}
+                                </a>
+                            @endforeach
+                        </div>
+                    </div>
+
+                    <div class="sidebar-border">
+                        <div class="sidebar-heading">
+                            <h6 class="f-18">Tags</h6>
+
+                        </div>
+                        <div class="sidebar-list-job">
+                            @foreach ($job?->tags->shuffle() as $jobTag)
+                                <a class="btn btn-grey-small mr-5 job-skill mt-2" href="javascript:void(0)">
+                                    {{ $jobTag?->tag?->name }}
+                                </a>
+                            @endforeach
+                        </div>
+                    </div>
+
+
                     <div class="sidebar-border">
                         <h6 class="f-18">Similar jobs</h6>
                         <div class="sidebar-list-job">
                             <ul>
-                                <li>
-                                    <div class="card-list-4 wow animate__animated animate__fadeIn hover-up">
-                                        <div class="image"><a href="job-details.html"><img
-                                                    src="assets/imgs/brands/brand-1.png" alt="joblist"></a></div>
-                                        <div class="info-text">
-                                            <h5 class="font-md font-bold color-brand-1"><a href="job-details.html">UI / UX
-                                                    Designer
-                                                    fulltime</a></h5>
-                                            <div class="mt-0"><span class="card-briefcase">Fulltime</span><span
-                                                    class="card-time"><span>3</span><span> mins ago</span></span></div>
-                                            <div class="mt-5">
-                                                <div class="row">
-                                                    <div class="col-6">
-                                                        <h6 class="card-price">$250<span>/Hour</span></h6>
+
+
+                                @forelse ($similarJobs as $similarJob)
+                                    <li>
+                                        <div class="card-list-4 wow animate__animated animate__fadeIn hover-up">
+                                            <div class="image"><a
+                                                    href="{{ route('jobs.show', $similarJob?->slug) }}"><img
+                                                        style="height: 50px; width:50px;"
+                                                        src="{{ asset($similarJob?->company?->logo) }}"
+                                                        alt="joblist"></a></div>
+                                            <div class="info-text">
+                                                <h5 class="font-md font-bold color-brand-1"><a
+                                                        href="{{ route('jobs.show', $similarJob?->slug) }}">{{ $similarJob?->title }}</a>
+                                                </h5>
+                                                <div class="mt-0"><span
+                                                        class="card-briefcase">{{ $similarJob?->jobType?->name }}</span><span
+                                                        class="card-time"><span>{{ $similarJob?->created_at->diffForHumans() }}</span>
+                                                </div>
+                                                <div class="mt-5">
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <h6 class="card-price">
+                                                                @if ($job?->salary_mode === 'range')
+                                                                    {{ $job?->min_salary }} - {{ $job?->max_salary }}
+                                                                    <span class="text-muted">
+                                                                        / {{ $job?->salaryType?->name }}
+                                                                    </span>
+                                                                @else
+                                                                    {{ $job?->custom_salary }}
+                                                                    <span class="text-muted">
+                                                                        / {{ $job?->salaryType?->name }}
+                                                                    </span>
+                                                                @endif
+                                                            </h6>
+                                                        </div>
+                                                        <div class="col-6 text-end"><span
+                                                                class="card-briefcase">{{ formatLocation($job?->country?->name, $job?->state?->name) }}</span>
+                                                        </div>
                                                     </div>
-                                                    <div class="col-6 text-end"><span class="card-briefcase">New York,
-                                                            US</span></div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="card-list-4 wow animate__animated animate__fadeIn hover-up">
-                                        <div class="image"><a href="job-details.html"><img
-                                                    src="assets/imgs/brands/brand-2.png" alt="joblist"></a></div>
-                                        <div class="info-text">
-                                            <h5 class="font-md font-bold color-brand-1"><a href="job-details.html">Java
-                                                    Software
-                                                    Engineer</a></h5>
-                                            <div class="mt-0"><span class="card-briefcase">Fulltime</span><span
-                                                    class="card-time"><span>5</span><span> mins ago</span></span></div>
-                                            <div class="mt-5">
-                                                <div class="row">
-                                                    <div class="col-6">
-                                                        <h6 class="card-price">$500<span>/Hour</span></h6>
-                                                    </div>
-                                                    <div class="col-6 text-end"><span class="card-briefcase">Tokyo,
-                                                            Japan</span></div>
-                                                </div>
+                                    </li>
+                                @empty
+                                    <li>
+                                        <div class="card-list-4 wow animate__animated animate__fadeIn hover-up">
+                                            <div class="info-text">
+                                                <h5 class="font-md font-bold color-brand-1">No Similar Jobs Found</h5>
                                             </div>
                                         </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="card-list-4 wow animate__animated animate__fadeIn hover-up">
-                                        <div class="image"><a href="job-details.html"><img
-                                                    src="assets/imgs/brands/brand-3.png" alt="joblist"></a></div>
-                                        <div class="info-text">
-                                            <h5 class="font-md font-bold color-brand-1"><a
-                                                    href="job-details.html">Frontend Developer</a>
-                                            </h5>
-                                            <div class="mt-0"><span class="card-briefcase">Fulltime</span><span
-                                                    class="card-time"><span>8</span><span> mins ago</span></span></div>
-                                            <div class="mt-5">
-                                                <div class="row">
-                                                    <div class="col-6">
-                                                        <h6 class="card-price">$650<span>/Hour</span></h6>
-                                                    </div>
-                                                    <div class="col-6 text-end"><span class="card-briefcase">Hanoi,
-                                                            Vietnam</span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="card-list-4 wow animate__animated animate__fadeIn hover-up">
-                                        <div class="image"><a href="job-details.html"><img
-                                                    src="assets/imgs/brands/brand-4.png" alt="joblist"></a></div>
-                                        <div class="info-text">
-                                            <h5 class="font-md font-bold color-brand-1"><a href="job-details.html">Cloud
-                                                    Engineer</a></h5>
-                                            <div class="mt-0"><span class="card-briefcase">Fulltime</span><span
-                                                    class="card-time"><span>12</span><span> mins ago</span></span></div>
-                                            <div class="mt-5">
-                                                <div class="row">
-                                                    <div class="col-6">
-                                                        <h6 class="card-price">$380<span>/Hour</span></h6>
-                                                    </div>
-                                                    <div class="col-6 text-end"><span class="card-briefcase">Losangl,
-                                                            Au</span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="card-list-4 wow animate__animated animate__fadeIn hover-up">
-                                        <div class="image"><a href="job-details.html"><img
-                                                    src="assets/imgs/brands/brand-5.png" alt="joblist"></a></div>
-                                        <div class="info-text">
-                                            <h5 class="font-md font-bold color-brand-1"><a href="job-details.html">DevOps
-                                                    Engineer</a></h5>
-                                            <div class="mt-0"><span class="card-briefcase">Fulltime</span><span
-                                                    class="card-time"><span>34</span><span> mins ago</span></span></div>
-                                            <div class="mt-5">
-                                                <div class="row">
-                                                    <div class="col-6">
-                                                        <h6 class="card-price">$140<span>/Hour</span></h6>
-                                                    </div>
-                                                    <div class="col-6 text-end"><span class="card-briefcase">Paris,
-                                                            France</span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="card-list-4 wow animate__animated animate__fadeIn hover-up">
-                                        <div class="image"><a href="job-details.html"><img
-                                                    src="assets/imgs/brands/brand-6.png" alt="joblist"></a></div>
-                                        <div class="info-text">
-                                            <h5 class="font-md font-bold color-brand-1"><a href="job-details.html">Figma
-                                                    design UI/UX</a>
-                                            </h5>
-                                            <div class="mt-0"><span class="card-briefcase">Fulltime</span><span
-                                                    class="card-time"><span>45</span><span> mins ago</span></span></div>
-                                            <div class="mt-5">
-                                                <div class="row">
-                                                    <div class="col-6">
-                                                        <h6 class="card-price">$290<span>/Hour</span></h6>
-                                                    </div>
-                                                    <div class="col-6 text-end"><span class="card-briefcase">New York,
-                                                            US</span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="card-list-4 wow animate__animated animate__fadeIn hover-up">
-                                        <div class="image"><a href="job-details.html"><img
-                                                    src="assets/imgs/brands/brand-7.png" alt="joblist"></a></div>
-                                        <div class="info-text">
-                                            <h5 class="font-md font-bold color-brand-1"><a href="job-details.html">Product
-                                                    Manage</a></h5>
-                                            <div class="mt-0"><span class="card-briefcase">Fulltime</span><span
-                                                    class="card-time"><span>50</span><span> mins ago</span></span></div>
-                                            <div class="mt-5">
-                                                <div class="row">
-                                                    <div class="col-6">
-                                                        <h6 class="card-price">$650<span>/Hour</span></h6>
-                                                    </div>
-                                                    <div class="col-6 text-end"><span class="card-briefcase">New York,
-                                                            US</span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="card-list-4 wow animate__animated animate__fadeIn hover-up">
-                                        <div class="image"><a href="job-details.html"><img
-                                                    src="assets/imgs/brands/brand-8.png" alt="joblist"></a></div>
-                                        <div class="info-text">
-                                            <h5 class="font-md font-bold color-brand-1"><a href="job-details.html">UI / UX
-                                                    Designer</a></h5>
-                                            <div class="mt-0"><span class="card-briefcase">Fulltime</span><span
-                                                    class="card-time"><span>58</span><span> mins ago</span></span></div>
-                                            <div class="mt-5">
-                                                <div class="row">
-                                                    <div class="col-6">
-                                                        <h6 class="card-price">$270<span>/Hour</span></h6>
-                                                    </div>
-                                                    <div class="col-6 text-end"><span class="card-briefcase">New York,
-                                                            US</span></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
+                                    </li>
+                                @endforelse
+
                             </ul>
                         </div>
                     </div>
