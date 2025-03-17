@@ -10106,3 +10106,8 @@ Additional CSS for responsive design
 .box-map iframe {
     height: 35vh;
 }
+
+.job-category li a {
+    display: block;
+    padding: 8px;
+}

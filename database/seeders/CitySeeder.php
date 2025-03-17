@@ -14,6 +14,8 @@ class CitySeeder extends Seeder
     public function run(): void
     {
         //
+
+
         $cities = array(
             array(
                 "id" => 1,
@@ -8016,6 +8018,8 @@ class CitySeeder extends Seeder
                 "updated_at" => "2020-05-01 18:52:33",
             ),
         );
+
+
 
         City::insert($cities);
     }

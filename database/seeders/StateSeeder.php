@@ -14,6 +14,7 @@ class StateSeeder extends Seeder
     public function run(): void
     {
         //
+
         $states = array(
             array(
                 "id" => 1,
@@ -7016,6 +7017,7 @@ class StateSeeder extends Seeder
                 "updated_at" => "2022-11-13 20:38:20",
             ),
         );
+
 
         State::insert($states);
     }
