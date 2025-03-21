@@ -25,7 +25,7 @@
 
                         </div>
                         <div class="row display-list">
-                            @foreach ($jobs as $job)
+                            @forelse ($jobs as $job)
                                 <div class="col-xl-12 col-12">
                                     <div class="card-grid-2 hover-up"><span class="flash"></span>
                                         <div class="row">
@@ -190,20 +190,62 @@
                                         </div>
                                     </div>
                                 </div>
-                            @endforeach
+                                <!-- Empty State - No Jobs Found -->
+                            @empty
+                                <div class="col-12">
+                                    <div class="empty-jobs-container text-center py-5 my-4">
+                                        <div class="empty-state-icon mb-4">
+                                            <img src="{{ asset('frontend/default-uploads/employees-tired.svg') }}"
+                                                alt="No jobs found" class="img-fluid" style="max-width: 450px;">
+                                        </div>
+                                        <h3 class="font-bold mb-3">No Job Listings Found</h3>
+                                        <p class="text-muted mb-4">We couldn't find any job openings matching your current
+                                            filters.</p>
+                                        <div class="empty-state-actions d-flex justify-content-center gap-3 flex-wrap">
+                                            <a href="{{ route('jobs.index') }}" class="btn btn-primary">
+                                                <i class="fas fa-filter me-2"></i> Clear All Filters
+                                            </a>
+                                            <a href="{{ route('company.jobs.create') }}" class="btn btn-default"
+                                                style="color: white; border: none;">
+                                                <i class="fas fa-plus me-2"></i> Post a Job
+                                            </a>
+                                        </div>
 
+                                        <div class="job-suggestions mt-5">
+                                            <h5 class="font-medium mb-3">Popular Categories</h5>
+                                            <div
+                                                class="suggested-searches d-flex flex-wrap justify-content-center gap-2 mt-3">
+                                                @foreach ($popularCategories as $category)
+                                                    <a href="{{ route('jobs.index', ['category' => $category?->slug]) }}"
+                                                        class="badge rounded-pill px-3 py-2"
+                                                        style="background-color: rgba(18, 144, 121, 0.1); color: #129079; text-decoration: none; font-weight: normal;">
+                                                        {{ $category->name }}
+                                                    </a>
+                                                @endforeach
+
+                                                @foreach ($popularJobTypes as $type)
+                                                    <a href="{{ route('jobs.index', ['jobtype' => $type->slug]) }}"
+                                                        class="badge rounded-pill px-3 py-2"
+                                                        style="background-color: rgba(18, 144, 121, 0.1); color: #129079; text-decoration: none; font-weight: normal;">
+                                                        {{ $type->name }}
+                                                    </a>
+                                                @endforeach
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            @endforelse
 
                         </div>
                     </div>
                     <div class="paginations">
-                        <ul class="pager">
-                            <li><a class="pager-prev" href="#"><i class="fas fa-arrow-left"></i></a></li>
-                            <li><a class="pager-number" href="#">1</a></li>
-                            <li><a class="pager-number" href="#">2</a></li>
-                            <li><a class="pager-number active" href="#">3</a></li>
-                            <li><a class="pager-number" href="#">4</a></li>
-                            <li><a class="pager-next" href="#"><i class="fas fa-arrow-right"></i></a></li>
-                        </ul>
+                        <nav class="d-inline-block">
+                            @if ($jobs->hasPages())
+                                {{ $jobs->withQueryString()->links() }}
+                            @endif
+                        </nav>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-12 col-sm-12 col-12">
@@ -327,7 +369,7 @@
                                                             type="checkbox"><span
                                                             class="text-small">{{ $jobType?->name }}</span><span
                                                             class="checkmark"></span>
-                                                    </label><span class="number-item">25</span>
+                                                    </label>
                                                 </li>
                                             @endforeach
                                         </ul>

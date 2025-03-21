@@ -24,7 +24,7 @@ class FrontendJobPageController extends Controller
 
         $jobCategories = JobCategory::withCount(['jobs' => function ($query) {
             $query->where('status', 'active')
-                ->where('deadline', '>=', date('Y-m-d'));
+                ->where('deadline', '>=', now());
         }])->get();
         // dd($jobCategories);
         $jobTypes = JobType::all();
@@ -51,10 +51,31 @@ class FrontendJobPageController extends Controller
         if ($request->has('city') && $request->filled('city')) {
             $query->where('city_id', $request->city);
         }
+        // if ($request->has('category') && $request->filled('category')) {
+        //     $categoryIds = JobCategory::whereIn('slug', $request->category)->pluck('id')->toArray();
+        //     $query->whereIn('job_category_id', $categoryIds);
+        // }
+
+        // New category filter using whereHas (previously for industry)
+        // if ($request->has('category') && $request->filled('category')) {
+        //     $categorySlugs = is_array($request->category) ? $request->category : [$request->category];
+
+        //     $query->whereHas('category', function ($query) use ($categorySlugs) {
+        //         $query->whereIn('slug', $categorySlugs);
+        //     });
+        // }
+
         if ($request->has('category') && $request->filled('category')) {
-            $categoryIds = JobCategory::whereIn('slug', $request->category)->pluck('id')->toArray();
+            $categorySlugs = is_array($request->category) ? $request->category : [$request->category];
+
+            $categoryIds = JobCategory::whereIn('slug', $categorySlugs)->pluck('id')->toArray();
             $query->whereIn('job_category_id', $categoryIds);
+
+            $query->orWhereHas('category', function ($query) use ($categorySlugs) {
+                $query->whereIn('slug', $categorySlugs);
+            });
         }
+
 
 
         // Salary filter
@@ -66,17 +87,45 @@ class FrontendJobPageController extends Controller
         }
 
 
+        // if ($request->has('jobtype') && $request->filled('jobtype')) {
+        //     $query->whereIn('job_type_id', JobType::whereIn('slug', $request->jobtype)->pluck('id'));
+        // }
+
         if ($request->has('jobtype') && $request->filled('jobtype')) {
-            $query->whereIn('job_type_id', JobType::whereIn('slug', $request->jobtype)->pluck('id'));
+            $jobTypeSlugs = is_array($request->jobtype) ? $request->jobtype : [$request->jobtype];
+
+            $jobTypeIds = JobType::whereIn('slug', $jobTypeSlugs)->pluck('id')->toArray();
+            $query->whereIn('job_type_id', $jobTypeIds);
+
+            $query->orWhereHas('jobType', function ($query) use ($jobTypeSlugs) {
+                $query->whereIn('slug', $jobTypeSlugs);
+            });
         }
+
+
+        // Get top 3 job categories by job count
+        $popularCategories = JobCategory::withCount(['jobs' => function ($query) {
+            $query->where('status', 'active')
+                ->where('deadline', '>=', now());
+        }])
+            ->orderBy('jobs_count', 'desc') // Sort by job count (most popular)
+            ->limit(3) // Get only the top 3 categories
+            ->get();
+
+        // Get top 2 job types by job count
+        $popularJobTypes = JobType::withCount('jobs')
+            ->orderBy('jobs_count', 'desc') // Sort by job count
+            ->limit(2) // Get only the top 2 job types
+            ->get();
+
 
         // Eager load relationships
         $query->with(['country', 'state', 'city', 'category', 'jobType']);
 
 
-        $jobs = $query->paginate(20);
+        $jobs = $query->paginate(18);
 
-        return view('frontend.pages.jobs-index', compact('jobs', 'countries', 'selectedStates', 'selectedCities', 'jobCategories', 'jobTypes'));
+        return view('frontend.pages.jobs-index', compact('jobs', 'countries', 'selectedStates', 'selectedCities', 'jobCategories', 'jobTypes', 'popularCategories', 'popularJobTypes'));
     }
 
     function show(string $slug): View

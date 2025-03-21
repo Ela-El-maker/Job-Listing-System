@@ -10111,3 +10111,46 @@ Additional CSS for responsive design
     display: block;
     padding: 8px;
 }
+
+.x-active {
+    color: var(--colorPrimary);
+}
+.x-radio {
+    height: 18px !important;
+    width: 18px !important;
+    margin-right: 10px;
+    visibility: visible;
+    opacity: 1;
+    cursor: pointer;
+    /* Use CSS variable for color */
+    accent-color: var(--colorPrimary) !important;
+}
+
+/* Alternative custom styling if accent-color isn't enough */
+.x-radio:checked {
+    background-color: var(--colorPrimary);
+    border-color: var(--colorPrimary);
+}
+
+.x-radio:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(var(--colorPrimary-rgb, 52, 152, 219), 0.3);
+}
+
+/* For radio button hover effect */
+label:hover .x-radio {
+    border-color: var(--colorPrimary);
+}
+
+.list-checkbox {
+    list-style: none;
+    padding-left: 0;
+}
+
+.list-checkbox li {
+    margin-bottom: 8px;
+}
+
+.list-checkbox label {
+    cursor: pointer;
+}
