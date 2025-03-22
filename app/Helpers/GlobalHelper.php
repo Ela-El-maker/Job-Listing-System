@@ -83,8 +83,6 @@ if (!function_exists('isCandidateProfileComplete')) {
             'marital_status',
             'bio',
             'country',
-            'state',
-            'city',
             'address',
             'phone_one',
             'phone_two',

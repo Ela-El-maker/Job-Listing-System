@@ -78,14 +78,11 @@
                         </div>
                     </div>
                     <div class="paginations">
-                        <ul class="pager">
-                            <li><a class="pager-prev" href="#"><i class="fas fa-arrow-left"></i></a></li>
-                            <li><a class="pager-number" href="#">1</a></li>
-                            <li><a class="pager-number" href="#">2</a></li>
-                            <li><a class="pager-number active" href="#">3</a></li>
-                            <li><a class="pager-number" href="#">4</a></li>
-                            <li><a class="pager-next" href="#"><i class="fas fa-arrow-right"></i></a></li>
-                        </ul>
+                        <nav class="d-inline-block">
+                            @if ($companies?->hasPages())
+                                {{ $companies->withQueryString()->links() }}
+                            @endif
+                        </nav>
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-12 col-sm-12 col-12">
@@ -164,8 +161,7 @@
 
 
                                                 <label class="d-flex">
-                                                    <input type="radio" name="industry" value=""
-                                                        class="x-radio">
+                                                    <input type="radio" name="industry" value="" class="x-radio">
                                                     <span class="text-small">ALL</span>
                                                 </label>
                                             </li>
