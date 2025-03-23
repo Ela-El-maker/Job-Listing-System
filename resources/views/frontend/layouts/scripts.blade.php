@@ -6,7 +6,9 @@
      *
      */
     // Create an instance of Notyf
-    var notyf = new Notyf();
+    var notyf = new Notyf({
+        duration: 5000,
+    });
 
 
     // date picker

@@ -48,8 +48,15 @@
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-12 text-lg-end">
-                    <div class="btn btn-apply-icon btn-apply btn-apply-big hover-up" data-bs-toggle="modal"
-                        data-bs-target="#ModalApplyJobForm">Apply now</div>
+                    @if ($alreadyAppliedJob)
+                        <div class="btn btn-apply-icon btn-apply btn-apply-big hover-up apply-now"
+                            style="background-color: #8d8c8c" data-bs-toggle="modal" data-bs-target="#ModalApplyJobForm">
+                            Applied</div>
+                    @else
+                        <div class="btn btn-apply-icon btn-apply btn-apply-big hover-up apply-now" data-bs-toggle="modal"
+                            data-bs-target="#ModalApplyJobForm">Apply now</div>
+                    @endif
+
                 </div>
             </div>
             <div class="border-bottom pt-10 pb-10"></div>
@@ -186,8 +193,7 @@
                     <div class="author-single"><span>{{ $job?->company?->name }}</span></div>
                     <div class="single-apply-jobs">
                         <div class="row align-items-center">
-                            <div class="col-md-5"><a class="btn btn-default mr-15" href="#">Apply now</a><a
-                                    class="btn btn-border" href="#">Save job</a></div>
+
                             <div class="col-md-7 text-lg-end social-share">
                                 <h6 class="color-text-paragraph-2 d-inline-block d-baseline mr-10">Share this</h6>
                                 <a data-social="facebook" class="mr-5 d-inline-block d-middle" href="#"><img
@@ -349,3 +355,36 @@
         </div>
     </section>
 @endsection
+
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            $('.apply-now').on('click', function() {
+                // alert('Apply now');
+                $.ajax({
+                    method: 'POST',
+                    url: '{{ route('apply-job.store', $job?->id) }}',
+                    data: {
+                        _token: "{{ csrf_token() }}"
+                    },
+                    beforeSend: function() {
+
+                    },
+                    success: function(response) {
+                        notyf.success(response.message);
+                    },
+                    error: function(xhr, status, error) {
+                        console.log(xhr);
+                        let errors = xhr.responseJSON.errors;
+                        $.each(errors, function(index, value) {
+                            // alert(value[0]);
+                            // console.log(value);
+                            notyf.error(value[index]);
+                        });
+                    },
+                });
+            });
+        });
+    </script>
+@endpush
