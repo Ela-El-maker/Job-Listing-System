@@ -50,7 +50,8 @@
                 <div class="col-lg-4 col-md-12 text-lg-end">
                     @if ($alreadyAppliedJob)
                         <div class="btn btn-apply-icon btn-apply btn-apply-big hover-up apply-now"
-                            style="background-color: #8d8c8c" data-bs-toggle="modal" data-bs-target="#ModalApplyJobForm">
+                            style="display: inline-flex; align-items: center;  background-color: #6c757d; color: white;  cursor: not-allowed; opacity: 0.7;"
+                            data-bs-toggle="modal" data-bs-target="#ModalApplyJobForm">
                             Applied</div>
                     @else
                         <div class="btn btn-apply-icon btn-apply btn-apply-big hover-up apply-now" data-bs-toggle="modal"

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Services\OrderService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Illuminate\View\View;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
@@ -59,15 +60,37 @@ class PaymentController extends Controller
      */
     function payWithPaypal()
     {
-        //handle payment redirect
-        // dd($this->setPaypalConfig());
+        $selectedPlan = Session::get('selected_plan');
+
+        // Check if the selected plan is free
+        if ($selectedPlan['price'] == 0) {
+            // Check if the company has already used the free plan
+            if (OrderService::hasUsedFreePlan(Auth::user()->company->id)) {
+                return redirect()->route('company.payment.error')->withErrors(['error' => 'You have already used the free plan.']);
+            }
+
+            // Store the order and assign the subscription
+            try {
+                OrderService::storeOrder('free_plan', 'free', 0, config('gatewaySettings.paypal_currency_name'), 'paid');
+                OrderService::setUserPlan();
+
+                Session::forget('selected_plan');
+
+                return redirect()->route('company.payment.success');
+            } catch (\Exception $th) {
+                logger('Payment ERROR >> ' . $th);
+                return redirect()->route('company.payment.error')->withErrors(['error' => 'Something went wrong. Please try again.']);
+            }
+        }
+
+        // Handle PayPal payment for non-free plans
         $config = $this->setPaypalConfig();
         $provider = new PayPalClient($config);
         $provider->getAccessToken();
 
         // Calculate payable amount
-        $payableAmount = round(Session::get('selected_plan')['price'] * config('gatewaySettings.paypal_currency_rate'));
-        // dd($payableAmount);
+        $payableAmount = round($selectedPlan['price'] * config('gatewaySettings.paypal_currency_rate'));
+
         $response = $provider->createOrder(
             [
                 'intent' => 'CAPTURE',
@@ -86,10 +109,8 @@ class PaymentController extends Controller
             ],
         );
 
-        // dd($response);
         if (isset($response['id']) && $response['id'] !== NULL) {
             foreach ($response['links'] as $link) {
-                # code...
                 if ($link['rel'] === 'approve') {
                     return redirect()->away($link['href']);
                 }
@@ -120,14 +141,13 @@ class PaymentController extends Controller
 
                 return redirect()->route('company.payment.success');
             } catch (\Exception $th) {
-                logger('Payment ERROR >> '.$th);
+                logger('Payment ERROR >> ' . $th);
             }
         }
 
         // return redirect()->route('company.payment.error')->withErrors(['error'=>$response['error']['message']]);
         return redirect()->route('company.payment.error')
-        ->withErrors(['error' => $response['error']['message'] ?? 'Payment failed. Please try again.']);
-
+            ->withErrors(['error' => $response['error']['message'] ?? 'Payment failed. Please try again.']);
     }
     /**
      * Paypal Cancel
@@ -136,8 +156,7 @@ class PaymentController extends Controller
     function paypalCancel()
     {
         //handle payment redirect
-        return redirect()->route('company.payment.error')->withErrors(['error'=>'Something went wrong. Please Try Again.']);
-
+        return redirect()->route('company.payment.error')->withErrors(['error' => 'Something went wrong. Please Try Again.']);
     }
 
 
@@ -147,10 +166,7 @@ class PaymentController extends Controller
      */
 
 
-    function payWithStripe()
-    {
-
-    }
+    function payWithStripe() {}
 
     function stripeSuccess()
     {

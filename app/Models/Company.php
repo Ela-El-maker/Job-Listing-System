@@ -32,7 +32,7 @@ class Company extends Model
         'state',
         'city',
         'address',
-        'map_link',
+        'map_link'
     ];
 
     /**
