@@ -5,7 +5,8 @@
             </li>
             <li><a class="btn btn-border mb-20" href="{{ route('candidate.profile.index') }}">My Profile</a></li>
             <li><a class="btn btn-border mb-20" href="{{ route('candidate.applied-jobs.index') }}">Applied Jobs</a></li>
-            <li><a class="btn btn-border mb-20" href="candidate-profile-save-jobs.html">Saved Jobs</a></li>
+            <li><a class="btn btn-border mb-20" href="{{ route('candidate.bookmarked-jobs.index') }}">Bookmarked
+                    Jobs</a></li>
         </ul>
         <div class="mt-20">
             <!-- Authentication -->

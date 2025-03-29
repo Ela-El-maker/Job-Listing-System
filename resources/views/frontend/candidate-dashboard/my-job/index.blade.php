@@ -148,6 +148,14 @@
                         </table>
                     </div>
 
+                    <div style="padding: 15px; border-top: 1px solid #eaedf2; text-align: right;">
+                        <nav style="display: inline-block;">
+                            @if ($appliedJobs->hasPages())
+                                {{ $appliedJobs->withQueryString()->links() }}
+                            @endif
+                        </nav>
+                    </div>
+
                 </div>
 
             </div>

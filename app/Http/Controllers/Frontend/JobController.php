@@ -51,6 +51,33 @@ class JobController extends Controller
         return view('frontend.company-dashboard.job.index', compact('jobs'));
     }
 
+
+    function applications(string $id): View
+    {
+
+        $query = AppliedJob::where('job_id', $id);
+        $this->search($query, ['full_name', 'deadline', 'status', 'birth_date']);
+        $applications = $query->paginate(15);
+        $jobTitle = Job::select('title')->where('id', $id)->first();
+        return view(
+            'frontend.company-dashboard.applications.index',
+            compact('applications', 'jobTitle')
+        );
+    }
+
+    // function deleteApplication(string $id)
+    // {
+    //     try {
+    //         AppliedJob::findorfail($id)->delete();
+    //         Notify::deletedNotification();
+    //         return response(['message' => 'success'], 200);
+    //     } catch (\Exception $e) {
+    //         logger($e);
+
+    //         return response(['message' => 'Something Went Wrong! Please Try Again'], 500);
+    //     }
+    // }
+
     /**
      * Show the form for creating a new resource.
      */
