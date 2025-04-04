@@ -75,11 +75,67 @@
 
     @stack('scripts')
     <script>
+        // ClassicEditor
+        //     .create(document.querySelector('#editor'))
+        //     .catch(error => {
+        //         console.error(error);
+        //     });
+
         ClassicEditor
-            .create(document.querySelector('#editor'))
+            .create(document.querySelector('#editor'), {
+
+                ckfinder: {
+                    uploadUrl: "{{ route('admin.upload.image', ['_token' => csrf_token()]) }}",
+                    options: {},
+
+                }
+            })
             .catch(error => {
                 console.error(error);
             });
+
+        // ClassicEditor
+        //     .create(document.querySelector('#editor'), {
+        //         ckfinder: {
+        //             uploadUrl: "{{ route('admin.upload.image') }}",
+        //             options: {
+        //                 resourceType: 'Images'
+        //             },
+        //             headers: {
+        //                 'X-CSRF-TOKEN': "{{ csrf_token() }}",
+        //                 'Accept': 'application/json'
+        //             }
+        //         },
+        //         image: {
+        //             toolbar: ['imageTextAlternative', '|', 'imageStyle:alignLeft', 'imageStyle:full',
+        //                 'imageStyle:alignRight'
+        //             ],
+        //             upload: {
+        //                 types: ['jpeg', 'png', 'jpg', 'gif', 'webp']
+        //             }
+        //         }
+        //     })
+        //     .then(editor => {
+        //         console.log('CKEditor initialized successfully');
+
+        //         // Handle successful image uploads
+        //         editor.plugins.get('FileRepository').on('change:uploaded', (evt, data) => {
+        //             if (data.status === 'uploaded') {
+        //                 console.log('Image uploaded successfully:', data.url);
+        //             }
+        //         });
+
+        //         // Handle upload errors
+        //         editor.plugins.get('FileRepository').on('change:uploaded', (evt, data) => {
+        //             if (data.status === 'error') {
+        //                 console.error('Upload error:', data.error);
+        //             }
+        //         });
+        //     })
+        //     .catch(error => {
+        //         console.error('Editor initialization error:', error);
+        //     });
+
 
 
         $(".delete-item").on('click', function(e) {

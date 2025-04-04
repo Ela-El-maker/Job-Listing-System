@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\Auth\PasswordController;
 use App\Http\Controllers\Admin\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Admin\Auth\RegisteredUserController;
 use App\Http\Controllers\Admin\Auth\VerifyEmailController;
+use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\Admin\CountryController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -31,6 +32,7 @@ use App\Http\Controllers\Admin\SiteSettingController;
 use App\Http\Controllers\Admin\SkillController;
 use App\Http\Controllers\Admin\StateController;
 use App\Http\Controllers\Admin\TagController;
+use App\Http\Controllers\Admin\UploadController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => ['guest:admin'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
@@ -75,6 +77,14 @@ Route::group(['middleware' => ['auth:admin'], 'prefix' => 'admin', 'as' => 'admi
     Route::resource('cities', CityController::class);
 
     Route::get('get-states/{country_id}', [LocationController::class, 'getStatesOfCountry'])->name('get-states');
+
+
+    /***
+     * Blogs
+     */
+
+    Route::resource('blogs', BlogController::class);
+
 
     /**** Language Route */
     Route::resource('languages', LanguageController::class);
@@ -149,4 +159,10 @@ Route::group(['middleware' => ['auth:admin'], 'prefix' => 'admin', 'as' => 'admi
     Route::get('site-settings', [SiteSettingController::class, 'index'])->name('site-settings.index');
 
     Route::post('general-settings', [SiteSettingController::class, 'updateGeneralSetting'])->name('general-settings.update');
+
+
+    /**
+     * Upload Controller Route
+     */
+    Route::post('/upload/image', [UploadController::class, 'storeImage'])->name('upload.image');
 });

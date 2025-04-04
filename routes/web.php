@@ -11,6 +11,7 @@ use App\Http\Controllers\Frontend\CheckoutPageController;
 use App\Http\Controllers\Frontend\CompanyDashboardController;
 use App\Http\Controllers\Frontend\CompanyOrderController;
 use App\Http\Controllers\Frontend\CompanyProfileController;
+use App\Http\Controllers\Frontend\FrontendBlogPageController;
 use App\Http\Controllers\Frontend\FrontendCandidatePageController;
 use App\Http\Controllers\Frontend\FrontendJobPageController;
 use App\Http\Controllers\Frontend\FrontendCompanyPageController;
@@ -69,6 +70,11 @@ Route::get('job/{slug}', [FrontendJobPageController::class, 'show'])->name('jobs
 Route::post('apply-job/{id}', [FrontendJobPageController::class, 'applyJob'])->name('apply-job.store');
 Route::get('job-bookmark/{id}', [CandidateJobBookmarkController::class, 'save'])->name('job.bookmark');
 
+/**
+ * Blogs route
+ */
+Route::get('blog', [FrontendBlogPageController::class, 'index'])->name('blogs.index');
+Route::get('blog/{slug}', [FrontendBlogPageController::class, 'show'])->name('blogs.show');
 
 /***  Candidate Dashboard Routes */
 Route::group(

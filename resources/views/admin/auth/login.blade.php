@@ -23,10 +23,12 @@
                                 <!-- Email Address -->
                                 <div class="form-group">
                                     <label for="email">Email</label>
-                                    <input id="email" type="email" value="{{ old('email') }}" class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}"
-                                        name="email" tabindex="1" required autofocus>
+                                    <input id="email" type="email" value="{{ old('email') }}"
+                                        class="form-control {{ $errors->has('email') ? 'is-invalid' : '' }}" name="email"
+                                        tabindex="1" required autofocus>
                                     <x-input-error :messages="$errors->get('email')" class="mt-2" />
                                 </div>
+
                                 <!-- Password -->
 
                                 <div class="form-group">

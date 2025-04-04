@@ -11,6 +11,8 @@ use Illuminate\View\View;
 class CandidateJobBookmarkController extends Controller
 {
     //
+
+
     function save(string $id)
     {
         // Save the candidate's bookmark for the given job ID
