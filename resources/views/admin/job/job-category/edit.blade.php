@@ -33,6 +33,18 @@
                     </div>
 
                     <div class="form-group">
+                        <label for="show_at_popular">Show At Popular</label>
+                        <select name="show_at_popular"
+                            class="form-control select2 {{ hasError($errors, 'show_at_popular') }}" id="show_at_popular">
+                            <!-- Add your options here -->
+                            <option @selected($jobCategory?->show_at_popular === 1) value="1"
+                                {{ old('show_at_popular') == '1' ? 'selected' : '' }}>Yes</option>
+                            <option @selected($jobCategory?->show_at_popular === 0) value="0"
+                                {{ old('show_at_popular') == '0' ? 'selected' : '' }}>No</option>
+                        </select>
+                        <x-input-error :messages="$errors->get('show_at_popular')" class="mt-2" />
+                    </div>
+                    <div class="form-group">
                         <button type="submit" class="btn btn-primary">Update</button>
                     </div>
                 </form>

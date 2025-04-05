@@ -1,6 +1,5 @@
 @extends('frontend.layouts.master')
 @section('contents')
-    <div class="bg-homepage1"></div>
     <!-- Hero Section Start-->
     @include('frontend.home.sections.hero-section')
     <!-- Hero Section End-->

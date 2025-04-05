@@ -279,7 +279,7 @@
             spaceBetween: 15,
             slidesPerGroup: 3,
             slidesPerView: 5,
-            loop: true,
+            loop: false,
             pagination: {
                 el: ".swiper-pagination",
                 clickable: true

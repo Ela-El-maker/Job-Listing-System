@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('job_categories', function (Blueprint $table) {
+        Schema::create('heroes', function (Blueprint $table) {
             $table->id();
-            $table->string('icon');
-            $table->string('name');
-            $table->string('slug');
-            $table->boolean('show_at_popular')->default(0);
+            $table->string('title')->comment('Title or subtitle for the hero');
+            $table->text('sub_title')->comment('Description of the hero');
+            $table->string('image')->comment('Image URL for the hero');
+            $table->string('background_image')->comment('Background image URL for the hero');
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('job_categories');
+        Schema::dropIfExists('heroes');
     }
 };

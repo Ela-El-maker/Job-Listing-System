@@ -118,7 +118,17 @@
              <li class="{{ setSidebarActive(['admin.jobs.*']) }}"><a class="nav-link"
                      href="{{ route('admin.jobs.index') }}"><i class="far fa-square"></i> <span>Job
                          Post </span></a></li>
+             <li class="dropdown {{ setSidebarActive(['admin.countries.*', 'admin.states.*', 'admin.cities.*']) }} ">
+                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
+                         class="fas fa-columns"></i>
+                     <span>Sections</span></a>
+                 <ul class="dropdown-menu">
+                     <li class="{{ setSidebarActive(['admin.hero.*']) }}"><a class="nav-link"
+                             href="{{ route('admin.hero.index') }}">Hero</a></li>
 
+
+                 </ul>
+             </li>
 
              <li class="{{ setSidebarActive(['admin.blogs.*']) }}"><a class="nav-link"
                      href="{{ route('admin.blogs.index') }}"><i class="far fa-square"></i> <span>Blogs</span></a>

@@ -180,7 +180,7 @@
                                                     @php
                                                         $bookmarked = \App\Models\JobBookmark::where(
                                                             'candidate_id',
-                                                            auth()->user()?->candidateProfile?->id,
+                                                            auth()?->user()?->candidateProfile?->id,
                                                         )
                                                             ->pluck('job_id')
                                                             ->toArray();

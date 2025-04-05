@@ -3,6 +3,10 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Country;
+use App\Models\Hero;
+use App\Models\Job;
+use App\Models\JobCategory;
 use App\Models\Plan;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -10,9 +14,16 @@ use Illuminate\View\View;
 class HomeController extends Controller
 {
     //return home view
-    function index() : View
+    function index(): View
     {
-        $plans = Plan::where(['frontend_show'=> 1,'show_at_home'=>1])->get();
-        return view('frontend.home.index',compact('plans'));
+        $hero = Hero::first(); // Get the first hero record, or null if none exists
+        $jobCategories = JobCategory::all();
+        $countries = Country::all();
+        $plans = Plan::where(['frontend_show' => 1, 'show_at_home' => 1])->get();
+        $jobCount = Job::count(); // Get the total count of jobs
+        $popularJobCategories = JobCategory::withCount(['jobs' => function ($query) {
+            $query->where(['status' => 'active'])->where('deadline', '>=', now());
+        }])->where('show_at_popular', 1)->get();
+        return view('frontend.home.index', compact('plans', 'hero', 'jobCategories', 'countries', 'jobCount', 'popularJobCategories'));
     }
 }

@@ -80,6 +80,27 @@ class FrontendJobPageController extends Controller
         }
 
 
+        // if ($request->has('category') && $request->filled('category')) {
+        //     $categorySlugs = is_array($request->category) ? $request->category : [$request->category];
+
+        //     $categoryIds = JobCategory::whereIn('slug', $categorySlugs)->pluck('id')->toArray();
+        //     $query->whereIn('job_category_id', $categoryIds);
+
+        //     if (is_array($request->category)) {
+
+        //         # code...
+        //         $categoryIds = JobCategory::whereIn('slug', $categorySlugs)->pluck('id')->toArray();
+        //         $query->whereIn('job_category_id', $categoryIds);
+        //     } else {
+        //         $category = JobCategory::where('slug', $request->category)->first();
+        //         $query->whereIn('job_category_id', $category->id);
+        //     }
+
+        //     $query->orWhereHas('category', function ($query) use ($categorySlugs) {
+        //         $query->whereIn('slug', $categorySlugs);
+        //     });
+        // }
+
 
         // Salary filter
         if ($request->has('min_salary') && $request->filled('min_salary') && $request->min_salary > 0) {
