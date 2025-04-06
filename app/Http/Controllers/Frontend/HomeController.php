@@ -24,6 +24,7 @@ class HomeController extends Controller
         $popularJobCategories = JobCategory::withCount(['jobs' => function ($query) {
             $query->where(['status' => 'active'])->where('deadline', '>=', now());
         }])->where('show_at_popular', 1)->get();
-        return view('frontend.home.index', compact('plans', 'hero', 'jobCategories', 'countries', 'jobCount', 'popularJobCategories'));
+        $featuredCategories = JobCategory::where('show_at_featured', 1)->take(6)->get();
+        return view('frontend.home.index', compact('plans', 'hero', 'jobCategories', 'countries', 'jobCount', 'popularJobCategories', 'featuredCategories'));
     }
 }

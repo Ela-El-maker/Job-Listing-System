@@ -40,6 +40,16 @@
                         </select>
                         <x-input-error :messages="$errors->get('show_at_popular')" class="mt-2" />
                     </div>
+                    <div class="form-group">
+                        <label for="show_at_featured">Show At Featured</label>
+                        <select name="show_at_featured"
+                            class="form-control select2 {{ hasError($errors, 'show_at_featured') }}" id="show_at_featured">
+                            <option value="1" {{ old('show_at_featured') == '1' ? 'selected' : '' }}>Yes</option>
+                            <option value="0" {{ old('show_at_featured') == '0' ? 'selected' : '' }}>No</option>
+                        </select>
+                        <x-input-error :messages="$errors->get('show_at_featured')" class="mt-2" />
+                    </div>
+
 
 
                     <div class="form-group">

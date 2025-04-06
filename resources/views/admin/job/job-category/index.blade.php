@@ -35,6 +35,7 @@
 
                             <th>Name</th>
                             <th style="width: 20%">Show At Popular</th>
+                            <th style="width: 20%">Show At Featured</th>
                             <th style="width: 20%">Action</th>
                         </tr>
                         <tbody>
@@ -45,6 +46,13 @@
                                     <td>{{ $category?->name }}</td>
                                     <td>
                                         @if ($category?->show_at_popular === 1)
+                                            <span class="badge badge-success">Yes</span>
+                                        @else
+                                            <span class="badge badge-danger">No</span>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        @if ($category?->show_at_featured === 1)
                                             <span class="badge badge-success">Yes</span>
                                         @else
                                             <span class="badge badge-danger">No</span>
