@@ -73,7 +73,7 @@ class WhyChooseUsController extends Controller
 
         $data = [
             'title_one'=> $request->title_one,
-            'sub_title_one' => $request->title_one,
+            'sub_title_one' => $request->sub_title_one,
             'title_two'=> $request->title_two,
             'sub_title_two' => $request->sub_title_two,
             'title_three'=> $request->title_three,
