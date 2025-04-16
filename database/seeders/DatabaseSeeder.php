@@ -18,5 +18,26 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+        $this->call([
+            AdminSeeder::class,
+            CountrySeeder::class,
+            StateSeeder::class,
+            CitySeeder::class,
+            ExperienceSeeder::class,
+            IndustryTypeSeeder::class,
+            JobCategorySeeder::class,
+            JobEducationSeeder::class,
+            JobExperienceSeeder::class,
+            JobRoleSeeder::class,
+            JobSalaryTypeSeeder::class,
+            JobTagSeeder::class,
+            JobTypeSeeder::class,
+            LanguageSeeder::class,
+            OrganizationTypeSeeder::class,
+            ProfessionSeeder::class,
+            SkillSeeder::class,
+            // SocialPlatformsSeeder::class,
+            TeamSizeSeeder::class,
+        ]);
     }
 }

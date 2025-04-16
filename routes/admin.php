@@ -34,6 +34,7 @@ use App\Http\Controllers\Admin\SkillController;
 use App\Http\Controllers\Admin\StateController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\UploadController;
+use App\Http\Controllers\Admin\WhyChooseUsController;
 use Illuminate\Support\Facades\Route;
 
 Route::group(['middleware' => ['guest:admin'], 'prefix' => 'admin', 'as' => 'admin.'], function () {
@@ -92,6 +93,7 @@ Route::group(['middleware' => ['auth:admin'], 'prefix' => 'admin', 'as' => 'admi
      * It allows the admin to create, read, update, and delete hero entries.
      */
     Route::resource('hero', HeroController::class);
+    Route::resource('why-choose-us', WhyChooseUsController::class);
 
 
 

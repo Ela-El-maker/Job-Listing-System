@@ -2,8 +2,7 @@
     <div class="container">
         <div class="text-center">
             <h2 class="section-title mb-10 wow animate__animated animate__fadeInUp">Featured Jobs</h2>
-            <p class="font-lg color-text-paragraph-2 wow animate__animated animate__fadeInUp">Lorem ipsum dolor sit amet
-                elit, sed do eiusmod tempor</p>
+            <p class="font-lg color-text-paragraph-2 wow animate__animated animate__fadeInUp"></p>
             <div class="list-tabs mt-40">
                 <ul class="nav nav-tabs" role="tablist">
                     @forelse ($featuredCategories as $category)
@@ -13,6 +12,64 @@
                                 aria-selected="true">{{ Str::limit($category?->name, 20, '...') }}</a></li>
 
                     @empty
+                    <div class="col-12">
+                        <div class="empty-category-state text-center py-5"
+                            style="
+                            background: rgba(245, 245, 245, 0.5);
+                            border-radius: 12px;
+                            padding: 40px;
+                            margin: 20px 0;
+                        ">
+                            <div
+                                style="
+                                width: 120px;
+                                height: 120px;
+                                background: #f0f7ff;
+                                border-radius: 50%;
+                                display: inline-flex;
+                                align-items: center;
+                                justify-content: center;
+                                margin-bottom: 25px;
+                            ">
+                                <i class="fa fa-folder-open" style="font-size: 50px; color: #38b2ac;"></i>
+                            </div>
+                            <h4
+                                style="
+                                font-size: 1.5rem;
+                                color: #05264e;
+                                margin-bottom: 15px;
+                                font-weight: 600;
+                            ">
+                                No Featured Job Categories Found</h4>
+                            <p
+                                style="
+                                color: #66789c;
+                                font-size: 1rem;
+                                max-width: 500px;
+                                margin: 0 auto 25px;
+                                line-height: 1.6;
+                            ">
+                                We couldn't find any featured job categories right now. Check back later or
+                                browse all available jobs.</p>
+                            <div>
+                                <a href="{{ route('jobs.index') }}"
+                                    style="
+                                    display: inline-block;
+                                    padding: 12px 24px;
+                                    background: #38b2ac;
+                                    color: white;
+                                    border-radius: 6px;
+                                    text-decoration: none;
+                                    font-weight: 500;
+                                    transition: all 0.3s ease;
+                                "
+                                    onmouseover="this.style.background='#2d928c'"
+                                    onmouseout="this.style.background='#38b2ac'">
+                                    Browse All Jobs
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                     @endforelse
 
                 </ul>

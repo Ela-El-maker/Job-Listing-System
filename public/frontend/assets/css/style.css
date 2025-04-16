@@ -10154,3 +10154,13 @@ label:hover .x-radio {
 .list-checkbox label {
     cursor: pointer;
 }
+
+.number-element{
+    display: flex;
+    justify-content: center;
+}
+
+.number-element i {
+    font-size: 38px;
+    margin-top: 5px;
+}
