@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Counter;
 use App\Models\Country;
 use App\Models\Hero;
 use App\Models\Job;
 use App\Models\JobCategory;
+use App\Models\LearnMore;
 use App\Models\Plan;
 use App\Models\WhyChooseUs;
 use Illuminate\Http\Request;
@@ -27,6 +29,8 @@ class HomeController extends Controller
         }])->where('show_at_popular', 1)->get();
         $featuredCategories = JobCategory::where('show_at_featured', 1)->take(6)->get();
         $whyChooseUs = WhyChooseUs::first();
-        return view('frontend.home.index', compact('plans', 'hero', 'jobCategories', 'countries', 'jobCount', 'popularJobCategories', 'featuredCategories','whyChooseUs'));
+        $learnMore = LearnMore::first();
+        $counter = Counter::first();
+        return view('frontend.home.index', compact('plans', 'hero', 'jobCategories', 'countries', 'jobCount', 'popularJobCategories', 'featuredCategories','whyChooseUs','learnMore','counter'));
     }
 }
