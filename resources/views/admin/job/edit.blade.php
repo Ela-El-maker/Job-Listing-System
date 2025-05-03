@@ -417,6 +417,7 @@
                                                 <select
                                                     class="form-control {{ hasError($errors, 'receive_applications') }} select2"
                                                     name="receive_applications">
+                                                    <option value="">Choose</option>
                                                     <option @selected($job?->apply_on == 'app') value="app">On Our Platform
                                                     </option>
                                                     <option @selected($job?->apply_on == 'email') value="email">On your Email
