@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\Auth\RegisteredUserController;
 use App\Http\Controllers\Admin\Auth\VerifyEmailController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\CityController;
+use App\Http\Controllers\Admin\ClientReviewController;
 use App\Http\Controllers\Admin\CounterController;
 use App\Http\Controllers\Admin\CountryController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -100,6 +101,7 @@ Route::group(['middleware' => ['auth:admin'], 'prefix' => 'admin', 'as' => 'admi
     Route::resource('learn-more', LearnMoreController::class);
     Route::resource('counter', CounterController::class);
     Route::resource('job-location', JobLocationController::class);
+    Route::resource('reviews', ClientReviewController::class);
 
 
 

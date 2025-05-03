@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Blog;
+use App\Models\ClientReview;
 use App\Models\Company;
 use App\Models\Counter;
 use App\Models\Country;
@@ -36,7 +38,9 @@ class HomeController extends Controller
         $companies = Company::with('companyCountry','jobs')->select('id','logo','name','slug','country','state')->withCount(['jobs'=>function($query){
             $query->where(['status'=> 'active'])->where('deadline','>=', now());
         }])->where(['profile_completion' => 1, 'visibility' => 1])->latest()->take(45)->get();
-        $jobsByLocations = JobLocation::all();
-        return view('frontend.home.index', compact('plans', 'hero', 'jobCategories', 'countries', 'jobCount', 'popularJobCategories', 'featuredCategories','whyChooseUs','learnMore','counter','companies','jobsByLocations'));
+        $jobsByLocations = JobLocation::latest()->take(8)->get();
+        $clientReviews = ClientReview::all();
+        $blogs = Blog::latest()->take(6)->get();
+        return view('frontend.home.index', compact('plans', 'hero', 'jobCategories', 'countries', 'jobCount', 'popularJobCategories', 'featuredCategories','whyChooseUs','learnMore','counter','companies','jobsByLocations','clientReviews','blogs'));
     }
 }

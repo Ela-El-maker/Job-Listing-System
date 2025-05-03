@@ -129,14 +129,17 @@
                      <li class="{{ setSidebarActive(['admin.why-choose-us.*']) }}"><a class="nav-link"
                              href="{{ route('admin.why-choose-us.index') }}">Why Choose Us</a></li>
 
-                             <li class="{{ setSidebarActive(['admin.learn-more.*']) }}"><a class="nav-link"
-                                href="{{ route('admin.learn-more.index') }}">Learn More</a></li>
+                     <li class="{{ setSidebarActive(['admin.learn-more.*']) }}"><a class="nav-link"
+                             href="{{ route('admin.learn-more.index') }}">Learn More</a></li>
 
-                                <li class="{{ setSidebarActive(['admin.counter.*']) }}"><a class="nav-link"
-                                    href="{{ route('admin.counter.index') }}">Counter</a></li>
+                     <li class="{{ setSidebarActive(['admin.counter.*']) }}"><a class="nav-link"
+                             href="{{ route('admin.counter.index') }}">Counter</a></li>
 
-                                    <li class="{{ setSidebarActive(['admin.job-location.*']) }}"><a class="nav-link"
-                                        href="{{ route('admin.job-location.index') }}">Job Locations</a></li>
+                     <li class="{{ setSidebarActive(['admin.job-location.*']) }}"><a class="nav-link"
+                             href="{{ route('admin.job-location.index') }}">Job Locations</a></li>
+
+                     <li class="{{ setSidebarActive(['admin.reviews.*']) }}"><a class="nav-link"
+                             href="{{ route('admin.reviews.index') }}">Client Reviews</a></li>
 
 
                  </ul>
