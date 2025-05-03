@@ -48,7 +48,7 @@ class FrontendCompanyPageController extends Controller
             $selectedCities = City::where('state_id', $request->state)->get();
         }
 
-        if ($request->has('city') && $request->fillezd('city')) {
+        if ($request->has('city') && $request->filled('city')) {
             $query->where('city', $request->city);
         }
 

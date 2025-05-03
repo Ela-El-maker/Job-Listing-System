@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Company;
 use App\Models\Counter;
 use App\Models\Country;
 use App\Models\Hero;
@@ -31,6 +32,9 @@ class HomeController extends Controller
         $whyChooseUs = WhyChooseUs::first();
         $learnMore = LearnMore::first();
         $counter = Counter::first();
-        return view('frontend.home.index', compact('plans', 'hero', 'jobCategories', 'countries', 'jobCount', 'popularJobCategories', 'featuredCategories','whyChooseUs','learnMore','counter'));
+        $companies = Company::with('companyCountry','jobs')->select('id','logo','name','slug','country','state')->withCount(['jobs'=>function($query){
+            $query->where(['status'=> 'active'])->where('deadline','>=', now());
+        }])->where(['profile_completion' => 1, 'visibility' => 1])->latest()->take(45)->get();
+        return view('frontend.home.index', compact('plans', 'hero', 'jobCategories', 'countries', 'jobCount', 'popularJobCategories', 'featuredCategories','whyChooseUs','learnMore','counter','companies'));
     }
 }
