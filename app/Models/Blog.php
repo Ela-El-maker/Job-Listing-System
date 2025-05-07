@@ -20,8 +20,8 @@ class Blog extends Model
         ];
     }
 
-    function author(): BelongsTo
+    public function author(): BelongsTo
     {
-        return $this->belongsTo(User::class, 'author_id', 'id');
+        return $this->belongsTo(Admin::class, 'author_id', 'id');
     }
 }

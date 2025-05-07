@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Admin\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Admin\Auth\EmailVerificationNotificationController;
@@ -102,6 +103,8 @@ Route::group(['middleware' => ['auth:admin'], 'prefix' => 'admin', 'as' => 'admi
     Route::resource('counter', CounterController::class);
     Route::resource('job-location', JobLocationController::class);
     Route::resource('reviews', ClientReviewController::class);
+
+    Route::resource('about-us', AboutController::class);
 
 
 

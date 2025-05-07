@@ -44,13 +44,20 @@ class BlogController extends Controller
      */
     public function store(BlogRequest $request)
     {
+        $admin = auth('admin')->user();
+
+
+        // dd($admin);
+
         //
         // dd($request);
         $imagePath = $this->uploadFile($request, 'image');
         $blog = new Blog();
         $blog->image = $imagePath;
         $blog->title = $request->title;
-        $blog->author_id = auth()->user()->id;
+        if ($admin) {
+            $blog->author_id = $admin->id;
+        }
         $blog->description = $request->description;
         $blog->status = $request->status;
         $blog->featured = $request->featured;
@@ -83,12 +90,15 @@ class BlogController extends Controller
      */
     public function update(BlogUpdateRequest $request, string $id)
     {
+        $admin = auth('admin')->user();
         // dd($request);
         $imagePath = $this->uploadFile($request, 'image');
         $blog = Blog::findorfail($id);
         if ($imagePath) $blog->image = $imagePath;
         $blog->title = $request->title;
-        $blog->author_id = auth()->user()->id;
+        if ($admin) {
+            $blog->author_id = $admin->id;
+        }
         $blog->description = $request->description;
         $blog->status = $request->status;
         $blog->featured = $request->featured;

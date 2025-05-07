@@ -65,7 +65,8 @@
          <li class="dropdown"><a href="#" data-toggle="dropdown"
                  class="nav-link dropdown-toggle nav-link-lg nav-link-user">
                  <img alt="image" src="assets/img/avatar/avatar-1.png" class="rounded-circle mr-1">
-                 <div class="d-sm-none d-lg-inline-block">Hi, {{ auth()->user()->name }}</div>
+                 <div class="d-sm-none d-lg-inline-block">Hi, {{ auth('admin')->user()->name }}
+                 </div>
              </a>
              <div class="dropdown-menu dropdown-menu-right">
                  <div class="dropdown-title">Logged in 5 min ago</div>
@@ -118,7 +119,24 @@
              <li class="{{ setSidebarActive(['admin.jobs.*']) }}"><a class="nav-link"
                      href="{{ route('admin.jobs.index') }}"><i class="far fa-square"></i> <span>Job
                          Post </span></a></li>
-             <li class="dropdown {{ setSidebarActive(['admin.countries.*', 'admin.states.*', 'admin.cities.*']) }} ">
+
+
+             <li class="dropdown {{ setSidebarActive(['admin.about-us.*']) }} ">
+                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
+                         class="fas fa-columns"></i>
+                     <span>Pages</span></a>
+                 <ul class="dropdown-menu">
+                     <li class="{{ setSidebarActive(['admin.about-us.*']) }}"><a class="nav-link"
+                             href="{{ route('admin.about-us.index') }}">About Us</a></li>
+                     
+
+                 </ul>
+             </li>
+
+
+
+             <li
+                 class="dropdown {{ setSidebarActive(['admin.hero.*', 'admin.why-choose-us.*', 'admin.learn-more.*', 'admin.counter.*', 'admin.job-location.*', 'admin.reviews.*']) }} ">
                  <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
                          class="fas fa-columns"></i>
                      <span>Sections</span></a>

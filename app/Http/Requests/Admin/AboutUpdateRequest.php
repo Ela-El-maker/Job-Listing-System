@@ -4,7 +4,7 @@ namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class GeneralSettingUpdateRequest extends FormRequest
+class AboutUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,13 +22,12 @@ class GeneralSettingUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
-            'site_name' => ['required','max:255'],
-            'site_email' => ['required','email','max:255'],
-            'site_phone' => ['required','max:100'],
-            'site_default_currency' => ['required'],
-            'site_currency_icon' => ['required'],
-            'site_map' => ['nullable'],
+            'about_title' => 'required|string|max:255',
+            'about_description' => 'required|string',
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'url' => 'nullable|url',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webm,webp|max:3000',
         ];
     }
 }
