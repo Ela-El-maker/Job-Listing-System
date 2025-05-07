@@ -117,7 +117,6 @@
 
                     },
                     error: function(xhr, status, error) {
-                        console.log(xhr);
                         let errors = xhr.responseJSON.errors;
                         $.each(errors, function(index, value) {
                             // alert(value[0]);

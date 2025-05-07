@@ -8,6 +8,7 @@ use App\Models\ClientReview;
 use App\Models\Company;
 use App\Models\Counter;
 use App\Models\Country;
+use App\Models\CustomPageBuilder;
 use App\Models\Hero;
 use App\Models\Job;
 use App\Models\JobCategory;
@@ -42,5 +43,14 @@ class HomeController extends Controller
         $clientReviews = ClientReview::all();
         $blogs = Blog::latest()->take(6)->get();
         return view('frontend.home.index', compact('plans', 'hero', 'jobCategories', 'countries', 'jobCount', 'popularJobCategories', 'featuredCategories','whyChooseUs','learnMore','counter','companies','jobsByLocations','clientReviews','blogs'));
+    }
+
+
+    function customPage(string $slug) : View
+    {
+        // dd( $slug);
+        $page = CustomPageBuilder::where('slug', $slug)->firstOrFail();
+
+        return view('frontend.pages.custom-page', compact('page'));
     }
 }
