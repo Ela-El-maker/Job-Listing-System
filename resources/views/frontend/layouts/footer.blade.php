@@ -23,6 +23,15 @@
     </div>
 </section>
 
+@php
+
+$footerOne = \Menu::getByName('Footer Menu One');
+$footerTwo = \Menu::getByName('Footer Menu Two');
+$footerThree = \Menu::getByName('Footer Menu Three');
+$footerFour = \Menu::getByName('Footer Menu Four');
+
+@endphp
+
 
 <footer class="footer pt-165">
     <div class="container">
@@ -43,37 +52,34 @@
             <div class="footer-col-2 col-md-2 col-xs-6">
                 <h6 class="mb-20">Resources</h6>
                 <ul class="menu-footer">
-                    <li><a href="#">About us</a></li>
-                    <li><a href="#">Our Team</a></li>
-                    <li><a href="#">Products</a></li>
-                    <li><a href="#">Contact</a></li>
+                    @foreach ($footerOne as $menu)
+                    <li><a href="{{ $menu['link'] }}">{{ $menu['label'] }}</a></li>
+                    @endforeach
+
                 </ul>
             </div>
             <div class="footer-col-3 col-md-2 col-xs-6">
                 <h6 class="mb-20">Community</h6>
                 <ul class="menu-footer">
-                    <li><a href="#">Feature</a></li>
-                    <li><a href="#">Pricing</a></li>
-                    <li><a href="#">Credit</a></li>
-                    <li><a href="#">FAQ</a></li>
+                    @foreach ($footerTwo as $menu)
+                    <li><a href="{{ $menu['link'] }}">{{ $menu['label'] }}</a></li>
+                    @endforeach
                 </ul>
             </div>
             <div class="footer-col-4 col-md-2 col-xs-6">
                 <h6 class="mb-20">Quick links</h6>
                 <ul class="menu-footer">
-                    <li><a href="#">iOS</a></li>
-                    <li><a href="#">Android</a></li>
-                    <li><a href="#">Microsoft</a></li>
-                    <li><a href="#">Desktop</a></li>
+                    @foreach ($footerThree as $menu)
+                    <li><a href="{{ $menu['link'] }}">{{ $menu['label'] }}</a></li>
+                    @endforeach
                 </ul>
             </div>
             <div class="footer-col-5 col-md-2 col-xs-6">
                 <h6 class="mb-20">More</h6>
                 <ul class="menu-footer">
-                    <li><a href="#">Privacy</a></li>
-                    <li><a href="#">Help</a></li>
-                    <li><a href="#">Terms</a></li>
-                    <li><a href="#">FAQ</a></li>
+                    @foreach ($footerFour as $menu)
+                    <li><a href="{{ $menu['link'] }}">{{ $menu['label'] }}</a></li>
+                    @endforeach
                 </ul>
             </div>
         </div>
