@@ -29,6 +29,7 @@ use App\Http\Controllers\Admin\JobTypeController;
 use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\LearnMoreController;
 use App\Http\Controllers\Admin\LocationController;
+use App\Http\Controllers\Admin\MenuBuilderController;
 use App\Http\Controllers\Admin\NewsletterController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\OrganizationTypeController;
@@ -119,6 +120,13 @@ Route::group(['middleware' => ['auth:admin'], 'prefix' => 'admin', 'as' => 'admi
     Route::delete('newsletter/{id}', [NewsletterController::class,'destroy'])->name('newsletter.destroy');
     Route::post('newsletter', [NewsletterController::class,'sendMail'])->name('newsletter.send-mail');
 
+
+
+    /***
+     * Menu Builder Route
+     */
+
+    Route::resource('menu-builder',MenuBuilderController::class);
     /**** Language Route */
     Route::resource('languages', LanguageController::class);
 

@@ -110,15 +110,33 @@
 
              </li>
              <li class="menu-header">Starter</li>
+
+             <li class="{{ setSidebarActive(['admin.menu-builder.*']) }}">
+                <a class="nav-link" href="{{ route('admin.menu-builder.index') }}">
+                    <i class="far fa-square"></i>
+                    <span>Menu Builder</span>
+                </a>
+            </li>
+
              <li class="{{ setSidebarActive(['admin.orders.*']) }}"><a class="nav-link"
                      href="{{ route('admin.orders.index') }}"><i class="far fa-square"></i> <span>Orders</span></a></li>
 
-             <li class="{{ setSidebarActive(['admin.job-categories.*']) }}"><a class="nav-link"
-                     href="{{ route('admin.job-categories.index') }}"><i class="far fa-square"></i> <span>Job
-                         Category</span></a></li>
-             <li class="{{ setSidebarActive(['admin.jobs.*']) }}"><a class="nav-link"
-                     href="{{ route('admin.jobs.index') }}"><i class="far fa-square"></i> <span>Job
-                         Post </span></a></li>
+             <li class="{{ setSidebarActive(['admin.job-categories.*']) }}">
+                 <a class="nav-link" href="{{ route('admin.job-categories.index') }}">
+                     <i class="far fa-square"></i>
+                     <span>
+                         Job
+                         Category
+                     </span>
+                 </a>
+             </li>
+             <li class="{{ setSidebarActive(['admin.jobs.*']) }}">
+                 <a class="nav-link" href="{{ route('admin.jobs.index') }}">
+                     <i class="far fa-square"></i>
+                     <span>Job
+                         Post </span>
+                 </a>
+             </li>
 
 
              <li class="dropdown {{ setSidebarActive(['admin.about-us.*']) }} ">

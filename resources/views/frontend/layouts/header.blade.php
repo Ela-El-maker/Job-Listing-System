@@ -5,25 +5,33 @@
                 <div class="header-logo"><a class="d-flex" href="{{ url('/') }}"><img alt="joblist"
                             src="{{ asset('frontend/assets/imgs/template/logo.png') }}"></a></div>
             </div>
+            @php
+                $navigationMenu = \Menu::getByName('Navigation Menu');
+                // dd($navigationMenu);
+            @endphp
+
             <div class="header-nav">
                 <nav class="nav-main-menu">
                     <ul class="main-menu">
-                        <li class="has-children"><a class="active" href="{{ url('/') }}">Home</a></li>
-                        <li class="has-children"><a href="{{ route('jobs.index') }}">Find a Job</a></li>
-                        <li class="has-children"><a href="{{ route('companies.index') }}">Recruiters</a></li>
-                        <li class="has-children"><a href="{{ route('candidates.index') }}">Candidates</a></li>
-                        <li class="has-children"><a href="blog-grid.html">Pages</a>
+
+                        @foreach ($navigationMenu as $menu)
+                        @if ($menu['child'])
+                        <li class="has-children"><a href="{{ $menu['link'] }}">{{ $menu['label'] }}</a>
                             <ul class="sub-menu">
-                                <li><a href="page-about.html">About Us</a></li>
-                                <li><a href="page-pricing.html">Pricing Plan</a></li>
-                                <li><a href="page-contact.html">Contact Us</a></li>
-                                <li><a href="page-register.html">Register</a></li>
-                                <li><a href="page-signin.html">Signin</a></li>
-                                <li><a href="page-reset-password.html">Reset Password</a></li>
-                                <li><a href="blog-details.html">Blog Single</a></li>
+                                @foreach ($menu['child'] as $child)
+                                <li><a href="{{ $child['link'] }}">{{ $child['label'] }}</a></li>
+                                @endforeach
                             </ul>
                         </li>
-                        <li class="has-children"><a href="blog-grid.html">Blog</a></li>
+                        @else
+                        <li class="has-children"><a href="{{ $menu['link'] }}">{{ $menu['label'] }}</a></li>
+                        @endif
+
+
+                        @endforeach
+
+
+
                     </ul>
                 </nav>
                 <div class="burger-icon burger-icon-white"><span class="burger-icon-top"></span><span
