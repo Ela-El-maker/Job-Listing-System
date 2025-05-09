@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\CountryController;
 use App\Http\Controllers\Admin\CustomPageBuilderController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\EducationController;
+use App\Http\Controllers\Admin\FooterController;
 use App\Http\Controllers\Admin\HeroController;
 use App\Http\Controllers\Admin\IndustryTypeController;
 use App\Http\Controllers\Admin\JobCategoryController;
@@ -39,6 +40,7 @@ use App\Http\Controllers\Admin\ProfessionController;
 use App\Http\Controllers\Admin\SalaryTypeController;
 use App\Http\Controllers\Admin\SiteSettingController;
 use App\Http\Controllers\Admin\SkillController;
+use App\Http\Controllers\Admin\SocialIconController;
 use App\Http\Controllers\Admin\StateController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\UploadController;
@@ -116,9 +118,9 @@ Route::group(['middleware' => ['auth:admin'], 'prefix' => 'admin', 'as' => 'admi
     Route::resource('page-builder', CustomPageBuilderController::class);
 
 
-    Route::get('newsletter', [NewsletterController::class,'index'])->name('newsletter.index');
-    Route::delete('newsletter/{id}', [NewsletterController::class,'destroy'])->name('newsletter.destroy');
-    Route::post('newsletter', [NewsletterController::class,'sendMail'])->name('newsletter.send-mail');
+    Route::get('newsletter', [NewsletterController::class, 'index'])->name('newsletter.index');
+    Route::delete('newsletter/{id}', [NewsletterController::class, 'destroy'])->name('newsletter.destroy');
+    Route::post('newsletter', [NewsletterController::class, 'sendMail'])->name('newsletter.send-mail');
 
 
 
@@ -126,7 +128,14 @@ Route::group(['middleware' => ['auth:admin'], 'prefix' => 'admin', 'as' => 'admi
      * Menu Builder Route
      */
 
-    Route::resource('menu-builder',MenuBuilderController::class);
+    Route::resource('menu-builder', MenuBuilderController::class);
+    Route::resource('social-icon', SocialIconController::class);
+
+
+    /**
+     * Footer Route
+     */
+    Route::resource('footer', FooterController::class);
     /**** Language Route */
     Route::resource('languages', LanguageController::class);
 

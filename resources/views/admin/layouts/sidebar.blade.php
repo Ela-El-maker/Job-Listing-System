@@ -112,11 +112,11 @@
              <li class="menu-header">Starter</li>
 
              <li class="{{ setSidebarActive(['admin.menu-builder.*']) }}">
-                <a class="nav-link" href="{{ route('admin.menu-builder.index') }}">
-                    <i class="far fa-square"></i>
-                    <span>Menu Builder</span>
-                </a>
-            </li>
+                 <a class="nav-link" href="{{ route('admin.menu-builder.index') }}">
+                     <i class="far fa-square"></i>
+                     <span>Menu Builder</span>
+                 </a>
+             </li>
 
              <li class="{{ setSidebarActive(['admin.orders.*']) }}"><a class="nav-link"
                      href="{{ route('admin.orders.index') }}"><i class="far fa-square"></i> <span>Orders</span></a></li>
@@ -285,6 +285,24 @@
              <li class="{{ setSidebarActive(['admin.site-settings.index']) }}"><a class="nav-link"
                      href="{{ route('admin.site-settings.index') }}"><i class="far fa-square"></i> <span>Site
                          Settings</span></a></li>
+
+
+             <li class="dropdown {{ setSidebarActive(['admin.footer.*','admin.social-icon.*']) }} ">
+                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
+                         class="fas fa-columns"></i>
+                     <span>Footer Details</span></a>
+                 <ul class="dropdown-menu">
+                     <li class="{{ setSidebarActive(['admin.footer.*']) }}"><a class="nav-link"
+                             href="{{ route('admin.footer.index') }}">Footer</a></li>
+
+                     <li class="{{ setSidebarActive(['admin.social-icon.*']) }}"><a class="nav-link"
+                             href="{{ route('admin.social-icon.index') }}">Socials</a></li>
+                 </ul>
+             </li>
+
+             {{-- <li class="{{ setSidebarActive(['admin.footer.index']) }}"><a class="nav-link"
+                     href="{{ route('admin.footer.index') }}"><i class="far fa-square"></i> <span>Footers</span></a>
+             </li> --}}
 
 
              {{-- <li class="{{ setSidebarActive(['admin.site-settings.index']) }}"><a class="nav-link" href="{{ route('admin.site-settings.index') }}"><i class="far fa-square"></i> <span>Site Settings</span></a></li> --}}
