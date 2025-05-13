@@ -91,4 +91,21 @@ class Company extends Model
     {
         return $this->hasMany(Job::class, 'company_id', 'id');
     }
+
+    public function orders(): HasMany
+    {
+        return $this->hasMany(Order::class);
+    }
+
+    public function applications()
+    {
+        return $this->hasManyThrough(
+            AppliedJob::class,
+            Job::class,
+            'company_id', // Foreign key on Job table...
+            'job_id',     // Foreign key on AppliedJob table...
+            'id',         // Local key on Company...
+            'id'          // Local key on Job...
+        );
+    }
 }

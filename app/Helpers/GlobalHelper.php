@@ -182,3 +182,18 @@ if (!function_exists('relativeTime')) {
         }
     }
 }
+
+
+if (!function_exists('calculateEarnings')) {
+    function calculateEarnings($amounts)
+    {
+        $total = 0;
+        foreach ($amounts as $value) {
+            // Remove anything except digits and decimal point
+            $clean = preg_replace('/[^0-9.]/', '', $value);
+            $total += (float)$clean;
+        }
+        return $total;
+    }
+}
+

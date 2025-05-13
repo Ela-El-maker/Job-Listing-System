@@ -40,7 +40,7 @@ class JobController extends Controller
         //
         $query = Job::query();
 
-        $this->search($query, ['title', 'slug', 'status']);
+        $this->search($query, ['title', 'slug', 'status','created_at','updated_at']);
 
         $jobs = $query->orderBy('created_at', 'DESC')->paginate(10);
         return view('admin.job.index', compact('jobs'));

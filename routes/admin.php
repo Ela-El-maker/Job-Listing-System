@@ -75,6 +75,11 @@ Route::group(['middleware' => ['auth:admin'], 'prefix' => 'admin', 'as' => 'admi
     /**** Dashboard Route */
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
+    Route::get('analytics/user-registrations', [DashboardController::class, 'userRegistrations'])->name('analytics.user-registrations');
+    Route::get('analytics/earnings', [DashboardController::class, 'earnings'])->name('analytics.earnings');
+    Route::get('analytics/growth-comparison', [DashboardController::class, 'growthComparison'])->name('analytics.growth-comparison');
+
+
     /**** Industry Type Route */
     Route::resource('industry-types', IndustryTypeController::class);
     /**** Organization Type Route */
