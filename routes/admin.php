@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\Auth\RegisteredUserController;
 use App\Http\Controllers\Admin\Auth\VerifyEmailController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\CityController;
+use App\Http\Controllers\Admin\ClearDatabaseController;
 use App\Http\Controllers\Admin\ClientReviewController;
 use App\Http\Controllers\Admin\CounterController;
 use App\Http\Controllers\Admin\CountryController;
@@ -214,6 +215,16 @@ Route::group(['middleware' => ['auth:admin'], 'prefix' => 'admin', 'as' => 'admi
     Route::get('site-settings', [SiteSettingController::class, 'index'])->name('site-settings.index');
 
     Route::post('general-settings', [SiteSettingController::class, 'updateGeneralSetting'])->name('general-settings.update');
+
+
+
+
+    Route::get('clear-database',[ClearDatabaseController::class,'index'])->name('clear-database.index');
+    Route::post('clear-database',[ClearDatabaseController::class,'clearDatabase'])->name('clear-database');
+
+
+
+
 
 
     /**

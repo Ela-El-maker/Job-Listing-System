@@ -287,7 +287,11 @@
                          Settings</span></a></li>
 
 
-             <li class="dropdown {{ setSidebarActive(['admin.footer.*','admin.social-icon.*']) }} ">
+             <li class="{{ setSidebarActive(['admin.clear-database.index']) }}"><a class="nav-link"
+                     href="{{ route('admin.clear-database.index') }}"><i class="far fa-square"></i> <span>Clear Database</span></a></li>
+
+
+             <li class="dropdown {{ setSidebarActive(['admin.footer.*', 'admin.social-icon.*']) }} ">
                  <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
                          class="fas fa-columns"></i>
                      <span>Footer Details</span></a>

@@ -30,6 +30,7 @@
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <tr>
+                            <th>#</th>
                             <th>Order & Transaction</th>
                             <th>Company</th>
                             <th>Plan</th>
@@ -92,7 +93,7 @@
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="3" class="text-center"> No Results Found! </td>
+                                    <td colspan="9" class="text-center"> No Results Found! </td>
                                 </tr>
                             @endforelse
                         </tbody>
