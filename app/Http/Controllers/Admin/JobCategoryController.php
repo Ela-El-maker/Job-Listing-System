@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Job;
 use App\Models\JobCategory;
 use App\Services\Notify;
 use App\Traits\Searchable;
@@ -108,6 +109,11 @@ class JobCategoryController extends Controller
     public function destroy(string $id)
     {
         //
+        $jobExists = Job::where('job_category_id',$id)->exists();
+        if($jobExists)
+        {
+            return response(['message' => 'This item is already being used. Can\'t Delete'],500);
+        }
         try {
             JobCategory::findorfail($id)->delete();
             Notify::deletedNotification();

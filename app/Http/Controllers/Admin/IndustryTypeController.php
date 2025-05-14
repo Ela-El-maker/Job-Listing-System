@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Company;
 use App\Models\IndustryType;
+use App\Models\Job;
 use App\Services\Notify;
 use App\Traits\Searchable;
 use Illuminate\Http\RedirectResponse;
@@ -23,7 +25,7 @@ class IndustryTypeController extends Controller
         // dd($request->search);
         $query = IndustryType::query();
 
-        $this->search($query,['name']);
+        $this->search($query, ['name']);
 
         $industryTypes = $query->paginate(10);
 
@@ -94,10 +96,14 @@ class IndustryTypeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id) : Response
+    public function destroy(string $id): Response
     {
         //
         // dd($id);
+        $company = Company::where('industry_type_id', $id)->exists();
+        if($company){
+            return response(['message'=> 'This item is already being used. Can\'t Delate'],500);
+        }
         try {
             IndustryType::findorfail($id)->delete();
             Notify::deletedNotification();

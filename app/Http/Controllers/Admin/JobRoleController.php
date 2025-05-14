@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Job;
 use App\Models\JobRole;
 use App\Services\Notify;
 use App\Traits\Searchable;
@@ -98,6 +99,11 @@ class JobRoleController extends Controller
     public function destroy(string $id)
     {
         //
+         $jobExists = Job::where('job_role_id', $id)->exists();
+        if ($jobExists) {
+            return response(['message' => 'This item is already being used. Can\'t Delete'], 500);
+        }
+
         try {
             JobRole::findorfail($id)->delete();
             Notify::deletedNotification();
