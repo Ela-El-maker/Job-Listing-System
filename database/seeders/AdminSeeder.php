@@ -15,13 +15,16 @@ class AdminSeeder extends Seeder
     public function run(): void
     {
         //
-        Admin::updateOrCreate(
-            ['email' => 'superadmin@elakali.com'], // Find admin by email
-            [
-                'name' => 'Super Admin',
-                'image' => '/default-uploads/avatar/pngwing.com(13).png',
-                'password' => Hash::make('password'),
-            ]
-        );
+        $admin = new Admin();
+        $admin->name = 'Super Admin';
+        $admin->image = '/default-uploads/avatar/pngwing.com(13).png';
+        $admin->email = 'superadmin@elakali.com';
+        $admin->password = bcrypt('password');
+        $admin->save();
+
+        // Assign Role
+        $admin->assignRole('Super Admin');
+
+
     }
 }
