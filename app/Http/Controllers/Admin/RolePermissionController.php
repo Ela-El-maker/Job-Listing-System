@@ -18,10 +18,10 @@ class RolePermissionController extends Controller
      */
     public function index(): View
     {
-        $query = Role::where('guard_name', 'admin');
-        $this->search($query, ['name']);
+        $query = Role::query();
+        $this->search($query, ['name','email']);
 
-        $roles = $query->with('permissions')->latest()->paginate(10);
+        $roles = $query->latest()->paginate(10);
 
         return view('admin.access-management.role.index', compact('roles'));
     }

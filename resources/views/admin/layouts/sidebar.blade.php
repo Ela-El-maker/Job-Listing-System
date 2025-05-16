@@ -111,19 +111,18 @@
              </li>
              <li class="menu-header">Starter</li>
 
-              <li class="dropdown {{ setSidebarActive(['admin.footer.*', 'admin.social-icon.*']) }} ">
-                <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
-                        class="fas fa-columns"></i>
-                    <span>Access Management</span></a>
-                <ul class="dropdown-menu">
-                    <li class="{{ setSidebarActive(['admin.role.*']) }}"><a class="nav-link"
-                            href="{{ route('admin.role.index') }}">Roles</a></li>
+             <li class="dropdown {{ setSidebarActive(['admin.footer.*', 'admin.social-icon.*']) }} ">
+                 <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i class="fas fa-columns"></i>
+                     <span>Access Management</span></a>
+                 <ul class="dropdown-menu">
+                     <li class="{{ setSidebarActive(['admin.role.*']) }}"><a class="nav-link"
+                             href="{{ route('admin.role.index') }}">Roles</a></li>
 
-                    <li class="{{ setSidebarActive(['admin.social-icon.*']) }}"><a class="nav-link"
-                            href="{{ route('admin.social-icon.index') }}">Socials</a></li>
-                </ul>
-            </li>
-            
+                     <li class="{{ setSidebarActive(['admin.role-user.*']) }}"><a class="nav-link"
+                             href="{{ route('admin.role-user.index') }}">User Roles</a></li>
+                 </ul>
+             </li>
+
              <li class="{{ setSidebarActive(['admin.menu-builder.*']) }}">
                  <a class="nav-link" href="{{ route('admin.menu-builder.index') }}">
                      <i class="far fa-square"></i>
@@ -132,7 +131,8 @@
              </li>
 
              <li class="{{ setSidebarActive(['admin.orders.*']) }}"><a class="nav-link"
-                     href="{{ route('admin.orders.index') }}"><i class="far fa-square"></i> <span>Orders</span></a></li>
+                     href="{{ route('admin.orders.index') }}"><i class="far fa-square"></i> <span>Orders</span></a>
+             </li>
 
              <li class="{{ setSidebarActive(['admin.job-categories.*']) }}">
                  <a class="nav-link" href="{{ route('admin.job-categories.index') }}">
@@ -301,7 +301,8 @@
 
 
              <li class="{{ setSidebarActive(['admin.clear-database.index']) }}"><a class="nav-link"
-                     href="{{ route('admin.clear-database.index') }}"><i class="far fa-square"></i> <span>Clear Database</span></a></li>
+                     href="{{ route('admin.clear-database.index') }}"><i class="far fa-square"></i> <span>Clear
+                         Database</span></a></li>
 
 
              <li class="dropdown {{ setSidebarActive(['admin.footer.*', 'admin.social-icon.*']) }} ">
