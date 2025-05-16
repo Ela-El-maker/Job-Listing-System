@@ -12,6 +12,12 @@ use Illuminate\View\View;
 class HeroController extends Controller
 {
     use FileUploadTrait;
+
+    function __construct()
+    {
+        $this->middleware(['permission:job sections']);
+    }
+
     /**
      * Display a listing of the resource.
      */

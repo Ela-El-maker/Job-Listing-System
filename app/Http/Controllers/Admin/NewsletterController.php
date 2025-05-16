@@ -14,6 +14,12 @@ use Illuminate\View\View;
 class NewsletterController extends Controller
 {
     use Searchable;
+
+    function __construct()
+    {
+        $this->middleware(['permission:newsletter']);
+    }
+
     //
     public function index(): View
     {

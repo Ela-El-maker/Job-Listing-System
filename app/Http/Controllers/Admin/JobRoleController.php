@@ -14,6 +14,11 @@ use Illuminate\View\View;
 class JobRoleController extends Controller
 {
     use Searchable;
+
+    function __construct()
+    {
+        $this->middleware(['permission:job role']);
+    }
     /**
      * Display a listing of the resource.
      */
@@ -99,7 +104,7 @@ class JobRoleController extends Controller
     public function destroy(string $id)
     {
         //
-         $jobExists = Job::where('job_role_id', $id)->exists();
+        $jobExists = Job::where('job_role_id', $id)->exists();
         if ($jobExists) {
             return response(['message' => 'This item is already being used. Can\'t Delete'], 500);
         }

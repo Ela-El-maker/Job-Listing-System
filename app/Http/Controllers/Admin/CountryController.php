@@ -13,25 +13,33 @@ use Illuminate\View\View;
 
 class CountryController extends Controller
 {
+
+    function __construct()
+    {
+        $this->middleware(['permission:job locations']);
+    }
+
+
+
     /**
      * Display a listing of the resource.
      */
     use Searchable;
-    public function index() : View
+    public function index(): View
     {
         //
         $query = Country::query();
 
-        $this->search($query,['name']);
+        $this->search($query, ['name']);
 
-        $countries = $query->orderBy('id','DESC')->paginate(10);
+        $countries = $query->orderBy('id', 'DESC')->paginate(10);
         return view('admin.location.country.index', compact('countries'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create() : View
+    public function create(): View
     {
         //
         return view('admin.location.country.create');
@@ -64,7 +72,7 @@ class CountryController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id) : View
+    public function edit(string $id): View
     {
         //
         $country = Country::findOrFail($id);
@@ -90,7 +98,7 @@ class CountryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id) : Response
+    public function destroy(string $id): Response
     {
         //
         try {

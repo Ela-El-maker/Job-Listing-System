@@ -5,446 +5,449 @@
             <h1>Dashboard</h1>
         </div>
 
-        <div class="row">
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-4">
-                <div class="card card-statistic-1">
-                    <div class="card-icon bg-info">
-                        <i class="fas fa-users"></i>
-                    </div>
-                    <div class="card-wrap">
-                        <div class="card-header">
-                            <h4>Total Users</h4>
+        @if (canAccess(['dashboard analytics']))
+            <div class="row">
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-4">
+                    <div class="card card-statistic-1">
+                        <div class="card-icon bg-info">
+                            <i class="fas fa-users"></i>
                         </div>
-                        <div class="card-body">
-                            {{ $allUsers }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Total Earnings -->
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-4">
-                <div class="card card-statistic-1">
-                    <div class="card-icon bg-primary">
-                        <i class="fas fa-dollar-sign"></i>
-                    </div>
-                    <div class="card-wrap">
-                        <div class="card-header">
-                            <h4>Total Earnings</h4>
-                        </div>
-                        <div class="card-body">
-                            {{ config('settings.site_currency_icon') }} {{ $totalEarnings }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Total Candidates -->
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-4">
-                <div class="card card-statistic-1">
-                    <div class="card-icon bg-info">
-                        <i class="fas fa-user-tie"></i>
-                    </div>
-                    <div class="card-wrap">
-                        <div class="card-header">
-                            <h4>Total Candidates</h4>
-                        </div>
-                        <div class="card-body">
-                            {{ $totalCandidates }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Total Visible Candidates -->
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-4">
-                <div class="card card-statistic-1">
-                    <div class="card-icon bg-success">
-                        <i class="fas fa-user-tie"></i>
-                    </div>
-                    <div class="card-wrap">
-                        <div class="card-header">
-                            <h4>Total Visible Candidates</h4>
-                        </div>
-                        <div class="card-body">
-                            {{ $totalVisibleCandidates }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Total Companies -->
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-4">
-                <div class="card card-statistic-1">
-                    <div class="card-icon bg-secondary">
-                        <i class="fas fa-building"></i>
-                    </div>
-                    <div class="card-wrap">
-                        <div class="card-header">
-                            <h4>Total Companies</h4>
-                        </div>
-                        <div class="card-body">
-                            {{ $totalCompanies }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-4">
-                <div class="card card-statistic-1">
-                    <div class="card-icon bg-success">
-                        <i class="fas fa-building"></i>
-                    </div>
-                    <div class="card-wrap">
-                        <div class="card-header">
-                            <h4>Total Visible Companies</h4>
-                        </div>
-                        <div class="card-body">
-                            {{ $totalVisibleCompanies }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Total Orders -->
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-4">
-                <div class="card card-statistic-1">
-                    <div class="card-icon bg-danger">
-                        <i class="fas fa-shopping-cart"></i>
-                    </div>
-                    <div class="card-wrap">
-                        <div class="card-header">
-                            <h4>Total Orders</h4>
-                        </div>
-                        <div class="card-body">
-                            {{ $totalOrders }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Total Jobs -->
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-4">
-                <div class="card card-statistic-1">
-                    <div class="card-icon bg-dark">
-                        <i class="fas fa-briefcase"></i>
-                    </div>
-                    <div class="card-wrap">
-                        <div class="card-header">
-                            <h4>Total Jobs</h4>
-                        </div>
-                        <div class="card-body">
-                            {{ $totalJobs }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Total Active Jobs -->
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-4">
-                <div class="card card-statistic-1">
-                    <div class="card-icon bg-success">
-                        <i class="fas fa-check-circle"></i>
-                    </div>
-                    <div class="card-wrap">
-                        <div class="card-header">
-                            <h4>Total Active Jobs</h4>
-                        </div>
-                        <div class="card-body">
-                            {{ $totalActiveJobs }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-4">
-                <div class="card card-statistic-1">
-                    <div class="card-icon bg-warning">
-                        <i class="fas fa-hourglass-half"></i>
-                    </div>
-                    <div class="card-wrap">
-                        <div class="card-header">
-                            <h4>Total Pending Jobs</h4>
-                        </div>
-                        <div class="card-body">
-                            {{ $totalPendingJobs }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-4">
-                <div class="card card-statistic-1">
-                    <div class="card-icon bg-secondary">
-                        <i class="fas fa-calendar-times"></i>
-                    </div>
-                    <div class="card-wrap">
-                        <div class="card-header">
-                            <h4>Total Expired Jobs</h4>
-                        </div>
-                        <div class="card-body">
-                            {{ $totalExpiredJobs }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-4">
-                <div class="card card-statistic-1">
-                    <div class="card-icon bg-primary">
-                        <i class="fas fa-book-open"></i>
-                    </div>
-                    <div class="card-wrap">
-                        <div class="card-header">
-                            <h4>Total Blog Posts</h4>
-                        </div>
-                        <div class="card-body">
-                            {{ $totalBlogs }}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-6 mb-4">
-                <div class="card">
-                    <div class="card-header">
-                        <h4>User Registrations & Earnings (Monthly)</h4>
-                    </div>
-                    <div class="card-body">
-                        <canvas id="monthlyChart" height="100"></canvas>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-md-6 mb-4">
-                <div class="card">
-                    <div class="card-header">
-                        <h4>System Overview</h4>
-                    </div>
-                    <div class="card-body">
-                        <canvas id="systemOverviewChart" height="150"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- In view -->
-        <div class="card">
-            <div class="card-header">
-                <h4>Top Performing Companies</h4>
-            </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table table-striped">
-                        <tr>
-                            <th>#</th>
-                            <th>Company</th>
-                            <th>Jobs Posted</th>
-                            <th>Orders</th>
-                            <th>Applicants</th>
-                        </tr>
-                        @foreach ($topCompanies as $company)
-                            <tr>
-                                <td>{{ ($topCompanies->currentPage() - 1) * $topCompanies->perPage() + $loop->iteration }}
-                                </td>
-                                <td>{{ $company->name }}</td>
-                                <td>{{ $company->jobs_count }}</td>
-                                <td>{{ $company->orders_count }}</td>
-                                <td>{{ $company->applications_count }}</td>
-                            </tr>
-                        @endforeach
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <!-- User Registration Trends -->
-            <div class="col-lg-6 col-md-12 mb-4">
-                <div class="card">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <h4>User Registration Trends</h4>
-
-                        <select class="form-control form-control-sm w-auto" id="userTrendsTimeRange">
-                            <option value="7">Last 7 Days</option>
-                            <option value="30" selected>Last 30 Days</option>
-                            <option value="90">Last 90 Days</option>
-                            <option value="365">Last Year</option>
-                        </select>
-                        <button class="btn btn-sm btn-outline-secondary export-chart" data-chart="userRegistrationChart">
-                            <i class="fas fa-download"></i> Export
-                        </button>
-                    </div>
-                    <div class="card-body">
-                        <canvas id="userRegistrationChart" height="250"></canvas>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Earnings Overview -->
-            <div class="col-lg-6 col-md-12 mb-4">
-                <div class="card">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <h4>Earnings Overview</h4>
-                        <select class="form-control form-control-sm w-auto" id="earningsTimeRange">
-                            <option value="monthly">Monthly</option>
-                            <option value="weekly" selected>Weekly</option>
-                            <option value="daily">Daily</option>
-                        </select>
-                    </div>
-                    <div class="card-body">
-                        <canvas id="earningsChart" height="250"></canvas>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Job Status Distribution -->
-            <div class="col-lg-6 col-md-12 mb-4">
-                <div class="card">
-                    <div class="card-header">
-                        <h4>Job Status Distribution</h4>
-                    </div>
-                    <div class="card-body">
-                        <canvas id="jobStatusChart" height="250"></canvas>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Candidate vs Company Growth -->
-            <div class="col-lg-6 col-md-12 mb-4">
-                <div class="card">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <h4>Candidate vs Company Growth</h4>
-                        <select class="form-control form-control-sm w-auto" id="growthTimeRange">
-                            <option value="monthly">Monthly</option>
-                            <option value="quarterly">Quarterly</option>
-                            <option value="yearly" selected>Yearly</option>
-                        </select>
-                    </div>
-                    <div class="card-body">
-                        <canvas id="growthComparisonChart" height="250"></canvas>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">
-                <h4>All Pending Job Posts</h4>
-                <div class="card-header-form">
-                    <form action="{{ route('admin.jobs.index') }}" method="GET">
-                        <div class="input-group">
-                            <input type="text" name="search" class="form-control" placeholder="Search"
-                                value="{{ request('search') }}">
-                            <div class="input-group-btn">
-                                <button type="submit" style="height: 42px" class="btn btn-primary"><i
-                                        class="fas fa-search"></i></button>
+                        <div class="card-wrap">
+                            <div class="card-header">
+                                <h4>Total Users</h4>
+                            </div>
+                            <div class="card-body">
+                                {{ $allUsers }}
                             </div>
                         </div>
-                    </form>
+                    </div>
+                </div>
+
+                <!-- Total Earnings -->
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-4">
+                    <div class="card card-statistic-1">
+                        <div class="card-icon bg-primary">
+                            <i class="fas fa-dollar-sign"></i>
+                        </div>
+                        <div class="card-wrap">
+                            <div class="card-header">
+                                <h4>Total Earnings</h4>
+                            </div>
+                            <div class="card-body">
+                                {{ config('settings.site_currency_icon') }} {{ $totalEarnings }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Total Candidates -->
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-4">
+                    <div class="card card-statistic-1">
+                        <div class="card-icon bg-info">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <div class="card-wrap">
+                            <div class="card-header">
+                                <h4>Total Candidates</h4>
+                            </div>
+                            <div class="card-body">
+                                {{ $totalCandidates }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Total Visible Candidates -->
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-4">
+                    <div class="card card-statistic-1">
+                        <div class="card-icon bg-success">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <div class="card-wrap">
+                            <div class="card-header">
+                                <h4>Total Visible Candidates</h4>
+                            </div>
+                            <div class="card-body">
+                                {{ $totalVisibleCandidates }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Total Companies -->
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-4">
+                    <div class="card card-statistic-1">
+                        <div class="card-icon bg-secondary">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <div class="card-wrap">
+                            <div class="card-header">
+                                <h4>Total Companies</h4>
+                            </div>
+                            <div class="card-body">
+                                {{ $totalCompanies }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-4">
+                    <div class="card card-statistic-1">
+                        <div class="card-icon bg-success">
+                            <i class="fas fa-building"></i>
+                        </div>
+                        <div class="card-wrap">
+                            <div class="card-header">
+                                <h4>Total Visible Companies</h4>
+                            </div>
+                            <div class="card-body">
+                                {{ $totalVisibleCompanies }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Total Orders -->
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-4">
+                    <div class="card card-statistic-1">
+                        <div class="card-icon bg-danger">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <div class="card-wrap">
+                            <div class="card-header">
+                                <h4>Total Orders</h4>
+                            </div>
+                            <div class="card-body">
+                                {{ $totalOrders }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Total Jobs -->
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-4">
+                    <div class="card card-statistic-1">
+                        <div class="card-icon bg-dark">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <div class="card-wrap">
+                            <div class="card-header">
+                                <h4>Total Jobs</h4>
+                            </div>
+                            <div class="card-body">
+                                {{ $totalJobs }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Total Active Jobs -->
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-4">
+                    <div class="card card-statistic-1">
+                        <div class="card-icon bg-success">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="card-wrap">
+                            <div class="card-header">
+                                <h4>Total Active Jobs</h4>
+                            </div>
+                            <div class="card-body">
+                                {{ $totalActiveJobs }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-4">
+                    <div class="card card-statistic-1">
+                        <div class="card-icon bg-warning">
+                            <i class="fas fa-hourglass-half"></i>
+                        </div>
+                        <div class="card-wrap">
+                            <div class="card-header">
+                                <h4>Total Pending Jobs</h4>
+                            </div>
+                            <div class="card-body">
+                                {{ $totalPendingJobs }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-4">
+                    <div class="card card-statistic-1">
+                        <div class="card-icon bg-secondary">
+                            <i class="fas fa-calendar-times"></i>
+                        </div>
+                        <div class="card-wrap">
+                            <div class="card-header">
+                                <h4>Total Expired Jobs</h4>
+                            </div>
+                            <div class="card-body">
+                                {{ $totalExpiredJobs }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 col-sm-6 col-12 mb-4">
+                    <div class="card card-statistic-1">
+                        <div class="card-icon bg-primary">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <div class="card-wrap">
+                            <div class="card-header">
+                                <h4>Total Blog Posts</h4>
+                            </div>
+                            <div class="card-body">
+                                {{ $totalBlogs }}
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="card-body p-0">
-                <div class="table-responsive">
-                    <table class="table table-striped">
-                        <tr>
-                            <th>#</th>
-                            <th>Job</th>
-                            <th>Category/Role</th>
-                            <th>Salary</th>
-                            <th>Deadline</th>
-                            <th>Status</th>
-                            <th>Approve</th>
-                            <th style="width: 20%">Action</th>
-                        </tr>
-                        <tbody>
-                            @forelse ($jobs as $job)
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>User Registrations & Earnings (Monthly)</h4>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="monthlyChart" height="100"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>System Overview</h4>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="systemOverviewChart" height="150"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- User Registration Trends -->
+                <div class="col-lg-6 col-md-12 mb-4">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h4>User Registration Trends</h4>
+
+                            <select class="form-control form-control-sm w-auto" id="userTrendsTimeRange">
+                                <option value="7">Last 7 Days</option>
+                                <option value="30" selected>Last 30 Days</option>
+                                <option value="90">Last 90 Days</option>
+                                <option value="365">Last Year</option>
+                            </select>
+                            <button class="btn btn-sm btn-outline-secondary export-chart"
+                                data-chart="userRegistrationChart">
+                                <i class="fas fa-download"></i> Export
+                            </button>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="userRegistrationChart" height="250"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Earnings Overview -->
+                <div class="col-lg-6 col-md-12 mb-4">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h4>Earnings Overview</h4>
+                            <select class="form-control form-control-sm w-auto" id="earningsTimeRange">
+                                <option value="monthly">Monthly</option>
+                                <option value="weekly" selected>Weekly</option>
+                                <option value="daily">Daily</option>
+                            </select>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="earningsChart" height="250"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Job Status Distribution -->
+                <div class="col-lg-6 col-md-12 mb-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h4>Job Status Distribution</h4>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="jobStatusChart" height="250"></canvas>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Candidate vs Company Growth -->
+                <div class="col-lg-6 col-md-12 mb-4">
+                    <div class="card">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                            <h4>Candidate vs Company Growth</h4>
+                            <select class="form-control form-control-sm w-auto" id="growthTimeRange">
+                                <option value="monthly">Monthly</option>
+                                <option value="quarterly">Quarterly</option>
+                                <option value="yearly" selected>Yearly</option>
+                            </select>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="growthComparisonChart" height="250"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        @endif
+
+        @if (canAccess(['dashboard pending posts']))
+            <!-- In view -->
+            <div class="card">
+                <div class="card-header">
+                    <h4>Top Performing Companies</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <tr>
+                                <th>#</th>
+                                <th>Company</th>
+                                <th>Jobs Posted</th>
+                                <th>Orders</th>
+                                <th>Applicants</th>
+                            </tr>
+                            @foreach ($topCompanies as $company)
                                 <tr>
-                                    <td>{{ ($jobs->currentPage() - 1) * $jobs->perPage() + $loop->iteration }}</td>
-                                    <td>
-                                        <div class="d-flex">
-                                            <div class="mr-2">
-                                                <img style="width: 50px;height:50px;object-fit:cover;"
-                                                    src="{{ asset($job?->company?->logo) }}" alt="">
+                                    <td>{{ ($topCompanies->currentPage() - 1) * $topCompanies->perPage() + $loop->iteration }}
+                                    </td>
+                                    <td>{{ $company->name }}</td>
+                                    <td>{{ $company->jobs_count }}</td>
+                                    <td>{{ $company->orders_count }}</td>
+                                    <td>{{ $company->applications_count }}</td>
+                                </tr>
+                            @endforeach
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <h4>All Pending Job Posts</h4>
+                    <div class="card-header-form">
+                        <form action="{{ route('admin.jobs.index') }}" method="GET">
+                            <div class="input-group">
+                                <input type="text" name="search" class="form-control" placeholder="Search"
+                                    value="{{ request('search') }}">
+                                <div class="input-group-btn">
+                                    <button type="submit" style="height: 42px" class="btn btn-primary"><i
+                                            class="fas fa-search"></i></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-striped">
+                            <tr>
+                                <th>#</th>
+                                <th>Job</th>
+                                <th>Category/Role</th>
+                                <th>Salary</th>
+                                <th>Deadline</th>
+                                <th>Status</th>
+                                <th>Approve</th>
+                                <th style="width: 20%">Action</th>
+                            </tr>
+                            <tbody>
+                                @forelse ($jobs as $job)
+                                    <tr>
+                                        <td>{{ ($jobs->currentPage() - 1) * $jobs->perPage() + $loop->iteration }}</td>
+                                        <td>
+                                            <div class="d-flex">
+                                                <div class="mr-2">
+                                                    <img style="width: 50px;height:50px;object-fit:cover;"
+                                                        src="{{ asset($job?->company?->logo) }}" alt="">
+                                                </div>
+                                                <div>
+                                                    <b>{{ $job?->title }}</b>
+                                                    <br>
+                                                    <span>{{ $job?->company?->name }} - {{ $job?->jobType?->name }}</span>
+                                                </div>
                                             </div>
+                                        </td>
+                                        <td>
                                             <div>
-                                                <b>{{ $job?->title }}</b>
+                                                <b>{{ $job?->category?->name }}</b>
                                                 <br>
-                                                <span>{{ $job?->company?->name }} - {{ $job?->jobType?->name }}</span>
+                                                <span>{{ $job?->jobRole?->name }}</span>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div>
-                                            <b>{{ $job?->category?->name }}</b>
-                                            <br>
-                                            <span>{{ $job?->jobRole?->name }}</span>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        @if ($job?->salary_mode === 'range')
-                                            {{ $job?->min_salary }} - {{ $job?->max_salary }}
-                                            {{ config('settings.site_default_currency') }}
-                                            <br>
-                                            <span>{{ $job?->salaryType?->name }}</span>
-                                        @else
-                                            {{ $job?->custom_salary }}
-                                            <br>
-                                            <span>{{ $job?->salaryType?->name }}</span>
-                                        @endif
-                                    </td>
-                                    <td>{{ formatDate($job?->deadline) }}</td>
-                                    <td>
-                                        @if ($job?->status === 'pending')
-                                            <span class="badge badge-warning">Pending</span>
-                                        @elseif ($job?->deadline > date('Y-m-d'))
-                                            <span class="badge badge-success">Active</span>
-                                        @else
-                                            <span class="badge badge-danger">Expired</span>
-                                        @endif
-                                    </td>
+                                        </td>
+                                        <td>
+                                            @if ($job?->salary_mode === 'range')
+                                                {{ $job?->min_salary }} - {{ $job?->max_salary }}
+                                                {{ config('settings.site_default_currency') }}
+                                                <br>
+                                                <span>{{ $job?->salaryType?->name }}</span>
+                                            @else
+                                                {{ $job?->custom_salary }}
+                                                <br>
+                                                <span>{{ $job?->salaryType?->name }}</span>
+                                            @endif
+                                        </td>
+                                        <td>{{ formatDate($job?->deadline) }}</td>
+                                        <td>
+                                            @if ($job?->status === 'pending')
+                                                <span class="badge badge-warning">Pending</span>
+                                            @elseif ($job?->deadline > date('Y-m-d'))
+                                                <span class="badge badge-success">Active</span>
+                                            @else
+                                                <span class="badge badge-danger">Expired</span>
+                                            @endif
+                                        </td>
 
-                                    <td>
-                                        <div class="form-group">
-                                            <label class="custom-switch mt-2">
-                                                <input @checked($job->status === 'active') type="checkbox"
-                                                    data-id="{{ $job->id }}" name="custom-switch-checkbox"
-                                                    class="custom-switch-input post_status">
-                                                <span class="custom-switch-indicator"></span>
-                                            </label>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <a href="{{ route('admin.jobs.edit', $job?->id) }}"
-                                            class="btn-small btn btn-primary">
-                                            <i class="fas fa-edit"></i>
-                                        </a>
-                                        <a href="{{ route('admin.jobs.destroy', $job?->id) }}"
-                                            class="btn-small btn btn-danger delete-item">
-                                            <i class="fas fa-trash-alt"></i>
-                                        </a>
-                                    </td>
-                                </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="8" class="text-center">No Results Found!</td>
-                                </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
+                                        <td>
+                                            <div class="form-group">
+                                                <label class="custom-switch mt-2">
+                                                    <input @checked($job->status === 'active') type="checkbox"
+                                                        data-id="{{ $job->id }}" name="custom-switch-checkbox"
+                                                        class="custom-switch-input post_status">
+                                                    <span class="custom-switch-indicator"></span>
+                                                </label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <a href="{{ route('admin.jobs.edit', $job?->id) }}"
+                                                class="btn-small btn btn-primary">
+                                                <i class="fas fa-edit"></i>
+                                            </a>
+                                            <a href="{{ route('admin.jobs.destroy', $job?->id) }}"
+                                                class="btn-small btn btn-danger delete-item">
+                                                <i class="fas fa-trash-alt"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                @empty
+                                    <tr>
+                                        <td colspan="8" class="text-center">No Results Found!</td>
+                                    </tr>
+                                @endforelse
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card-footer text-right">
+                    <nav class="d-inline-block">
+                        @if ($jobs->hasPages())
+                            {{ $jobs->withQueryString()->links() }}
+                        @endif
+                    </nav>
                 </div>
             </div>
-
-            <div class="card-footer text-right">
-                <nav class="d-inline-block">
-                    @if ($jobs->hasPages())
-                        {{ $jobs->withQueryString()->links() }}
-                    @endif
-                </nav>
-            </div>
-        </div>
+        @endif
 
     </section>
 @endsection
@@ -455,8 +458,6 @@
     <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment"></script>
     <script>
         $(document).ready(function() {
-
-
             // Initialize all charts
             initUserRegistrationChart();
             initEarningsChart();

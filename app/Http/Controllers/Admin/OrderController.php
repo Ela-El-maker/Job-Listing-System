@@ -13,6 +13,12 @@ use LaravelDaily\Invoices\Invoice;
 
 class OrderController extends Controller
 {
+
+    function __construct()
+    {
+        $this->middleware(['permission:job category create|job category update|job category delete']);
+    }
+
     //
     use Searchable;
 

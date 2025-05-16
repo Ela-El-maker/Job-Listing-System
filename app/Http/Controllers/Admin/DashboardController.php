@@ -21,6 +21,11 @@ class DashboardController extends Controller
     use Searchable;
     //
 
+    function __construct()
+    {
+        // $this->middleware(['permission:'])
+    }
+
 
     function index(): View
     {

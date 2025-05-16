@@ -32,6 +32,15 @@ use Illuminate\View\View;
 class JobController extends Controller
 {
     use Searchable;
+
+    function __construct()
+    {
+        $this->middleware(['permission:job create|job update|job delete'])->only(['index']);
+        $this->middleware(['permission:job create'])->only(['create', 'store']);
+        $this->middleware(['permission:job update'])->only(['edit', 'update', 'changeStatus']);
+        $this->middleware(['permission:job delete'])->only(['destroy']);
+    }
+
     /**
      * Display a listing of the resource.
      */
@@ -40,7 +49,7 @@ class JobController extends Controller
         //
         $query = Job::query();
 
-        $this->search($query, ['title', 'slug', 'status','created_at','updated_at']);
+        $this->search($query, ['title', 'slug', 'status', 'created_at', 'updated_at']);
 
         $jobs = $query->orderBy('created_at', 'DESC')->paginate(10);
         return view('admin.job.index', compact('jobs'));

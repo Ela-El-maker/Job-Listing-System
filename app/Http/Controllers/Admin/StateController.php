@@ -14,6 +14,12 @@ use Illuminate\View\View;
 
 class StateController extends Controller
 {
+     function __construct()
+    {
+        $this->middleware(['permission:job locations']);
+    }
+
+
     /**
      * Display a listing of the resource.
      */

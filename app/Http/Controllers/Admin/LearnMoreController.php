@@ -12,6 +12,12 @@ use Illuminate\View\View;
 class LearnMoreController extends Controller
 {
     use FileUploadTrait;
+
+    function __construct()
+    {
+        $this->middleware(['permission:job sections']);
+    }
+
     /**
      * Display a listing of the resource.
      */

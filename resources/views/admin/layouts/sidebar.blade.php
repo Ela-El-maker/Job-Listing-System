@@ -198,12 +198,16 @@
                          <li class="{{ setSidebarActive(['admin.cities.*']) }}"><a class="nav-link"
                                  href="{{ route('admin.cities.index') }}">Cities</a></li>
 
+
+
+
+
                      </ul>
                  </li>
              @endif
              @if (canAccess(['sections']))
                  <li
-                     class="dropdown {{ setSidebarActive(['admin.hero.*','admin.learn-more.*', 'admin.custom-section.*', 'admin.reviews.*']) }}">
+                     class="dropdown {{ setSidebarActive(['admin.hero.*', 'admin.learn-more.*', 'admin.custom-section.*', 'admin.reviews.*','admin.location.*']) }}">
                      <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
                              class="fas fa-columns"></i>
                          <span>Sections</span></a>
@@ -212,17 +216,19 @@
                                  href="{{ route('admin.hero.index') }}">Hero</a></li>
                          <li class="{{ setSidebarActive(['admin.learn-more.*']) }}"><a class="nav-link"
                                  href="{{ route('admin.learn-more.index') }}">Learn More Section</a></li>
-                        <li class="{{ setSidebarActive(['admin.why-choose-us.*']) }}"><a class="nav-link"
-                        href="{{ route('admin.why-choose-us.index') }}">Custom Section</a></li>
+                         <li class="{{ setSidebarActive(['admin.why-choose-us.*']) }}"><a class="nav-link"
+                                 href="{{ route('admin.why-choose-us.index') }}">Custom Section</a></li>
 
                          <li class="{{ setSidebarActive(['admin.reviews.*']) }}"><a class="nav-link"
                                  href="{{ route('admin.reviews.index') }}">Client Reviews</a></li>
+
+                                 <li class="{{ setSidebarActive(['admin.job-location.*']) }}"><a class="nav-link"
+                                 href="{{ route('admin.job-location.index') }}"> <span>Job Locations</span></a></li>
                      </ul>
                  </li>
              @endif
              @if (canAccess(['Site Pages']))
-                 <li
-                     class="dropdown {{ setSidebarActive(['admin.about-us.*', 'admin.page-builder.*']) }} ">
+                 <li class="dropdown {{ setSidebarActive(['admin.about-us.*', 'admin.page-builder.*']) }} ">
                      <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
                              class="fas fa-columns"></i>
                          <span>Pages</span></a>
@@ -263,8 +269,7 @@
                  </li>
              @endif
              @if (canAccess(['newsletter']))
-             <li
-                     class="dropdown {{ setSidebarActive(['admin.newsletter.*']) }} ">
+                 <li class="dropdown {{ setSidebarActive(['admin.newsletter.*']) }} ">
                      <a href="#" class="nav-link has-dropdown" data-toggle="dropdown"><i
                              class="fas fa-columns"></i>
                          <span>Newsletters</span></a>

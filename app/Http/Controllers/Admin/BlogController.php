@@ -15,6 +15,12 @@ class BlogController extends Controller
 {
 
     use FileUploadTrait, Searchable;
+
+    function __construct()
+    {
+        $this->middleware(['permission:blogs']);
+    }
+
     /**
      * Display a listing of the resource.
      */
