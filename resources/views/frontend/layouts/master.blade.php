@@ -12,7 +12,7 @@
     <meta name="description" content="Index page">
     <meta name="keywords" content="index, page">
     <meta name="author" content="">
-    <link rel="shortcut icon" type="image/x-icon" href="">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ config('settings.site_favicon') }}">
 
 
     <link href="{{ asset('frontend/assets/css/all.min.css') }}" rel="stylesheet">

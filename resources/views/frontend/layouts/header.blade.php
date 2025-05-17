@@ -3,7 +3,7 @@
         <div class="main-header">
             <div class="header-left">
                 <div class="header-logo"><a class="d-flex" href="{{ url('/') }}"><img alt="joblist"
-                            src="{{ asset('frontend/assets/imgs/template/logo.png') }}"></a></div>
+                            src="{{ config('settings.site_logo') }}"></a></div>
             </div>
             @php
                 $navigationMenu = \Menu::getByName('Navigation Menu');
